@@ -1,0 +1,43 @@
+# Netlify Configuration — Sigal Group Realty
+
+[build]
+  publish = "."
+
+# Identity + Git Gateway for CMS
+[[headers]]
+  for = "/admin/*"
+  [headers.values]
+    X-Frame-Options = "SAMEORIGIN"
+    X-Content-Type-Options = "nosniff"
+
+# Redirect /admin to /admin/index.html
+[[redirects]]
+  from  = "/admin"
+  to    = "/admin/index.html"
+  status = 200
+
+# Clean URLs
+[[redirects]]
+  from  = "/properties"
+  to    = "/properties.html"
+  status = 200
+
+[[redirects]]
+  from  = "/sell"
+  to    = "/sell.html"
+  status = 200
+
+[[redirects]]
+  from  = "/about"
+  to    = "/about.html"
+  status = 200
+
+[[redirects]]
+  from  = "/contact"
+  to    = "/contact.html"
+  status = 200
+
+[[redirects]]
+  from  = "/areas"
+  to    = "/neighborhoods.html"
+  status = 200

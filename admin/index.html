@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Sigal Group Realty — Listings Manager</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    body{margin:0;font-family:'Plus Jakarta Sans',sans-serif}
+    #cms-loading{position:fixed;inset:0;background:#0E3D26;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:9999;transition:opacity .5s}
+    #cms-loading.hidden{opacity:0;pointer-events:none}
+    .cms-logo{color:#F0DFA0;font-size:1.5rem;font-weight:700;letter-spacing:.1em;margin-bottom:.5rem}
+    .cms-sub{color:rgba(255,255,255,.55);font-size:.8rem;letter-spacing:.15em;text-transform:uppercase;margin-bottom:2rem}
+    .cms-spinner{width:40px;height:40px;border:3px solid rgba(255,255,255,.15);border-top-color:#C9A96E;border-radius:50%;animation:spin 1s linear infinite}
+    @keyframes spin{to{transform:rotate(360deg)}}
+  </style>
+  <!-- Netlify Identity Widget -->
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+</head>
+<body>
+  <div id="cms-loading">
+    <div class="cms-logo">SIGAL GROUP REALTY</div>
+    <div class="cms-sub">Listings Manager</div>
+    <div class="cms-spinner"></div>
+  </div>
+  <!-- Decap CMS -->
+  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+  <script>
+    // Hide loading screen once CMS is ready
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        const loader = document.getElementById('cms-loading');
+        if (loader) loader.classList.add('hidden');
+      }, 1500);
+    });
+  </script>
+</body>
+</html>
