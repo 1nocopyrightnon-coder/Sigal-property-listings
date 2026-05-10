@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Properties | Sigal Group Realty | South Florida Listings</title>
+<meta name="description" content="Browse Sigal Fishman's full portfolio of South Florida properties — recent sales, active listings, waterfront homes, golf communities and condos in Boca Raton."/>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,700;1,9..144,300;1,9..144,500&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+
+
+:root{
+  --forest:#1A5C3A;--forest-d:#0E3D26;--sage:#3D8B64;--mint:#5BAF87;
+  --foam:#D4EDE0;--cream:#F8F3EA;--sand:#EDE4D3;--warm:#C9A96E;
+  --warm-l:#F0DFA0;--ocean:#1B6B8A;--sky:#E8F4F8;--ink:#1A2820;
+  --slate:#4A6058;--silver:#8FA89A;--rule:#D9E8E0;--white:#FDFCF9;--off:#F4F0E8;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--white);color:var(--ink);overflow-x:hidden;animation:pgFade .4s ease}
+@keyframes pgFade{from{opacity:0}to{opacity:1}}
+img{display:block;max-width:100%}
+a{text-decoration:none;color:inherit}
+.wrap{max-width:1260px;margin:0 auto;padding:0 2.5rem}
+
+/* TYPOGRAPHY */
+.tag{font-size:.62rem;font-weight:700;letter-spacing:.3em;text-transform:uppercase;color:var(--sage);display:inline-flex;align-items:center;gap:.6rem}
+.tag::before{content:'';width:22px;height:2px;background:var(--sage)}
+.h2{font-family:'Fraunces',serif;font-size:clamp(1.8rem,3.2vw,2.8rem);font-weight:500;line-height:1.1;color:var(--ink)}
+.h2 i{font-style:italic;color:var(--sage)}
+.h3{font-family:'Fraunces',serif;font-size:1.4rem;font-weight:500;color:var(--ink)}
+.lead{color:var(--slate);font-size:.95rem;line-height:1.9}
+.rule{width:48px;height:3px;background:var(--sage);margin:1rem 0 1.6rem}
+
+/* BUTTONS */
+.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.88rem 2rem;font-size:.76rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;transition:.3s;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;border:none}
+.btn-forest{background:var(--forest);color:var(--white);border:2px solid var(--forest)}
+.btn-forest:hover{background:var(--forest-d);transform:translateY(-2px)}
+.btn-ghost{background:transparent;color:var(--forest);border:2px solid var(--forest)}
+.btn-ghost:hover{background:var(--forest);color:var(--white)}
+.btn-warm{background:var(--warm);color:var(--white);border:2px solid var(--warm)}
+.btn-warm:hover{background:#b8963a;transform:translateY(-2px)}
+.btn-white{background:var(--white);color:var(--forest);border:2px solid var(--white)}
+.btn-white:hover{background:transparent;color:var(--white)}
+.btn-outline-white{background:transparent;color:var(--white);border:2px solid rgba(255,255,255,.55)}
+.btn-outline-white:hover{background:rgba(255,255,255,.12);border-color:var(--white)}
+
+/* REVEAL */
+.rx{opacity:0;transform:translateY(22px);transition:opacity .8s ease,transform .8s ease}
+.rx.in{opacity:1;transform:none}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}.d4{transition-delay:.4s}
+
+/* FLOATING CTA */
+.float-cta{position:fixed;bottom:1.8rem;right:1.8rem;z-index:900;display:flex;flex-direction:column;align-items:flex-end;gap:.5rem}
+.fcta-btn{display:flex;align-items:center;gap:.55rem;padding:.78rem 1.3rem;font-size:.76rem;font-weight:700;color:var(--white);white-space:nowrap;transition:.25s}
+.fcta-btn:hover{transform:translateY(-3px)}
+.fcta-call{background:var(--forest);box-shadow:0 4px 20px rgba(26,92,58,.35);animation:fcPulse 3s ease infinite}
+.fcta-email{background:var(--ocean)}
+@keyframes fcPulse{0%,100%{box-shadow:0 4px 20px rgba(26,92,58,.35)}50%{box-shadow:0 4px 32px rgba(26,92,58,.65)}}
+
+/* BACK TO TOP */
+#btt{position:fixed;bottom:1.8rem;left:1.8rem;z-index:800;width:44px;height:44px;background:var(--forest);color:var(--white);border:none;cursor:pointer;font-size:1.1rem;display:none;align-items:center;justify-content:center;transition:.25s;box-shadow:0 4px 16px rgba(0,0,0,.2)}
+#btt:hover{background:var(--sage);transform:translateY(-3px)}
+#btt.show{display:flex}
+
+/* NAV — starts solid on sub-pages */
+#nav{position:fixed;top:0;left:0;right:0;z-index:800;height:68px;display:flex;align-items:center;justify-content:space-between;padding:0 2.5rem;background:rgba(253,252,249,.97);backdrop-filter:blur(10px);box-shadow:0 2px 20px rgba(0,0,0,.08);transition:box-shadow .3s}
+.nav-logo img{height:46px;width:auto;filter:none;transition:height .3s}
+.nav-menu{display:flex;align-items:center;gap:1.8rem;list-style:none}
+.nav-menu>li>a{font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink);transition:.25s;padding:5px 0;position:relative;white-space:nowrap}
+.nav-menu>li>a::after{content:'';position:absolute;bottom:0;left:0;width:0;height:2px;background:var(--sage);transition:.3s}
+.nav-menu>li>a:hover::after,.nav-menu>li>a.active::after{width:100%}
+.nav-menu>li>a:hover{color:var(--forest)}
+.nav-cta-link{background:var(--sage)!important;color:var(--white)!important;padding:.48rem 1.2rem;font-size:.68rem!important;transition:background .25s!important}
+.nav-cta-link:hover{background:var(--forest)!important}
+.nav-cta-link::after{display:none!important}
+
+/* DROPDOWN */
+.nav-dd{position:relative}
+.nav-dd-panel{display:none;position:absolute;top:calc(100%+10px);left:-1rem;min-width:200px;background:var(--white);border-top:3px solid var(--sage);box-shadow:0 16px 50px rgba(0,0,0,.12)}
+.nav-dd:hover .nav-dd-panel{display:block}
+.nav-dd-panel a{display:block;padding:.82rem 1.3rem;font-size:.7rem;font-weight:600;letter-spacing:.06em;color:var(--ink)!important;border-bottom:1px solid var(--rule);transition:.2s}
+.nav-dd-panel a:hover{color:var(--sage)!important;background:var(--cream)}
+.nav-dd-panel a::after{display:none!important}
+
+/* HAMBURGER */
+.ham{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none}
+.ham span{display:block;width:24px;height:2px;background:var(--ink);transition:.3s;transform-origin:left}
+.ham.open span:nth-child(1){transform:rotate(40deg) translateY(-1px)}
+.ham.open span:nth-child(2){opacity:0}
+.ham.open span:nth-child(3){transform:rotate(-40deg) translateY(1px)}
+
+/* MOBILE MENU — hidden by default, shows only when .open */
+.mobile-menu{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:var(--forest-d);z-index:799;flex-direction:column;justify-content:center;align-items:center;gap:2rem}
+.mobile-menu.open{display:flex}
+.mobile-menu a{font-family:'Fraunces',serif;font-size:2rem;color:var(--white);font-style:italic;transition:.25s}
+.mobile-menu a:hover{color:var(--warm-l)}
+
+/* PAGE HERO */
+.page-hero{background:var(--forest-d);padding:7.5rem 0 4rem;position:relative;overflow:hidden}
+.page-hero::before{content:'';position:absolute;inset:0;opacity:.04;background-image:repeating-linear-gradient(45deg,var(--white) 0,var(--white) 1px,transparent 0,transparent 50%);background-size:30px 30px}
+.page-hero-inner{position:relative;z-index:2}
+.page-hero .tag{color:var(--mint);margin-bottom:1rem}
+.page-hero .tag::before{background:var(--mint)}
+.breadcrumb{display:flex;align-items:center;gap:.5rem;font-size:.65rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:1.5rem}
+.breadcrumb a{color:rgba(255,255,255,.45);transition:.2s}
+.breadcrumb a:hover{color:var(--warm-l)}
+.breadcrumb span{color:var(--warm-l)}
+.ph-sub{color:rgba(255,255,255,.65);font-size:.95rem;line-height:1.85;max-width:580px;margin-top:1rem;font-weight:300}
+
+/* PROPERTY CARDS */
+.pcard{background:var(--cream);display:block;color:inherit;overflow:hidden;transition:transform .35s cubic-bezier(.23,1,.32,1),box-shadow .35s;cursor:pointer}
+.pcard:hover{transform:translateY(-7px);box-shadow:0 22px 65px rgba(26,92,58,.13)}
+.pcard-img{position:relative;overflow:hidden;aspect-ratio:4/3}
+.pcard-img img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease;display:block}
+.pcard:hover .pcard-img img{transform:scale(1.07)}
+.pcard-badge{position:absolute;top:.9rem;left:.9rem;font-size:.58rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;padding:.32rem .8rem}
+.lb-jsold{background:var(--forest);color:var(--white)}
+.lb-sold{background:var(--slate);color:var(--white)}
+.lb-sale{background:var(--warm);color:var(--white)}
+.lb-rent{background:var(--ocean);color:var(--white)}
+.pcard-price-bar{position:absolute;bottom:0;left:0;right:0;padding:1rem;background:linear-gradient(to top,rgba(14,61,38,.85),transparent)}
+.pcard-price{font-family:'Fraunces',serif;font-size:1.4rem;font-weight:500;color:var(--white)}
+.pcard-body{padding:1.3rem 1.5rem 1.6rem}
+.pcard-loc{font-size:.6rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--sage);margin-bottom:.35rem}
+.pcard-name{font-family:'Fraunces',serif;font-size:1rem;font-weight:500;color:var(--ink);line-height:1.3;margin-bottom:.9rem;transition:.25s}
+.pcard:hover .pcard-name{color:var(--sage)}
+.pcard-specs{display:flex;gap:1.2rem;flex-wrap:wrap;padding-top:.85rem;border-top:1px solid var(--sand)}
+.pspec{font-size:.7rem;color:var(--silver);font-weight:500}
+
+/* REVIEW CARDS */
+.rcard{background:var(--off);padding:2.2rem;border-top:3px solid var(--sage)}
+.rcard-q{font-family:'Fraunces',serif;font-size:3.5rem;color:var(--sage);opacity:.18;line-height:.6;display:block;margin-bottom:.9rem}
+.rcard-stars{color:#FCA326;font-size:.8rem;letter-spacing:.15em;margin-bottom:1rem}
+.rcard-text{font-family:'Fraunces',serif;font-style:italic;font-size:.98rem;color:var(--ink);line-height:1.75;margin-bottom:1.4rem}
+.rcard-foot{display:flex;align-items:center;gap:.8rem}
+.rcard-av{width:42px;height:42px;border-radius:50%;background:var(--forest);display:flex;align-items:center;justify-content:center;font-family:'Fraunces',serif;font-size:1.1rem;font-weight:500;color:var(--white);flex-shrink:0}
+.rcard-name{font-weight:700;font-size:.82rem;color:var(--ink);display:block}
+.rcard-src{font-size:.63rem;color:var(--silver);margin-top:.15rem;display:flex;align-items:center;gap:.3rem}
+.g-g{color:#4285F4;font-weight:800;font-size:.72rem}
+
+/* FORMS */
+.fgrp{margin-bottom:1.1rem}
+.fgrp label{display:block;font-size:.62rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--ink);margin-bottom:.45rem}
+.fgrp input,.fgrp select,.fgrp textarea{width:100%;padding:.82rem .95rem;border:1.5px solid var(--sand);background:var(--cream);font-family:'Plus Jakarta Sans',sans-serif;font-size:.87rem;color:var(--ink);outline:none;transition:.25s;appearance:none}
+.fgrp input:focus,.fgrp select:focus,.fgrp textarea:focus{border-color:var(--sage)}
+.fgrp textarea{resize:vertical;min-height:95px}
+.f2col{display:grid;grid-template-columns:1fr 1fr;gap:.9rem}
+.fsubmit{width:100%;padding:1rem;background:var(--forest);color:var(--white);font-family:'Plus Jakarta Sans',sans-serif;font-size:.78rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;border:none;cursor:pointer;transition:.3s}
+.fsubmit:hover{background:var(--sage)}
+
+/* STATS STRIP */
+.stats-strip{background:var(--sage);display:flex;justify-content:space-around;flex-wrap:wrap}
+.sstat{padding:2rem 1.5rem;text-align:center;flex:1;min-width:130px;border-right:1px solid rgba(255,255,255,.15)}
+.sstat:last-child{border-right:none}
+.sstat-n{font-family:'Fraunces',serif;font-size:2.5rem;font-weight:500;color:var(--white);display:block;line-height:1}
+.sstat-l{font-size:.6rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.65);display:block;margin-top:.4rem}
+
+/* FOOTER */
+footer{background:#091F14;padding:5rem 0 2.5rem;border-top:3px solid var(--sage)}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3.5rem;margin-bottom:3.5rem;padding-bottom:3.5rem;border-bottom:1px solid rgba(255,255,255,.07)}
+.fl-logo img{height:50px;filter:brightness(0) invert(1);display:block;margin-bottom:1.2rem}
+.fl-tag{color:rgba(255,255,255,.45);font-size:.82rem;line-height:1.85;max-width:300px;margin-bottom:1.6rem;font-weight:300}
+.fl-socials{display:flex;gap:.5rem}
+.fsoc{width:36px;height:36px;border:1px solid rgba(255,255,255,.18);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.5);font-size:.75rem;font-weight:700;transition:.25s}
+.fsoc:hover{border-color:var(--mint);color:var(--mint)}
+.fc-head{font-family:'Fraunces',serif;font-size:.95rem;font-weight:500;color:var(--white);margin-bottom:1.2rem;padding-bottom:.6rem;border-bottom:1px solid rgba(200,168,110,.22)}
+.fl-links{list-style:none;display:flex;flex-direction:column;gap:.7rem}
+.fl-links a{color:rgba(255,255,255,.45);font-size:.81rem;transition:.25s}
+.fl-links a:hover{color:var(--mint)}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.fb-copy{font-size:.7rem;color:rgba(255,255,255,.22);letter-spacing:.06em}
+.fb-links{display:flex;gap:1.5rem}
+.fb-links a{font-size:.7rem;color:rgba(255,255,255,.22);transition:.25s}
+.fb-links a:hover{color:var(--mint)}
+
+/* RESPONSIVE */
+@media(max-width:1000px){.footer-grid{grid-template-columns:1fr 1fr;gap:2.5rem}}
+@media(max-width:768px){
+  #nav{padding:0 1.5rem}
+  .nav-menu{display:none}
+  .ham{display:flex}
+  .wrap{padding:0 1.5rem}
+  .stats-strip{display:grid;grid-template-columns:1fr 1fr}
+  .sstat{border-right:none;border-bottom:1px solid rgba(255,255,255,.1)}
+  .f2col{grid-template-columns:1fr}
+  .footer-grid{grid-template-columns:1fr;gap:2rem}
+  .footer-bottom{flex-direction:column;text-align:center}
+}
+
+
+.filter-bar{background:var(--off);padding:1.4rem 0;border-bottom:1px solid var(--rule);position:sticky;top:68px;z-index:600}
+.fb-inner{display:flex;align-items:center;gap:.7rem;flex-wrap:wrap}
+.ftag{padding:.46rem 1rem;font-size:.63rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;background:transparent;border:1.5px solid var(--rule);color:var(--slate);cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;transition:.25s;white-space:nowrap}
+.ftag.on,.ftag:hover{background:var(--forest);border-color:var(--forest);color:var(--white)}
+.fb-sep{width:1px;height:26px;background:var(--rule);flex-shrink:0}
+.fb-sel{padding:.46rem .9rem;border:1.5px solid var(--rule);background:var(--white);font-family:'Plus Jakarta Sans',sans-serif;font-size:.72rem;font-weight:600;color:var(--ink);outline:none;cursor:pointer;appearance:none;min-width:130px;transition:.25s}
+.fb-sel:focus{border-color:var(--sage)}
+.fb-count{margin-left:auto;font-size:.72rem;color:var(--silver);font-weight:600;white-space:nowrap}
+.props-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+.no-res{display:none;grid-column:1/-1;text-align:center;padding:4rem;color:var(--silver);font-size:.95rem}
+.mkt-bar{background:var(--forest-d);padding:1rem 0}
+.mkt-bar .wrap{display:flex;justify-content:space-around;flex-wrap:wrap;gap:1rem}
+.mb-item{text-align:center}
+.mb-n{font-family:'Fraunces',serif;font-size:1.4rem;font-weight:500;color:var(--warm-l);display:block;line-height:1}
+.mb-l{font-size:.58rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.5)}
+
+/* MODAL */
+.modal-bg{display:none;position:fixed;inset:0;background:rgba(10,25,15,.9);z-index:2000;overflow-y:auto;padding:2rem 1rem;align-items:flex-start;justify-content:center}
+.modal-bg.open{display:flex}
+.modal{background:var(--white);max-width:1000px;width:100%;position:relative;animation:mIn .3s ease;margin:auto}
+@keyframes mIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+.modal-close{position:absolute;top:1rem;right:1rem;width:38px;height:38px;background:var(--forest);color:var(--white);border:none;font-size:1.2rem;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:10;transition:.25s}
+.modal-close:hover{background:var(--sage)}
+.modal-hero{position:relative;aspect-ratio:16/9;overflow:hidden;background:var(--forest-d)}
+.modal-hero img{width:100%;height:100%;object-fit:cover;display:block}
+.mh-nav{position:absolute;top:50%;transform:translateY(-50%);width:100%;display:flex;justify-content:space-between;padding:0 1rem;pointer-events:none;z-index:5}
+.mhn{width:42px;height:42px;background:rgba(255,255,255,.85);border:none;cursor:pointer;font-size:1.2rem;pointer-events:all;display:flex;align-items:center;justify-content:center;transition:.2s}
+.mhn:hover{background:var(--white)}
+.thumb-strip{display:flex;gap:.4rem;padding:.6rem;background:var(--forest-d);overflow-x:auto}
+.thumb{width:70px;height:52px;flex-shrink:0;object-fit:cover;cursor:pointer;opacity:.5;border:2px solid transparent;transition:.2s}
+.thumb.on,.thumb:hover{opacity:1;border-color:var(--warm)}
+.modal-body{padding:2rem 2.5rem}
+.m-status{display:inline-block;font-size:.6rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;padding:.3rem .8rem;margin-bottom:.8rem}
+.m-price{font-family:'Fraunces',serif;font-size:2rem;font-weight:500;color:var(--forest);margin-bottom:.4rem}
+.m-title{font-family:'Fraunces',serif;font-size:1.6rem;font-weight:500;color:var(--ink);line-height:1.2;margin-bottom:.5rem}
+.m-addr{font-size:.8rem;color:var(--silver);margin-bottom:1.5rem}
+.m-meta{display:flex;gap:2rem;flex-wrap:wrap;padding:1.2rem 0;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);margin-bottom:1.5rem}
+.m-mi{text-align:center}
+.m-mi-v{font-family:'Fraunces',serif;font-size:1.3rem;font-weight:500;color:var(--forest);display:block;line-height:1}
+.m-mi-l{font-size:.58rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--silver);margin-top:.2rem;display:block}
+.m-desc{font-size:.88rem;color:var(--slate);line-height:1.9;margin-bottom:2rem}
+.m-ctas{display:flex;gap:.8rem;flex-wrap:wrap}
+
+@media(max-width:900px){.props-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:580px){
+  .props-grid{grid-template-columns:1fr}
+  .fb-inner{flex-direction:column;align-items:stretch}
+  .fb-count{margin-left:0}
+  .modal-body{padding:1.5rem}
+  .m-title{font-size:1.2rem}
+}
+
+
+
+/* Loading state */
+.listings-loading{
+  grid-column:1/-1;text-align:center;padding:5rem 2rem;
+}
+.listing-spinner{
+  width:48px;height:48px;border:3px solid var(--rule);
+  border-top-color:var(--sage);border-radius:50%;
+  animation:lspin 1s linear infinite;margin:0 auto 1.5rem;
+}
+@keyframes lspin{to{transform:rotate(360deg)}}
+.ls-text{font-size:.85rem;color:var(--silver);letter-spacing:.1em;text-transform:uppercase}
+</style>
+</head>
+<body>
+
+<!-- Float CTA -->
+<div class="float-cta">
+  <a href="tel:6177770485" class="fcta-btn fcta-call">📞 (617) 777-0485</a>
+  <a href="mailto:sigoosh@gmail.com" class="fcta-btn fcta-email">✉ sigoosh@gmail.com</a>
+</div>
+<button id="btt" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<!-- Nav -->
+<nav id="nav">
+  <a href="index.html" class="nav-logo"><img src="https://static.wixstatic.com/media/640c0f_de4855d5b90048c4b1b8b195ae36a064~mv2.png/v1/crop/x_0,y_56,w_500,h_240/fill/w_294,h_137,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Real%20Estate%20Logo_edited.png" alt="Sigal Group Realty"/></a>
+  <ul class="nav-menu">
+    <li><a href="index.html">Home</a></li>
+    <li class="nav-dd"><a href="properties.html" class="active">Properties ▾</a>
+      <div class="nav-dd-panel">
+        <a href="properties.html">All Listings</a>
+        <a href="properties.html" onclick="sessionStorage.setItem('filter','sale')">For Sale</a>
+        <a href="properties.html" onclick="sessionStorage.setItem('filter','sold')">Sold</a>
+      </div>
+    </li>
+    <li><a href="sell.html">Sell</a></li>
+    <li><a href="neighborhoods.html">Top Areas</a></li>
+    <li><a href="about.html">About Sigal</a></li>
+    <li><a href="contact.html" class="nav-cta-link">Contact</a></li>
+  </ul>
+  <button class="ham" id="ham" onclick="toggleMenu()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html">Home</a>
+  <a href="properties.html">Properties</a>
+  <a href="sell.html">Sell</a>
+  <a href="neighborhoods.html">Top Areas</a>
+  <a href="about.html">About Sigal</a>
+  <a href="contact.html" style="color:var(--warm-l)">Contact</a>
+</div>
+
+<!-- Modal -->
+<div class="modal-bg" id="modalBg" onclick="bgClose(event)">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div class="modal-hero">
+      <img id="mHeroImg" src="" alt=""/>
+      <div class="mh-nav">
+        <button class="mhn" onclick="navGal(-1)">&#8592;</button>
+        <button class="mhn" onclick="navGal(1)">&#8594;</button>
+      </div>
+    </div>
+    <div class="thumb-strip" id="mThumbs"></div>
+    <div class="modal-body">
+      <span class="m-status" id="mStatus"></span>
+      <div class="m-price"  id="mPrice"></div>
+      <div class="m-title"  id="mTitle"></div>
+      <div class="m-addr"   id="mAddr"></div>
+      <div class="m-meta"   id="mMeta"></div>
+      <div class="m-desc"   id="mDesc"></div>
+      <div class="m-ctas">
+        <a href="tel:6177770485" class="btn btn-forest">📞 Call Sigal: (617) 777-0485</a>
+        <a href="contact.html"   class="btn btn-ghost">Request Showing →</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Page Hero -->
+<div class="page-hero">
+  <div class="wrap page-hero-inner">
+    <div class="breadcrumb"><a href="index.html">Home</a> › <span>Properties</span></div>
+    <div class="tag">Full Portfolio</div>
+    <h1 class="h2" style="color:var(--white);margin-top:.6rem">
+      South Florida <i style="color:var(--warm-l)">Properties</i>
+    </h1>
+    <p class="ph-sub">Click any listing to view photos, full description and details. Filter by status, price, bedrooms or type below.</p>
+  </div>
+</div>
+
+<!-- Market Bar -->
+<div class="mkt-bar">
+  <div class="wrap">
+    <div class="mb-item"><span class="mb-n">$828K</span><span class="mb-l">Median · Boca Raton</span></div>
+    <div class="mb-item"><span class="mb-n">78 Days</span><span class="mb-l">Avg. Time on Market</span></div>
+    <div class="mb-item"><span class="mb-n">+17%</span><span class="mb-l">Inventory vs Last Year</span></div>
+    <div class="mb-item"><span class="mb-n">66%</span><span class="mb-l">Cash Purchases</span></div>
+  </div>
+</div>
+
+<!-- Filter Bar -->
+<div class="filter-bar">
+  <div class="wrap fb-inner">
+    <button class="ftag on" data-f="all"   id="btn-all">All</button>
+    <button class="ftag"    data-f="jsold" id="btn-jsold">Just Sold</button>
+    <button class="ftag"    data-f="sold"  id="btn-sold">Sold</button>
+    <button class="ftag"    data-f="sale"  id="btn-sale">For Sale</button>
+    <button class="ftag"    data-f="rent"  id="btn-rent" style="display:none">For Rent</button>
+    <div class="fb-sep"></div>
+    <select class="fb-sel" id="priceF" onchange="applyFilters()">
+      <option value="">Any Price</option>
+      <option value="u500">Under $500K</option>
+      <option value="500m1">$500K – $1M</option>
+      <option value="1m2m">$1M – $2M</option>
+      <option value="2mplus">$2M+</option>
+    </select>
+    <select class="fb-sel" id="bedF" onchange="applyFilters()">
+      <option value="">Any Beds</option>
+      <option value="2">2+ Beds</option>
+      <option value="3">3+ Beds</option>
+      <option value="4">4+ Beds</option>
+      <option value="5">5+ Beds</option>
+    </select>
+    <select class="fb-sel" id="typeF" onchange="applyFilters()">
+      <option value="">Any Type</option>
+      <option value="single">Single Family</option>
+      <option value="condo">Condo</option>
+      <option value="waterfront">Waterfront</option>
+      <option value="golf">Golf</option>
+    </select>
+    <span class="fb-count" id="propCount">Loading…</span>
+  </div>
+</div>
+
+<!-- Grid -->
+<section style="padding:3rem 0 7rem;background:var(--off)">
+  <div class="wrap">
+    <div class="props-grid" id="propsGrid">
+      <div class="listings-loading">
+        <div class="listing-spinner"></div>
+        <div class="ls-text">Loading properties…</div>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:4rem;padding:3rem;background:var(--white);border:1px solid var(--rule)" id="ctaBox" style="display:none">
+      <h3 class="h3" style="margin-bottom:.8rem">Don't see what you're looking for?</h3>
+      <p class="lead" style="max-width:520px;margin:0 auto 1.8rem">Sigal has access to off-market listings across all of South Florida.</p>
+      <div style="display:flex;gap:.8rem;justify-content:center;flex-wrap:wrap">
+        <a href="tel:6177770485" class="btn btn-forest">📞 Call Sigal: (617) 777-0485</a>
+        <a href="contact.html" class="btn btn-ghost">Send Your Wishlist →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+<div class="wrap">
+  <div class="footer-grid">
+    <div>
+      <div class="fl-logo"><img src="https://static.wixstatic.com/media/640c0f_09000c1816174075966619a837ef40c3~mv2.png/v1/crop/x_0,y_63,w_500,h_231/fill/w_240,h_101,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Real%20Estate%20Logo_edited.png" alt="Sigal Group Realty"/></div>
+      <p class="fl-tag">South Florida's boutique real estate firm. 35+ years of expertise. Direct, smart, and always working for you.</p>
+      <div class="fl-socials">
+        <a href="https://www.instagram.com" target="_blank" class="fsoc">ig</a>
+        <a href="#" class="fsoc">fb</a>
+        <a href="#" class="fsoc">in</a>
+      </div>
+    </div>
+    <div><div class="fc-head">Navigate</div><ul class="fl-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="properties.html">All Properties</a></li>
+      <li><a href="sell.html">Sell Your Home</a></li>
+      <li><a href="neighborhoods.html">Top Areas</a></li>
+      <li><a href="about.html">About Sigal</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul></div>
+    <div><div class="fc-head">Markets</div><ul class="fl-links">
+      <li><a href="neighborhoods.html">Boca Raton</a></li>
+      <li><a href="neighborhoods.html">Highland Beach</a></li>
+      <li><a href="neighborhoods.html">Delray Beach</a></li>
+      <li><a href="neighborhoods.html">Palm Beach</a></li>
+      <li><a href="neighborhoods.html">Wellington</a></li>
+      <li><a href="neighborhoods.html">Treasure Coast</a></li>
+    </ul></div>
+    <div><div class="fc-head">Contact</div><ul class="fl-links">
+      <li><a href="tel:6177770485">📞 (617) 777-0485</a></li>
+      <li><a href="mailto:sigoosh@gmail.com">✉ sigoosh@gmail.com</a></li>
+      <li><a href="sell.html">Free Valuation</a></li>
+      <li><a href="contact.html">Schedule a Call</a></li>
+    </ul></div>
+  </div>
+  <div class="footer-bottom">
+    <span class="fb-copy">© 2026 Sigal Fishman · Sigal Group Realty · All Rights Reserved · Licensed in Florida</span>
+    <div class="fb-links"><a href="#">DMCA</a><a href="#">Privacy</a><a href="#">Terms</a></div>
+  </div>
+</div>
+</footer>
+
+<script>
+// ── NAV + UI ─────────────────────────────────────────────
+window.addEventListener('scroll',()=>{
+  document.getElementById('btt').classList.toggle('show',scrollY>400);
+});
+const obs=new IntersectionObserver(e=>{
+  e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('in')});
+},{threshold:.08});
+function toggleMenu(){
+  document.getElementById('ham').classList.toggle('open');
+  document.getElementById('mobileMenu').classList.toggle('open');
+  document.body.style.overflow=document.getElementById('mobileMenu').classList.contains('open')?'hidden':'';
+}
+
+// ── MODAL ─────────────────────────────────────────────────
+let mGal=[],mIdx=0;
+const stLabel={jsold:'Just Sold',sold:'Sold',sale:'For Sale',rent:'For Rent'};
+const stColor={jsold:'#1A5C3A',sold:'#4A6058',sale:'#C9A96E',rent:'#1B6B8A'};
+
+function openModal(p){
+  mGal=Array.isArray(p.gallery)&&p.gallery.length ? p.gallery : [p.image];
+  mIdx=0;
+  document.getElementById('mTitle').textContent=p.title||'';
+  document.getElementById('mPrice').textContent=p.price||'';
+  document.getElementById('mAddr').textContent= p.address ? '📍 '+p.address : p.city ? '📍 '+p.city : '';
+  const sb=document.getElementById('mStatus');
+  sb.textContent=stLabel[p.status]||p.status||'';
+  sb.style.background=stColor[p.status]||'#1A5C3A';
+  sb.style.color='#fff';
+  let meta='';
+  if(p.beds)    meta+=`<div class="m-mi"><span class="m-mi-v">${p.beds}</span><span class="m-mi-l">Bedrooms</span></div>`;
+  if(p.baths)   meta+=`<div class="m-mi"><span class="m-mi-v">${p.baths}</span><span class="m-mi-l">Bathrooms</span></div>`;
+  if(p.size)    meta+=`<div class="m-mi"><span class="m-mi-v" style="font-size:1rem">${p.size}</span><span class="m-mi-l">Size</span></div>`;
+  if(p.year&&p.year!=='0') meta+=`<div class="m-mi"><span class="m-mi-v">${p.year}</span><span class="m-mi-l">Year Built</span></div>`;
+  if(p.type)    meta+=`<div class="m-mi"><span class="m-mi-v" style="font-size:.85rem;line-height:1.3">${p.type}</span><span class="m-mi-l">Type</span></div>`;
+  document.getElementById('mMeta').innerHTML=meta;
+  document.getElementById('mDesc').textContent=p.description||'';
+  renderGal();
+  document.getElementById('modalBg').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function renderGal(){
+  document.getElementById('mHeroImg').src=mGal[mIdx]||'';
+  document.getElementById('mThumbs').innerHTML=mGal
+    .map((u,i)=>`<img class="thumb ${i===mIdx?'on':''}" src="${u}" onclick="setImg(${i})" loading="lazy"/>`)
+    .join('');
+}
+function setImg(i){mIdx=i;renderGal();}
+function navGal(d){mIdx=(mIdx+d+mGal.length)%mGal.length;renderGal();}
+function closeModal(){document.getElementById('modalBg').classList.remove('open');document.body.style.overflow='';}
+function bgClose(e){if(e.target===document.getElementById('modalBg'))closeModal();}
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape')closeModal();
+  if(e.key==='ArrowRight')navGal(1);
+  if(e.key==='ArrowLeft')navGal(-1);
+});
+
+// ── LISTINGS — fetch from CMS JSON ────────────────────────
+let ALL_LISTINGS = [];
+let activeStatus = 'all';
+
+// Check sessionStorage for filter from nav dropdown
+const savedFilter = sessionStorage.getItem('filter');
+if(savedFilter){ activeStatus = savedFilter; sessionStorage.removeItem('filter'); }
+
+function pcard(p,i){
+  const bc={jsold:'lb-jsold',sold:'lb-sold',sale:'lb-sale',rent:'lb-rent'}[p.status]||'lb-sold';
+  const bt={jsold:'Just Sold',sold:'Sold',sale:'For Sale',rent:'For Rent'}[p.status]||'Sold';
+  return `<div class="pcard rx" data-s="${p.status}" data-price="${p.price||''}" data-beds="${p.beds||'0'}" data-type="${(p.type||'').toLowerCase()}" onclick="openModal(LISTING_BY_IDX[${i}])">
+  <div class="pcard-img">
+    <img src="${p.image||''}" alt="${p.title||''}" loading="lazy"/>
+    <span class="pcard-badge ${bc}">${bt}</span>
+    <div class="pcard-price-bar"><div class="pcard-price">${p.price||''}</div></div>
+  </div>
+  <div class="pcard-body">
+    <div class="pcard-loc">📍 ${p.city||'South Florida'}</div>
+    <div class="pcard-name">${p.title||''}</div>
+    <div class="pcard-specs">
+      <span class="pspec">🛏 ${p.beds||'—'}</span>
+      <span class="pspec">🛁 ${p.baths||'—'}</span>
+      <span class="pspec">📐 ${p.size||'—'}</span>
+      ${p.year&&p.year!=='0'?`<span class="pspec">🏗 ${p.year}</span>`:''}
+    </div>
+  </div>
+</div>`;
+}
+
+// Global reference so onclick can access listing data
+window.LISTING_BY_IDX = [];
+
+function updateFilterBtns(listings){
+  const counts={all:0,jsold:0,sold:0,sale:0,rent:0};
+  listings.forEach(p=>{ counts.all++; if(counts[p.status]!==undefined) counts[p.status]++; });
+  document.getElementById('btn-all').textContent  =`All (${counts.all})`;
+  document.getElementById('btn-jsold').textContent=`Just Sold (${counts.jsold})`;
+  document.getElementById('btn-sold').textContent =`Sold (${counts.sold})`;
+  document.getElementById('btn-sale').textContent =`For Sale (${counts.sale})`;
+  if(counts.rent>0){
+    const rb=document.getElementById('btn-rent');
+    rb.textContent=`For Rent (${counts.rent})`;
+    rb.style.display='';
+  }
+}
+
+function applyFilters(){
+  const pf=document.getElementById('priceF').value;
+  const bf=document.getElementById('bedF').value;
+  const tf=document.getElementById('typeF').value;
+  const cards=document.querySelectorAll('#propsGrid .pcard');
+  let shown=0;
+  cards.forEach(c=>{
+    const s=c.dataset.s;
+    const statusOk = activeStatus==='all'
+      || (activeStatus==='sold' && (s==='sold'||s==='jsold'))
+      || activeStatus===s;
+    const price=parseInt((c.dataset.price||'').replace(/[^0-9]/g,''))||0;
+    const priceOk=!pf
+      ||(pf==='u500'   && price<500000)
+      ||(pf==='500m1'  && price>=500000 && price<1000000)
+      ||(pf==='1m2m'   && price>=1000000 && price<2000000)
+      ||(pf==='2mplus' && price>=2000000);
+    const beds=parseInt(c.dataset.beds)||0;
+    const bedOk=!bf||beds>=parseInt(bf);
+    const type=(c.dataset.type||'').toLowerCase();
+    const typeOk=!tf||type.includes(tf);
+    const show=statusOk&&priceOk&&bedOk&&typeOk;
+    c.style.display=show?'':'none';
+    if(show) shown++;
+  });
+  const total=ALL_LISTINGS.length;
+  document.getElementById('propCount').textContent=`Showing ${shown} of ${total} properties`;
+  const noRes=document.getElementById('noRes');
+  if(noRes) noRes.style.display=shown===0?'block':'none';
+}
+
+// Filter buttons
+document.querySelectorAll('.ftag').forEach(b=>{
+  b.addEventListener('click',()=>{
+    document.querySelectorAll('.ftag').forEach(x=>x.classList.remove('on'));
+    b.classList.add('on');
+    activeStatus=b.dataset.f;
+    applyFilters();
+  });
+});
+// Set saved filter button active
+if(savedFilter){
+  document.querySelectorAll('.ftag').forEach(b=>b.classList.remove('on'));
+  const fb=document.querySelector(`[data-f="${savedFilter}"]`);
+  if(fb) fb.classList.add('on');
+}
+
+async function loadListings(){
+  try{
+    const res  = await fetch('/listings/listings.json?v='+Date.now());
+    const data = await res.json();
+    const listings = Array.isArray(data) ? data : (data.listings || []);
+    ALL_LISTINGS = listings;
+    window.LISTING_BY_IDX = listings;
+    updateFilterBtns(listings);
+    const grid=document.getElementById('propsGrid');
+    if(!listings.length){
+      grid.innerHTML='<div style="grid-column:1/-1;text-align:center;padding:4rem;color:var(--silver)">No listings found. Add your first listing via the <a href="/admin/" style="color:var(--sage);font-weight:700">Listings Manager</a>.</div>';
+      return;
+    }
+    grid.innerHTML = listings.map((p,i)=>pcard(p,i)).join('')
+      + '<div class="no-res" id="noRes" style="display:none">No properties match your filters. <a href="#" onclick="location.reload()" style="color:var(--sage);font-weight:700">Clear filters →</a></div>';
+    // Re-observe for scroll reveal
+    grid.querySelectorAll('.rx').forEach(el=>obs.observe(el));
+    // Apply any saved filter
+    applyFilters();
+    // Show CTA
+    document.getElementById('ctaBox').style.display='';
+  } catch(err){
+    console.error('Error loading listings:',err);
+    document.getElementById('propsGrid').innerHTML='<div style="grid-column:1/-1;text-align:center;padding:4rem;color:var(--silver)">Unable to load listings. Please try again.</div>';
+  }
+}
+
+loadListings();
+</script>
+</body>
+</html>
