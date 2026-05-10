@@ -9,31 +9,6 @@
     X-Content-Type-Options = "nosniff"
 
 [[redirects]]
-  from  = "/admin"
-  to    = "/admin/index.html"
-  status = 200
-
-[[redirects]]
-  from  = "/properties"
-  to    = "/properties.html"
-  status = 200
-
-[[redirects]]
-  from  = "/sell"
-  to    = "/sell.html"
-  status = 200
-
-[[redirects]]
-  from  = "/about"
-  to    = "/about.html"
-  status = 200
-
-[[redirects]]
-  from  = "/contact"
-  to    = "/contact.html"
-  status = 200
-
-[[redirects]]
-  from  = "/areas"
-  to    = "/neighborhoods.html"
+  from = "/admin"
+  to = "/admin/index.html"
   status = 200
