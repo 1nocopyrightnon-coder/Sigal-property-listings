@@ -685,11 +685,10 @@ footer{background:#091F14;padding:5rem 0 2.5rem;border-top:3px solid var(--sage)
   <!-- HAMBURGER — shows on mobile only -->
   <button class="ham-btn" id="hamBtn"
     onclick="toggleMobMenu()" aria-label="Open menu"
-    style="display:none;flex-direction:column;gap:5px;
-           background:none;border:none;cursor:pointer;padding:6px;z-index:10">
-    <span style="display:block;width:24px;height:2px;background:#1A5C3A;transition:.3s;transform-origin:left"></span>
-    <span style="display:block;width:24px;height:2px;background:#1A5C3A;transition:.3s"></span>
-    <span style="display:block;width:24px;height:2px;background:#1A5C3A;transition:.3s;transform-origin:left"></span>
+    style="display:none;flex-direction:column;gap:5px;background:rgba(26,92,58,.7);border:none;cursor:pointer;padding:10px 12px;z-index:10;border-radius:4px">
+    <span style="display:block;width:24px;height:2px;background:#ffffff;transition:.3s;transform-origin:left"></span>
+    <span style="display:block;width:24px;height:2px;background:#ffffff;transition:.3s"></span>
+    <span style="display:block;width:24px;height:2px;background:#ffffff;transition:.3s;transform-origin:left"></span>
   </button>
 </nav>
 <!-- MOBILE FULL-SCREEN MENU -->
@@ -1346,5 +1345,71 @@ document.addEventListener('keydown', function(e){
   }
 });
 </script>
+
+<script>
+(function(){
+  function mobileNavFix(){
+    var nav = document.getElementById('mainNav');
+    var ham = document.getElementById('hamBtn');
+    var ul  = nav ? nav.querySelector('ul.nav-menu, ul.nav-links, ul') : null;
+    var isMobile = window.innerWidth <= 768;
+
+    if(!nav) return;
+
+    if(isMobile){
+      // Force solid nav
+      nav.style.background   = 'rgba(253,252,249,0.97)';
+      nav.style.backdropFilter = 'blur(10px)';
+      nav.style.boxShadow    = '0 2px 16px rgba(0,0,0,0.12)';
+      nav.style.height       = '62px';
+
+      // Make logo dark (not inverted)
+      var logo = nav.querySelector('img');
+      if(logo){ logo.style.filter = 'none'; logo.style.height = '42px'; }
+
+      // Hide nav links
+      if(ul) ul.style.display = 'none';
+
+      // Show hamburger
+      if(ham){
+        ham.style.display        = 'flex';
+        ham.style.flexDirection  = 'column';
+        ham.style.gap            = '5px';
+        ham.style.background     = '#1A5C3A';
+        ham.style.border         = 'none';
+        ham.style.cursor         = 'pointer';
+        ham.style.padding        = '9px 11px';
+        ham.style.borderRadius   = '4px';
+        // Make spans white
+        var spans = ham.querySelectorAll('span');
+        spans.forEach(function(s){ s.style.background = '#ffffff'; });
+      }
+    } else {
+      // Desktop — restore
+      nav.style.background = '';
+      nav.style.boxShadow  = '';
+      nav.style.height     = '';
+      if(ul) ul.style.display = '';
+      if(ham) ham.style.display = 'none';
+    }
+  }
+
+  // Run on load and resize
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', mobileNavFix);
+  } else {
+    mobileNavFix();
+  }
+  window.addEventListener('resize', mobileNavFix);
+
+  // Keep nav solid when scrolled on mobile
+  window.addEventListener('scroll', function(){
+    if(window.innerWidth > 768) return;
+    var nav = document.getElementById('mainNav');
+    if(nav) nav.style.background = 'rgba(253,252,249,0.97)';
+  });
+})();
+</script>
+
 </body>
 </html>
