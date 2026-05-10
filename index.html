@@ -641,6 +641,17 @@ footer{background:#091F14;padding:5rem 0 2.5rem;border-top:3px solid var(--sage)
 }
 
 </style>
+
+<style>
+@media screen and (max-width:768px){
+  #mainNav .nav-menu, #mainNav .nav-links { display:none !important; }
+  #mainNav #hamBtn { display:flex !important; }
+}
+@media screen and (min-width:769px){
+  #mainNav #hamBtn { display:none !important; }
+  #mainNav .nav-menu { display:flex !important; }
+}
+</style>
 </head>
 <body>
 
@@ -652,10 +663,10 @@ footer{background:#091F14;padding:5rem 0 2.5rem;border-top:3px solid var(--sage)
 
 <!-- ░░░ NAV ░░░ -->
 <nav id="mainNav">
-  <a href="#" class="nav-logo">
+  <a href="index.html" class="nav-logo">
     <img src="https://static.wixstatic.com/media/640c0f_de4855d5b90048c4b1b8b195ae36a064~mv2.png/v1/crop/x_0,y_56,w_500,h_240/fill/w_294,h_137,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Real%20Estate%20Logo_edited.png" alt="Sigal Group Realty"/>
   </a>
-  <ul class="nav-menu">
+  <ul class="nav-menu nav-links">
     <li class="nav-dd">
       <a href="#">Buy ▾</a>
       <div class="nav-dd-panel">
@@ -671,7 +682,30 @@ footer{background:#091F14;padding:5rem 0 2.5rem;border-top:3px solid var(--sage)
     <li><a href="contact.html">Contact</a></li>
     <li><a href="contact.html" class="nav-cta">Free Consultation</a></li>
   </ul>
+  <!-- HAMBURGER — shows on mobile only -->
+  <button class="ham-btn" id="hamBtn"
+    onclick="toggleMobMenu()" aria-label="Open menu"
+    style="display:none;flex-direction:column;gap:5px;
+           background:none;border:none;cursor:pointer;padding:6px;z-index:10">
+    <span style="display:block;width:24px;height:2px;background:#1A5C3A;transition:.3s;transform-origin:left"></span>
+    <span style="display:block;width:24px;height:2px;background:#1A5C3A;transition:.3s"></span>
+    <span style="display:block;width:24px;height:2px;background:#1A5C3A;transition:.3s;transform-origin:left"></span>
+  </button>
 </nav>
+<!-- MOBILE FULL-SCREEN MENU -->
+<div id="mobMenu" style="display:none;position:fixed;inset:0;
+  background:rgba(14,61,38,.97);z-index:799;
+  flex-direction:column;justify-content:center;align-items:center;gap:2rem">
+  <button onclick="toggleMobMenu()"
+    style="position:absolute;top:1.2rem;right:1.5rem;font-size:1.5rem;
+           color:rgba(255,255,255,.7);background:none;border:none;cursor:pointer">✕</button>
+  <a href="index.html"          style="font-family:'Fraunces',serif;font-size:1.9rem;font-style:italic;color:#fff;text-decoration:none">Home</a>
+  <a href="properties.html"     style="font-family:'Fraunces',serif;font-size:1.9rem;font-style:italic;color:#fff;text-decoration:none">Properties</a>
+  <a href="sell.html"           style="font-family:'Fraunces',serif;font-size:1.9rem;font-style:italic;color:#fff;text-decoration:none">Sell</a>
+  <a href="neighborhoods.html"  style="font-family:'Fraunces',serif;font-size:1.9rem;font-style:italic;color:#fff;text-decoration:none">Top Areas</a>
+  <a href="about.html"          style="font-family:'Fraunces',serif;font-size:1.9rem;font-style:italic;color:#fff;text-decoration:none">About Sigal</a>
+  <a href="contact.html"        style="font-family:'Fraunces',serif;font-size:1.9rem;font-style:italic;color:#F0DFA0;text-decoration:none">Contact</a>
+</div>
 
 <!-- ░░░ HERO ░░░ -->
 <section id="hero">
@@ -1273,14 +1307,32 @@ document.querySelectorAll('.ftag').forEach(btn=>{
   });
 });
 
+// Mobile menu toggle
 function toggleMobMenu(){
   var btn  = document.getElementById('hamBtn');
   var menu = document.getElementById('mobMenu');
-  if(!btn || !menu) return;
-  btn.classList.toggle('open');
-  menu.classList.toggle('open');
-  document.body.style.overflow = menu.classList.contains('open') ? 'hidden' : '';
+  if(!btn||!menu) return;
+  var open = menu.style.display === 'flex';
+  menu.style.display  = open ? 'none' : 'flex';
+  document.body.style.overflow = open ? '' : 'hidden';
+  // Animate hamburger spans
+  var spans = btn.querySelectorAll('span');
+  if(!open){
+    if(spans[0]) spans[0].style.transform='rotate(40deg) translateY(-1px)';
+    if(spans[1]) spans[1].style.opacity='0';
+    if(spans[2]) spans[2].style.transform='rotate(-40deg) translateY(1px)';
+  } else {
+    if(spans[0]) spans[0].style.transform='none';
+    if(spans[1]) spans[1].style.opacity='1';
+    if(spans[2]) spans[2].style.transform='none';
+  }
 }
+document.addEventListener('keydown',function(e){
+  if(e.key==='Escape'){
+    var m=document.getElementById('mobMenu');
+    if(m&&m.style.display==='flex') toggleMobMenu();
+  }
+});
 // Close on ESC
 document.addEventListener('keydown', function(e){
   if(e.key==='Escape') {
