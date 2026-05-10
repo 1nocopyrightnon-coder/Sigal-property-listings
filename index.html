@@ -655,6 +655,74 @@ footer{background:#091F14;padding:5rem 0 2.5rem;border-top:3px solid var(--sage)
 </head>
 <body>
 
+<!-- ═══════ STANDALONE MOBILE NAV — only shows ≤768px ═══════ -->
+<div id="sgrMobNav" style="display:none;position:fixed;top:0;left:0;right:0;height:60px;background:#ffffff;box-shadow:0 2px 14px rgba(0,0,0,.12);z-index:99999;align-items:center;justify-content:space-between;padding:0 16px">
+  <a href="index.html" style="display:flex;align-items:center;text-decoration:none">
+    <img src="https://static.wixstatic.com/media/640c0f_de4855d5b90048c4b1b8b195ae36a064~mv2.png/v1/crop/x_0,y_56,w_500,h_240/fill/w_294,h_137,al_c,q_85/Real%20Estate%20Logo_edited.png" alt="Sigal Group Realty" style="height:38px;width:auto;display:block;filter:none"/>
+  </a>
+  <button id="sgrHamBtn" onclick="sgrToggleMenu()" aria-label="Open menu" style="display:flex;flex-direction:column;gap:5px;background:#1A5C3A;border:none;cursor:pointer;padding:10px 12px;border-radius:4px;align-items:center;justify-content:center">
+    <span style="display:block;width:22px;height:2px;background:#ffffff;transition:.3s"></span>
+    <span style="display:block;width:22px;height:2px;background:#ffffff;transition:.3s"></span>
+    <span style="display:block;width:22px;height:2px;background:#ffffff;transition:.3s"></span>
+  </button>
+</div>
+
+<!-- Mobile menu overlay -->
+<div id="sgrMobMenu" style="display:none;position:fixed;inset:0;background:rgba(14,61,38,.97);z-index:99998;flex-direction:column;justify-content:center;align-items:center;gap:1.6rem">
+  <button onclick="sgrToggleMenu()" style="position:absolute;top:1.2rem;right:1.5rem;font-size:1.6rem;color:#fff;background:none;border:none;cursor:pointer;width:40px;height:40px">✕</button>
+  <a href="index.html"          style="font-family:'Fraunces',serif;font-size:1.8rem;font-style:italic;color:#fff;text-decoration:none">Home</a>
+  <a href="properties.html"     style="font-family:'Fraunces',serif;font-size:1.8rem;font-style:italic;color:#fff;text-decoration:none">Properties</a>
+  <a href="sell.html"           style="font-family:'Fraunces',serif;font-size:1.8rem;font-style:italic;color:#fff;text-decoration:none">Sell</a>
+  <a href="neighborhoods.html"  style="font-family:'Fraunces',serif;font-size:1.8rem;font-style:italic;color:#fff;text-decoration:none">Top Areas</a>
+  <a href="about.html"          style="font-family:'Fraunces',serif;font-size:1.8rem;font-style:italic;color:#fff;text-decoration:none">About Sigal</a>
+  <a href="contact.html"        style="font-family:'Fraunces',serif;font-size:1.8rem;font-style:italic;color:#F0DFA0;text-decoration:none">Contact</a>
+  <a href="tel:6177770485"      style="font-family:'Plus Jakarta Sans',sans-serif;font-size:.85rem;letter-spacing:.1em;color:rgba(255,255,255,.7);text-decoration:none;margin-top:1rem">📞 (617) 777-0485</a>
+</div>
+
+<!-- CSS to show this on mobile, hide desktop nav on mobile -->
+<style>
+  @media screen and (max-width:768px){
+    #sgrMobNav   { display:flex !important }
+    #mainNav     { display:none !important }
+    body         { padding-top:60px !important }
+  }
+  @media screen and (min-width:769px){
+    #sgrMobNav, #sgrMobMenu { display:none !important }
+  }
+</style>
+
+<script>
+  function sgrToggleMenu(){
+    var menu = document.getElementById('sgrMobMenu');
+    var ham  = document.getElementById('sgrHamBtn');
+    if(!menu) return;
+    var isOpen = menu.style.display === 'flex';
+    menu.style.display = isOpen ? 'none' : 'flex';
+    document.body.style.overflow = isOpen ? '' : 'hidden';
+    if(ham){
+      var s = ham.querySelectorAll('span');
+      if(!isOpen){
+        if(s[0]) s[0].style.transform='rotate(45deg) translate(4px,4px)';
+        if(s[1]) s[1].style.opacity='0';
+        if(s[2]) s[2].style.transform='rotate(-45deg) translate(4px,-4px)';
+      } else {
+        if(s[0]) s[0].style.transform='none';
+        if(s[1]) s[1].style.opacity='1';
+        if(s[2]) s[2].style.transform='none';
+      }
+    }
+  }
+  // Close on Escape
+  document.addEventListener('keydown',function(e){
+    if(e.key==='Escape'){
+      var m=document.getElementById('sgrMobMenu');
+      if(m && m.style.display==='flex') sgrToggleMenu();
+    }
+  });
+</script>
+<!-- ═══════ END STANDALONE MOBILE NAV ═══════ -->
+
+
 <!-- ░░ FLOATING BUTTONS ░░ -->
 <div class="phone-bubble">
   <a href="tel:6177770485" class="pb-btn pb-call">📞 (617) 777-0485</a>
@@ -682,50 +750,7 @@ footer{background:#091F14;padding:5rem 0 2.5rem;border-top:3px solid var(--sage)
     <li><a href="contact.html">Contact</a></li>
     <li><a href="contact.html" class="nav-cta">Free Consultation</a></li>
   </ul>
-  <!-- HAMBURGER — shows on mobile only -->
-  <button class="ham-btn" id="hamBtn"
-    onclick="toggleMobMenu()" aria-label="Open menu"
-    style="display:none;flex-direction:column;gap:5px;background:rgba(26,92,58,.7);border:none;cursor:pointer;padding:10px 12px;z-index:10;border-radius:4px">
-    <span style="display:block;width:24px;height:2px;background:#ffffff;transition:.3s;transform-origin:left"></span>
-    <span style="display:block;width:24px;height:2px;background:#ffffff;transition:.3s"></span>
-    <span style="display:block;width:24px;height:2px;background:#ffffff;transition:.3s;transform-origin:left"></span>
-  </button>
 </nav>
-<!-- MOBILE FULL-SCREEN MENU -->
-<div id="mobMenu" style="display:none;position:fixed;inset:0;
-  background:rgba(14,61,38,.97);z-index:799;
-  flex-direction:column;justify-content:center;align-items:center;gap:2rem">
-  <button onclick="toggleMobMenu()"
-    style="position:absolute;top:1.2rem;right:1.5rem;font-size:1.5rem;
-           color:rgba(255,255,255,.7);background:none;border:none;cursor:pointer">✕</button>
-  <a href="index.html"          style="font-family:'Fraunces',serif;font-size:1.9rem;font-style:italic;color:#fff;text-decoration:none">Home</a>
-  <a href="properties.html"     style="font-family:'Fraunces',serif;font-size:1.9rem;font-style:italic;color:#fff;text-decoration:none">Properties</a>
-  <a href="sell.html"           style="font-family:'Fraunces',serif;font-size:1.9rem;font-style:italic;color:#fff;text-decoration:none">Sell</a>
-  <a href="neighborhoods.html"  style="font-family:'Fraunces',serif;font-size:1.9rem;font-style:italic;color:#fff;text-decoration:none">Top Areas</a>
-  <a href="about.html"          style="font-family:'Fraunces',serif;font-size:1.9rem;font-style:italic;color:#fff;text-decoration:none">About Sigal</a>
-  <a href="contact.html"        style="font-family:'Fraunces',serif;font-size:1.9rem;font-style:italic;color:#F0DFA0;text-decoration:none">Contact</a>
-</div>
-
-<!-- ░░░ HERO ░░░ -->
-<section id="hero">
-  <div class="hero-left">
-    <div class="hero-pattern"></div>
-    <div class="hero-left-content">
-      <div class="hero-eyebrow"><span></span>South Florida's Trusted Realtor</div>
-      <h1 class="hero-h1">Find Your<br>Perfect Home<br>in <i>South Florida</i></h1>
-      <p class="hero-sub">35+ years of expertise across Boca Raton, Highland Beach, Delray Beach &amp; the Treasure Coast. Direct. Smart. Always in your corner.</p>
-
-      <div class="hero-search-card">
-        <div class="hsc-tabs">
-          <button class="hsc-tab on" onclick="switchTab(this)">&#127968; Buy</button>
-          <button class="hsc-tab" onclick="switchTab(this)">&#128176; Sell</button>
-          <button class="hsc-tab" onclick="switchTab(this)">&#128202; Home Value</button>
-        </div>
-        <div class="hsc-input-row">
-          <input class="hsc-input" type="text" placeholder="City, neighborhood, ZIP code&hellip;"/>
-          <button class="hsc-btn" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Search &rarr;</button>
-        </div>
-      </div>
 
       <div class="hero-quick-links">
         <a href="properties.html" class="hql">&#127969; Recent Sales</a>
@@ -1346,70 +1371,7 @@ document.addEventListener('keydown', function(e){
 });
 </script>
 
-<script>
-(function(){
-  function mobileNavFix(){
-    var nav = document.getElementById('mainNav');
-    var ham = document.getElementById('hamBtn');
-    var ul  = nav ? nav.querySelector('ul.nav-menu, ul.nav-links, ul') : null;
-    var isMobile = window.innerWidth <= 768;
 
-    if(!nav) return;
-
-    if(isMobile){
-      // Force solid nav
-      nav.style.background   = 'rgba(253,252,249,0.97)';
-      nav.style.backdropFilter = 'blur(10px)';
-      nav.style.boxShadow    = '0 2px 16px rgba(0,0,0,0.12)';
-      nav.style.height       = '62px';
-
-      // Make logo dark (not inverted)
-      var logo = nav.querySelector('img');
-      if(logo){ logo.style.filter = 'none'; logo.style.height = '42px'; }
-
-      // Hide nav links
-      if(ul) ul.style.display = 'none';
-
-      // Show hamburger
-      if(ham){
-        ham.style.display        = 'flex';
-        ham.style.flexDirection  = 'column';
-        ham.style.gap            = '5px';
-        ham.style.background     = '#1A5C3A';
-        ham.style.border         = 'none';
-        ham.style.cursor         = 'pointer';
-        ham.style.padding        = '9px 11px';
-        ham.style.borderRadius   = '4px';
-        // Make spans white
-        var spans = ham.querySelectorAll('span');
-        spans.forEach(function(s){ s.style.background = '#ffffff'; });
-      }
-    } else {
-      // Desktop — restore
-      nav.style.background = '';
-      nav.style.boxShadow  = '';
-      nav.style.height     = '';
-      if(ul) ul.style.display = '';
-      if(ham) ham.style.display = 'none';
-    }
-  }
-
-  // Run on load and resize
-  if(document.readyState === 'loading'){
-    document.addEventListener('DOMContentLoaded', mobileNavFix);
-  } else {
-    mobileNavFix();
-  }
-  window.addEventListener('resize', mobileNavFix);
-
-  // Keep nav solid when scrolled on mobile
-  window.addEventListener('scroll', function(){
-    if(window.innerWidth > 768) return;
-    var nav = document.getElementById('mainNav');
-    if(nav) nav.style.background = 'rgba(253,252,249,0.97)';
-  });
-})();
-</script>
 
 </body>
 </html>
