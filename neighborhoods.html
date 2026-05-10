@@ -146,6 +146,158 @@ footer{background:#091F14;padding:5rem 0 2.5rem;border-top:3px solid var(--sage)
 .reloc-bar{background:var(--sky);border:1px solid rgba(27,107,138,.2);padding:2rem;margin-bottom:3.5rem;display:flex;align-items:center;gap:2rem;flex-wrap:wrap}
 @media(max-width:1000px){.areas-grid{grid-template-columns:1fr 1fr}}
 @media(max-width:600px){.areas-grid{grid-template-columns:1fr}}
+
+/* ─── ENHANCED MOBILE ─── */
+@media(max-width:768px){
+  /* Nav */
+  #nav{height:62px !important;padding:0 1.2rem !important}
+  .nav-logo img{height:42px !important}
+  .nav-menu{display:none !important}
+  .ham{display:flex !important}
+
+  /* Mobile menu overlay */
+  .mobile-menu a{font-size:1.6rem}
+
+  /* Page hero */
+  .page-hero{padding:5.5rem 0 2.5rem !important}
+  .ph-sub{font-size:.85rem !important}
+
+  /* All 2+ col grids → 1 col */
+  .sell-hero,.why-grid,.about-grid,
+  .fin-grid,.contact-grid,.rev-header,
+  .ah-inner,.wn-grid,.bio-grid,
+  .scta-inner{
+    grid-template-columns:1fr !important;
+    gap:2rem !important;
+  }
+  .sh-left,.sh-right{
+    padding:5rem 1.2rem 3rem !important;
+    min-height:auto !important;
+  }
+  .sh-right{padding-top:2rem !important}
+
+  /* Properties grid */
+  .props-grid,.listings-grid{
+    grid-template-columns:1fr !important;
+  }
+
+  /* Areas / neighborhoods */
+  .areas-grid,.nh-grid{
+    grid-template-columns:1fr !important;
+    grid-auto-rows:auto !important;
+  }
+  .nhcard.feat,.nhcard.wide{
+    grid-row:span 1 !important;
+    grid-column:span 1 !important;
+    height:220px;
+  }
+
+  /* Filter bar */
+  .filter-bar{
+    position:sticky;top:62px;z-index:600;
+    padding:.8rem 1rem !important;
+  }
+  .fb-inner{
+    flex-wrap:wrap;gap:.5rem !important;
+  }
+  .ftag{font-size:.6rem !important;padding:.4rem .75rem !important}
+  .fb-sel{font-size:.7rem;flex:1;min-width:100px}
+  .fb-count{width:100%;text-align:center;margin-left:0 !important}
+  .fb-sep{display:none}
+
+  /* Review grids */
+  .rev-grid,.rev-grid-6,.big-review-grid,
+  .testimonials-track,.test-grid{
+    grid-template-columns:1fr !important;
+  }
+  .score-bar{padding:2rem !important}
+
+  /* Contact methods */
+  .cm-grid,.contact-methods{
+    grid-template-columns:1fr !important;
+    gap:2px !important;
+  }
+  .contact-grid{
+    padding:3rem 0 !important;
+    gap:2rem !important;
+  }
+
+  /* Process steps */
+  .proc-grid{grid-template-columns:1fr 1fr !important}
+
+  /* Footer */
+  .footer-grid{grid-template-columns:1fr !important;gap:2rem !important}
+  .footer-bottom{flex-direction:column;text-align:center;gap:.8rem}
+
+  /* Forms */
+  .f2col,.field-row,.sf-row{grid-template-columns:1fr !important}
+  .fsubmit,.cf-submit,.sb-submit{font-size:.72rem !important}
+
+  /* Float buttons */
+  .float-cta{bottom:1rem;right:.8rem;gap:.4rem}
+  .fcta-btn{font-size:.68rem !important;padding:.65rem 1rem !important}
+  #btt{bottom:1rem;left:.8rem;width:40px;height:40px;font-size:.9rem}
+
+  /* Map */
+  .map-pill,.map-overlay{
+    left:1rem !important;right:1rem;
+    width:auto;font-size:.85rem;
+    padding:1.2rem !important;
+  }
+
+  /* Sell band / banner */
+  #sell-band,#sell{padding:4rem 0 !important}
+  .sb-inner{grid-template-columns:1fr !important;gap:2.5rem}
+  .sb-right{padding:2rem !important}
+
+  /* About hero */
+  .about-hero .ah-inner{padding-top:62px !important}
+  .ah-text{padding:2rem 1.2rem 3rem !important}
+  .ah-photo-badge{right:.5rem !important;top:5rem !important}
+
+  /* Timeline */
+  .timeline{padding-left:1.5rem}
+  .tl-item{padding-left:1.5rem}
+  .tl-dot{left:-2rem}
+
+  /* Phone hero (contact page) */
+  .big-phone{font-size:2.2rem !important}
+  .phone-hero,.ph-hero{padding:5rem 0 3rem !important}
+
+  /* Wrap */
+  .wrap{padding:0 1.2rem !important}
+
+  /* Section padding */
+  section[style*="padding:7rem"]{padding:4rem 0 !important}
+  section[style*="padding:6rem"]{padding:3.5rem 0 !important}
+  section[style*="padding:5rem"]{padding:3rem 0 !important}
+
+  /* Finance section */
+  .fin-grid{grid-template-columns:1fr !important;gap:2rem}
+  .fin-badge{right:.5rem !important;top:-1rem !important}
+  .fin-img-main{aspect-ratio:4/3 !important}
+
+  /* Reloc bar */
+  .reloc-bar{flex-direction:column;gap:1rem;padding:1.5rem !important}
+
+  /* Buttons */
+  .btn{font-size:.72rem !important;padding:.82rem 1.5rem !important}
+  .hero-btns,[style*="display:flex"][style*="gap"]{
+    flex-wrap:wrap;
+  }
+
+  /* h2 sizing */
+  .h2{font-size:1.7rem !important}
+  .h3{font-size:1.1rem !important}
+}
+
+@media(max-width:420px){
+  .h2{font-size:1.5rem !important}
+  .ftag{font-size:.58rem !important}
+  .btn{font-size:.68rem !important;padding:.75rem 1.2rem !important}
+  .proc-grid{grid-template-columns:1fr !important}
+}
+
 </style></head>
 <body><div class="float-cta">
   <a href="tel:6177770485" class="fcta-btn fcta-call">📞 (617) 777-0485</a>

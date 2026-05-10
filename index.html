@@ -351,6 +351,191 @@ footer{background:#091F14;padding:5rem 0 2.5rem;border-top:3px solid var(--sage)
   .stats-strip{flex-direction:column}
   .sstat{border-right:none;border-bottom:1px solid rgba(255,255,255,.1)}
 }
+
+/* ─── MOBILE NAV ─── */
+.ham-btn{
+  display:none;flex-direction:column;justify-content:center;
+  gap:5px;cursor:pointer;padding:8px;background:none;border:none;
+  z-index:10;
+}
+.ham-btn span{
+  display:block;width:24px;height:2px;background:#fff;
+  transition:.3s;transform-origin:left;
+}
+#mainNav.scrolled .ham-btn span{background:var(--ink,#1A2820)}
+.ham-btn.open span:nth-child(1){transform:rotate(40deg) translateY(-1px)}
+.ham-btn.open span:nth-child(2){opacity:0}
+.ham-btn.open span:nth-child(3){transform:rotate(-40deg) translateY(1px)}
+
+.mob-menu{
+  display:none;position:fixed;inset:0;
+  background:rgba(14,61,38,.97);z-index:799;
+  flex-direction:column;justify-content:center;
+  align-items:center;gap:2rem;
+}
+.mob-menu.open{display:flex}
+.mob-menu a{
+  font-family:'Fraunces',serif;font-size:2rem;font-style:italic;
+  color:#fff;text-decoration:none;transition:.25s;
+}
+.mob-menu a:hover{color:var(--warm-l,#F0DFA0)}
+.mob-menu .mob-close{
+  position:absolute;top:1.5rem;right:1.5rem;
+  font-size:1.5rem;color:rgba(255,255,255,.6);
+  background:none;border:none;cursor:pointer;
+}
+
+@media(max-width:768px){
+  /* Show hamburger, hide nav links */
+  .ham-btn{display:flex !important}
+  .nav-links{display:none !important}
+
+  /* Hero layout */
+  #hero{min-height:100svh;padding:0 1.2rem}
+  .hero-content{padding:7rem 1.2rem 3rem !important;max-width:100%}
+  .hero-title{font-size:clamp(2rem,9vw,3rem) !important}
+  .hero-btns{flex-direction:column;gap:.8rem}
+  .hero-btns .btn-gold,
+  .hero-btns .btn-outline-white{width:100%;justify-content:center;text-align:center}
+
+  /* Search card */
+  .hero-search-card{padding:1.2rem !important}
+  .hsc-input-row{flex-direction:column;gap:.6rem}
+  .hsc-input{min-width:0 !important}
+  .hsc-sbtn,.hsc-btn{width:100%}
+  .hero-quick-links{gap:.5rem}
+  .hql{font-size:.62rem !important;padding:.45rem .7rem !important}
+
+  /* Stats */
+  .stats-strip{display:grid;grid-template-columns:1fr 1fr !important;flex-wrap:wrap}
+  .sstat{border-right:none;border-bottom:1px solid rgba(255,255,255,.12);padding:1.2rem !important}
+  .sstat:nth-child(2){border-right:none}
+
+  /* Process steps */
+  .process-grid,.services-grid,.why-grid,
+  .about-grid,.fin-grid,.scta-inner,
+  .rev-grid,.testimonials-grid,.contact-grid,
+  .properties-grid,.props-grid,.listings-grid,
+  .feat-grid{
+    grid-template-columns:1fr !important;
+  }
+
+  /* About / sell split */
+  .hero-left,.sh-left,.ah-text{
+    padding:7rem 1.2rem 2.5rem !important;
+  }
+
+  /* Market stats */
+  .mkt-stats-box{grid-template-columns:1fr 1fr !important}
+
+  /* Footer */
+  .footer-grid,.footer-top{
+    grid-template-columns:1fr !important;
+    gap:2rem !important;
+  }
+  .footer-bottom,.fb-bottom{
+    flex-direction:column;text-align:center;gap:.8rem;
+  }
+
+  /* Forms */
+  .f2col,.form-row,.cf-row,.frow,.sf-row,.field-row{
+    grid-template-columns:1fr !important;
+  }
+
+  /* Float CTA */
+  .float-cta,.phone-bubble{
+    bottom:1rem;right:.8rem;gap:.4rem;
+  }
+  .fcta-btn,.pb-btn{
+    font-size:.68rem !important;padding:.65rem 1rem !important;
+  }
+
+  /* Back to top */
+  #btt{bottom:1rem;left:.8rem;width:40px;height:40px}
+
+  /* Map overlay */
+  .map-pill,.map-overlay{
+    left:1rem !important;right:1rem;
+    transform:translateY(-50%);
+    width:auto;
+  }
+
+  /* Wrap */
+  .wrap{padding:0 1.2rem !important}
+
+  /* Section padding */
+  section{padding:4rem 0 !important}
+  #services,#process,#about,#testimonials,
+  #contact,#reviews,#finance,#sell,
+  #properties,#listings,#neighborhoods,
+  #sell-section,#sell-band{
+    padding:4rem 0 !important;
+  }
+
+  /* Neighbourhood cards */
+  .areas-grid,.nh-grid{
+    grid-template-columns:1fr !important;
+    grid-auto-rows:auto !important;
+  }
+  .nhcard.feat,.nhcard.wide{
+    grid-row:span 1 !important;
+    grid-column:span 1 !important;
+  }
+  .nhcard-body{transform:none !important}
+
+  /* Testimonial / review grids */
+  .testimonials-track,.test-grid,.rev-grid,
+  .rev-grid-6,.big-review-grid{
+    grid-template-columns:1fr !important;
+  }
+
+  /* Contact */
+  .contact-methods,.cm-grid{
+    grid-template-columns:1fr !important;
+  }
+
+  /* Sell hero */
+  .sell-hero,.sh-right{
+    grid-template-columns:1fr !important;
+    min-height:auto !important;
+  }
+
+  /* About hero */
+  .ah-inner{
+    grid-template-columns:1fr !important;
+    gap:0 !important;
+  }
+  .ah-text{padding:2rem 1.2rem 3rem !important}
+  .about-accent-box,.scta-badge,.fin-badge,.ah-photo-badge{
+    right:1rem !important;
+  }
+
+  /* Navbar height */
+  #nav,#mainNav{height:60px !important;padding:0 1.2rem !important}
+  .nav-logo img{height:40px !important}
+
+  /* Filter bar */
+  .filter-bar,.fb-inner{
+    flex-wrap:wrap !important;
+    padding:.8rem 1rem !important;
+    top:60px !important;
+  }
+  .ftag,.filter-btn{font-size:.6rem !important;padding:.4rem .8rem !important}
+  .fb-sel{min-width:0 !important;flex:1}
+  .fb-count{width:100%;text-align:center}
+}
+
+@media(max-width:420px){
+  .hero-title{font-size:1.9rem !important}
+  .h2{font-size:1.6rem !important}
+  .btn,.btn-gold,.btn-forest,.btn-warm,.btn-outline-white,.btn-ghost,.btn-white{
+    font-size:.68rem !important;padding:.8rem 1.2rem !important;
+  }
+  .fsubmit,.cf-submit,.sb-submit,.form-submit{
+    font-size:.68rem !important;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -982,6 +1167,27 @@ document.querySelectorAll('.ftag').forEach(btn=>{
       c.style.display = (f==='all' || c.dataset.s===f) ? 'block' : 'none';
     });
   });
+});
+
+function toggleMobMenu(){
+  var btn  = document.getElementById('hamBtn');
+  var menu = document.getElementById('mobMenu');
+  if(!btn || !menu) return;
+  btn.classList.toggle('open');
+  menu.classList.toggle('open');
+  document.body.style.overflow = menu.classList.contains('open') ? 'hidden' : '';
+}
+// Close on ESC
+document.addEventListener('keydown', function(e){
+  if(e.key==='Escape') {
+    var m=document.getElementById('mobMenu');
+    var b=document.getElementById('hamBtn');
+    if(m && m.classList.contains('open')){
+      m.classList.remove('open');
+      if(b) b.classList.remove('open');
+      document.body.style.overflow='';
+    }
+  }
 });
 </script>
 </body>
