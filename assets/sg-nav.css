@@ -389,3 +389,54 @@ body.sg-locked{overflow:hidden}
   .pcard-price{font-size:1.25rem !important}
   .btn{font-size:.68rem !important;padding:.85rem 1.3rem !important}
 }
+
+
+/* ═══════════════════════════════════════════════════════════════
+   DESKTOP-ONLY: Transparent nav over hero on homepage
+   Mobile keeps solid cream nav (so hamburger stays visible)
+   ═══════════════════════════════════════════════════════════════ */
+@media (min-width:901px){
+  /* Transparent nav at top of homepage hero */
+  body[data-hero="true"] .sg-nav:not(.scrolled){
+    background:transparent;
+    border-bottom-color:transparent;
+    box-shadow:none;
+    backdrop-filter:none;
+    -webkit-backdrop-filter:none;
+  }
+  /* White logo over dark hero */
+  body[data-hero="true"] .sg-nav:not(.scrolled) .sg-nav-logo img{
+    filter:brightness(0) invert(1);
+  }
+  /* White menu links */
+  body[data-hero="true"] .sg-nav:not(.scrolled) .sg-nav-menu a:not(.sg-nav-cta){
+    color:#fff;
+  }
+  body[data-hero="true"] .sg-nav:not(.scrolled) .sg-nav-menu a:not(.sg-nav-cta):hover{
+    color:var(--sg-gold-l);
+  }
+  body[data-hero="true"] .sg-nav:not(.scrolled) .sg-nav-menu a:not(.sg-nav-cta)::after{
+    background:var(--sg-gold-l);
+  }
+  /* Gold CTA over hero */
+  body[data-hero="true"] .sg-nav:not(.scrolled) .sg-nav-cta{
+    background:var(--sg-gold);
+    color:var(--sg-ink) !important;
+  }
+  body[data-hero="true"] .sg-nav:not(.scrolled) .sg-nav-cta:hover{
+    background:var(--sg-gold-l);
+    color:var(--sg-ink) !important;
+  }
+}
+
+/* Mobile: ALWAYS solid cream nav — never transparent
+   This is what keeps the hamburger visible at the top of the page */
+@media (max-width:900px){
+  body[data-hero="true"] .sg-nav,
+  body[data-hero="true"] .sg-nav:not(.scrolled){
+    background:rgba(253,252,249,.94) !important;
+    backdrop-filter:saturate(180%) blur(20px) !important;
+    -webkit-backdrop-filter:saturate(180%) blur(20px) !important;
+    border-bottom:1px solid var(--sg-rule) !important;
+  }
+}
