@@ -3,1013 +3,1106 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>Sigal Group Realty — South Florida Real Estate</title>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,700;1,9..144,300;1,9..144,500&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<title>Sigal Group Realty — Listings Manager</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
 <style>
-/* ═══════════════ TOKENS ═══════════════ */
 :root{
-  --forest:   #1A5C3A;
-  --forest-d: #0E3D26;
-  --sage:     #3D8B64;
-  --mint:     #5BAF87;
-  --foam:     #D4EDE0;
-  --cream:    #F8F3EA;
-  --sand:     #EDE4D3;
-  --warm:     #C9A96E;
-  --warm-l:   #F0DFA0;
-  --ocean:    #1B6B8A;
-  --sky:      #E8F4F8;
-  --ink:      #1A2820;
-  --slate:    #4A6058;
-  --silver:   #8FA89A;
-  --rule:     #D9E8E0;
-  --white:    #FDFCF9;
-  --off:      #F4F0E8;
+  --green:#1A5C3A;--green-d:#0E3D26;--green-l:#E8F5EE;
+  --sage:#3D8B64;--mint:#5BAF87;
+  --gold:#C9A96E;--gold-l:#F0DFA0;
+  --red:#C0392B;--red-l:#FDEDEC;
+  --ink:#1A2820;--slate:#4A6058;--silver:#8FA89A;
+  --rule:#D9E8E0;--cream:#F8F3EA;--off:#F4F0E8;--white:#FDFCF9;
+  --shadow:rgba(26,92,58,.12);
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;font-size:16px}
-body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--white);color:var(--ink);overflow-x:hidden}
+html{scroll-behavior:smooth}
+body{font-family:'Plus Jakarta Sans',sans-serif;background:#EEF3EF;color:var(--ink);overflow-x:hidden;min-height:100vh}
 img{display:block;max-width:100%}
-a{text-decoration:none;color:inherit}
+button{cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif}
+input,select,textarea{font-family:'Plus Jakarta Sans',sans-serif}
 
-/* UTILS */
-.wrap{max-width:1260px;margin:0 auto;padding:0 2.5rem}
-.tag{font-size:.62rem;font-weight:700;letter-spacing:.3em;text-transform:uppercase;color:var(--sage);display:inline-flex;align-items:center;gap:.6rem}
-.tag::before{content:'';width:22px;height:2px;background:var(--sage)}
-.h2{font-family:'Fraunces',serif;font-size:clamp(2rem,3.8vw,3rem);font-weight:500;line-height:1.1;color:var(--ink)}
-.h2 i{font-style:italic;color:var(--sage)}
-.lead{color:var(--slate);font-size:.95rem;line-height:1.9;font-weight:400}
-.btn-forest{display:inline-flex;align-items:center;gap:.5rem;background:var(--forest);color:var(--white);padding:.88rem 2.1rem;font-size:.76rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;border:2px solid var(--forest);transition:.3s}
-.btn-forest:hover{background:var(--forest-d);border-color:var(--forest-d);transform:translateY(-2px)}
-.btn-ghost{display:inline-flex;align-items:center;gap:.5rem;background:transparent;color:var(--forest);padding:.88rem 2.1rem;font-size:.76rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;border:2px solid var(--forest);transition:.3s}
-.btn-ghost:hover{background:var(--forest);color:var(--white)}
-.btn-warm{display:inline-flex;align-items:center;gap:.5rem;background:var(--warm);color:var(--white);padding:.88rem 2.1rem;font-size:.76rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;border:2px solid var(--warm);transition:.3s}
-.btn-warm:hover{background:#b8963a;transform:translateY(-2px)}
-.btn-white{display:inline-flex;align-items:center;gap:.5rem;background:var(--white);color:var(--forest);padding:.88rem 2.1rem;font-size:.76rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;border:2px solid var(--white);transition:.3s}
-.btn-white:hover{background:transparent;color:var(--white)}
-
-/* REVEAL */
-.rx{opacity:0;transform:translateY(28px);transition:opacity .8s ease,transform .8s ease}
-.rx.in{opacity:1;transform:none}
-.rx.d1{transition-delay:.1s}.rx.d2{transition-delay:.2s}.rx.d3{transition-delay:.3s}.rx.d4{transition-delay:.4s}
-
-/* ═══════════════ FLOATING ═══════════════ */
-.phone-bubble{position:fixed;bottom:2rem;right:2rem;z-index:900;display:flex;flex-direction:column;align-items:flex-end;gap:.5rem}
-.pb-btn{display:flex;align-items:center;gap:.55rem;padding:.75rem 1.3rem;font-size:.76rem;font-weight:700;letter-spacing:.05em;color:var(--white);white-space:nowrap;transition:.25s}
-.pb-btn:hover{transform:translateY(-3px)}
-.pb-call{background:var(--forest);box-shadow:0 4px 20px rgba(26,92,58,.35);animation:pbPulse 3s ease infinite}
-.pb-email{background:var(--ocean)}
-@keyframes pbPulse{0%,100%{box-shadow:0 4px 20px rgba(26,92,58,.35)}50%{box-shadow:0 4px 32px rgba(26,92,58,.65)}}
-
-/* ═══════════════ NAV ═══════════════ */
-#mainNav{position:fixed;top:0;left:0;right:0;z-index:800;height:80px;display:flex;align-items:center;justify-content:space-between;padding:0 2.5rem;background:transparent;transition:background .4s,height .4s,box-shadow .4s}
-#mainNav.solid{background:rgba(253,252,249,.97);backdrop-filter:blur(10px);height:64px;box-shadow:0 2px 24px rgba(0,0,0,.07)}
-.nav-logo img{height:56px;filter:brightness(0) invert(1);transition:height .4s,filter .4s}
-#mainNav.solid .nav-logo img{height:44px;filter:none}
-.nav-menu{display:flex;align-items:center;gap:2rem;list-style:none}
-.nav-menu > li > a{font-size:.72rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.92);transition:.25s;padding:4px 0;position:relative}
-.nav-menu > li > a::after{content:'';position:absolute;bottom:0;left:0;width:0;height:2px;background:var(--mint);transition:.3s}
-.nav-menu > li > a:hover::after{width:100%}
-#mainNav.solid .nav-menu > li > a{color:var(--ink)}
-#mainNav.solid .nav-menu > li > a:hover{color:var(--forest)}
-.nav-dd{position:relative}
-.nav-dd-panel{display:none;position:absolute;top:calc(100%+12px);left:-1rem;min-width:210px;background:var(--white);border-top:3px solid var(--sage);box-shadow:0 16px 50px rgba(0,0,0,.12)}
-.nav-dd:hover .nav-dd-panel{display:block}
-.nav-dd-panel a{display:block;padding:.82rem 1.3rem;font-size:.71rem;font-weight:600;letter-spacing:.06em;color:var(--ink) !important;border-bottom:1px solid var(--rule);transition:.2s}
-.nav-dd-panel a:hover{color:var(--sage) !important;background:var(--cream)}
-.nav-dd-panel a::after{display:none !important}
-.nav-cta{background:var(--sage);color:var(--white) !important;padding:.5rem 1.3rem !important;font-size:.7rem !important;transition:background .25s !important}
-.nav-cta:hover{background:var(--forest) !important}
-.nav-cta::after{display:none !important}
-
-/* ═══════════════ HERO ═══════════════ */
-#hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;position:relative;overflow:hidden}
-.hero-left{position:relative;background:var(--forest-d);display:flex;flex-direction:column;justify-content:center;padding:7rem 4rem 5rem 4.5rem;z-index:10}
-.hero-left::after{content:'';position:absolute;top:0;right:-80px;bottom:0;width:160px;background:var(--forest-d);transform:skewX(-5deg);z-index:1}
-.hero-pattern{position:absolute;inset:0;opacity:.04;background-image:repeating-linear-gradient(45deg,var(--white) 0,var(--white) 1px,transparent 0,transparent 50%);background-size:30px 30px}
-.hero-left-content{position:relative;z-index:5}
-.hero-eyebrow{font-size:.62rem;font-weight:700;letter-spacing:.3em;text-transform:uppercase;color:var(--mint);display:flex;align-items:center;gap:.7rem;margin-bottom:1.6rem}
-.hero-eyebrow span{width:30px;height:2px;background:var(--mint)}
-.hero-h1{font-family:'Fraunces',serif;font-size:clamp(2.8rem,5vw,4.6rem);line-height:1.0;font-weight:500;color:var(--white);margin-bottom:1.6rem;animation:hSlide .9s ease both}
-.hero-h1 i{font-style:italic;color:var(--warm-l)}
-@keyframes hSlide{from{opacity:0;transform:translateX(-24px)}to{opacity:1;transform:none}}
-.hero-sub{font-size:.95rem;color:rgba(255,255,255,.72);line-height:1.85;max-width:440px;margin-bottom:2.6rem;animation:hSlide .9s .2s ease both;font-weight:300}
-.hero-search-card{background:var(--white);padding:1.8rem;animation:hSlide .9s .4s ease both;margin-bottom:2rem}
-.hsc-tabs{display:flex;gap:0;margin-bottom:1.4rem;border-bottom:2px solid var(--rule)}
-.hsc-tab{padding:.7rem 1.4rem;font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--silver);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-2px;transition:.25s;background:none;border-top:none;border-left:none;border-right:none;font-family:'Plus Jakarta Sans',sans-serif}
-.hsc-tab.on{color:var(--forest);border-bottom-color:var(--forest)}
-.hsc-input-row{display:flex;gap:.6rem}
-.hsc-input{flex:1;padding:.8rem 1rem;border:1.5px solid var(--rule);background:var(--cream);font-family:'Plus Jakarta Sans',sans-serif;font-size:.86rem;color:var(--ink);outline:none;transition:.25s}
-.hsc-input:focus{border-color:var(--sage)}
-.hsc-input::placeholder{color:var(--silver)}
-.hsc-btn{background:var(--forest);color:var(--white);padding:.8rem 1.4rem;border:none;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;font-size:.78rem;font-weight:700;letter-spacing:.08em;transition:.25s;white-space:nowrap}
-.hsc-btn:hover{background:var(--sage)}
-.hero-quick-links{display:flex;gap:1rem;flex-wrap:wrap;animation:hSlide .9s .55s ease both}
-.hql{display:flex;align-items:center;gap:.5rem;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.85);padding:.55rem 1rem;font-size:.7rem;font-weight:600;letter-spacing:.08em;transition:.25s}
-.hql:hover{background:rgba(255,255,255,.18);border-color:rgba(255,255,255,.4)}
-.hero-right{position:relative;overflow:hidden;background:#0a1a12}
-.hero-right-badge{position:absolute;bottom:3rem;left:50%;transform:translateX(-50%);background:var(--white);padding:1.2rem 2rem;display:flex;align-items:center;gap:1.4rem;z-index:10;min-width:280px;box-shadow:0 8px 40px rgba(0,0,0,.15)}
-.hrb-star{color:#FCA326;font-size:1rem;letter-spacing:.1em}
-.hrb-num{font-family:'Fraunces',serif;font-size:2rem;font-weight:500;color:var(--forest);line-height:1}
-.hrb-txt{font-size:.7rem;color:var(--slate);font-weight:600;display:block}
-.hrb-src{font-size:.6rem;color:var(--silver);letter-spacing:.08em;text-transform:uppercase}
-
-/* ═══════════════ STATS STRIP ═══════════════ */
-.stats-strip{background:var(--sage);display:flex;justify-content:space-around;flex-wrap:wrap}
-.sstat{padding:2rem 1.5rem;text-align:center;flex:1;min-width:130px;border-right:1px solid rgba(255,255,255,.15)}
-.sstat:last-child{border-right:none}
-.sstat-n{font-family:'Fraunces',serif;font-size:2.6rem;font-weight:500;color:var(--white);display:block;line-height:1}
-.sstat-l{font-size:.6rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.65);display:block;margin-top:.4rem}
-
-/* ═══════════════ HOW WE WORK ═══════════════ */
-#process{padding:7rem 0;background:var(--cream)}
-.process-top{text-align:center;max-width:600px;margin:0 auto 5rem}
-.process-top .tag{justify-content:center;margin-bottom:1rem}
-.process-top .tag::before{display:none}
-.process-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:var(--rule)}
-.pstep{background:var(--white);padding:3rem 2.2rem;position:relative;overflow:hidden;transition:transform .35s,box-shadow .35s}
-.pstep:hover{transform:translateY(-6px);box-shadow:0 20px 60px rgba(26,92,58,.1);z-index:1}
-.pstep-num{font-family:'Fraunces',serif;font-size:5rem;font-weight:300;color:var(--foam);line-height:1;position:absolute;top:.5rem;right:1.2rem;transition:.35s}
-.pstep:hover .pstep-num{color:var(--sage);opacity:.25}
-.pstep-icon{font-size:2rem;margin-bottom:1.5rem;display:block}
-.pstep-title{font-family:'Fraunces',serif;font-size:1.25rem;font-weight:500;color:var(--ink);margin-bottom:.8rem}
-.pstep-text{font-size:.83rem;color:var(--slate);line-height:1.8}
-.pstep-link{display:inline-flex;align-items:center;gap:.4rem;margin-top:1.4rem;font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--sage);transition:.25s}
-.pstep-link:hover{gap:.8rem}
-
-/* ═══════════════ ABOUT SPLIT ═══════════════ */
-#about{padding:7rem 0;background:var(--white)}
-.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;align-items:stretch}
-.about-photo-side{position:relative;min-height:640px;overflow:hidden}
-.about-photo-side img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top}
-.about-photo-overlay{position:absolute;bottom:0;left:0;right:0;padding:2.5rem;background:linear-gradient(to top,rgba(14,61,38,.9),transparent)}
-.apo-stat{display:flex;gap:2rem;flex-wrap:wrap}
-.apo-item{text-align:center}
-.apo-n{font-family:'Fraunces',serif;font-size:2.5rem;font-weight:500;color:var(--warm-l);display:block;line-height:1}
-.apo-l{font-size:.6rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.65);display:block}
-.about-text-side{background:var(--cream);padding:5rem 4.5rem;display:flex;flex-direction:column;justify-content:center}
-.about-text-side .tag{margin-bottom:1.2rem}
-.about-text-side .h2{margin-bottom:.8rem}
-.about-rule{width:48px;height:3px;background:var(--sage);margin:1rem 0 1.6rem}
-.about-body p{font-size:.9rem;color:var(--slate);line-height:1.9;margin-bottom:1rem}
-.about-pull{border-left:4px solid var(--sage);padding:1.2rem 1.5rem;background:var(--white);font-size:.88rem;font-weight:600;color:var(--forest);line-height:1.7;margin:1.5rem 0}
-.about-chips{display:flex;flex-wrap:wrap;gap:.5rem;margin:1.4rem 0 2rem}
-.chip{background:var(--foam);color:var(--forest-d);font-size:.68rem;font-weight:700;padding:.38rem .85rem;letter-spacing:.06em;border:1px solid var(--sage)}
-
-/* ═══════════════ NEIGHBORHOODS ═══════════════ */
-#neighborhoods{padding:7rem 0;background:var(--off)}
-.nh-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:3.5rem}
-.nh-grid{display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:220px 200px;gap:1rem}
-.nhcard{position:relative;overflow:hidden;cursor:pointer;background:var(--forest)}
-.nhcard img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .6s ease,opacity .4s}
-.nhcard:hover img{transform:scale(1.08);opacity:.7}
-.nhcard-body{position:absolute;bottom:0;left:0;right:0;padding:1.5rem;background:linear-gradient(to top,rgba(14,61,38,.82),transparent);transform:translateY(8px);transition:.35s}
-.nhcard:hover .nhcard-body{transform:none}
-.nhcard-name{font-family:'Fraunces',serif;font-size:1.25rem;font-weight:500;color:var(--white)}
-.nhcard-sub{font-size:.65rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--warm-l);margin-bottom:.3rem}
-.nhcard-count{font-size:.72rem;color:rgba(255,255,255,.7);margin-top:.3rem}
-/* Featured spans */
-.nhcard.feat{grid-row:span 2}
-.nhcard.wide{grid-column:span 2}
-
-/* ═══════════════ PROPERTIES ═══════════════ */
-#listings{padding:7rem 0;background:var(--white)}
-.listings-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:3rem;flex-wrap:wrap;gap:1.5rem}
-.lh-right{display:flex;gap:.5rem;flex-wrap:wrap}
-.ftag{padding:.48rem 1.1rem;font-size:.65rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;background:transparent;border:1.5px solid var(--rule);color:var(--slate);cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;transition:.25s}
-.ftag.on,.ftag:hover{background:var(--forest);border-color:var(--forest);color:var(--white)}
-.listings-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
-.lcard{background:var(--cream);display:block;color:inherit;overflow:hidden;position:relative;transition:transform .35s cubic-bezier(.23,1,.32,1),box-shadow .35s}
-.lcard:hover{transform:translateY(-8px);box-shadow:0 22px 65px rgba(26,92,58,.13)}
-.lcard-img{position:relative;overflow:hidden;aspect-ratio:4/3}
-.lcard-img img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease}
-.lcard:hover .lcard-img img{transform:scale(1.07)}
-.lcard-badge{position:absolute;top:.9rem;left:.9rem;font-size:.58rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;padding:.32rem .8rem}
-.lb-jsold{background:var(--forest);color:var(--white)}
-.lb-sold{background:var(--slate);color:var(--white)}
-.lb-sale{background:var(--warm);color:var(--white)}
-.lcard-price-bar{position:absolute;bottom:0;left:0;right:0;padding:1rem;background:linear-gradient(to top,rgba(14,61,38,.85),transparent)}
-.lcard-price{font-family:'Fraunces',serif;font-size:1.4rem;font-weight:500;color:var(--white)}
-.lcard-body{padding:1.3rem 1.5rem 1.6rem}
-.lcard-loc{font-size:.6rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--sage);margin-bottom:.35rem;display:flex;align-items:center;gap:.3rem}
-.lcard-name{font-family:'Fraunces',serif;font-size:1rem;font-weight:500;color:var(--ink);line-height:1.3;margin-bottom:.9rem}
-.lcard-specs{display:flex;gap:1.2rem;flex-wrap:wrap;padding-top:.85rem;border-top:1px solid var(--sand)}
-.lspec{font-size:.7rem;color:var(--silver);display:flex;align-items:center;gap:.25rem;font-weight:500}
-
-/* ═══════════════ SELL BAND ═══════════════ */
-#sell-band{position:relative;padding:8rem 0;overflow:hidden}
-.sb-bg{position:absolute;inset:0;background-image:url('https://static.wixstatic.com/media/640c0f_d6e5622858894805b6b563dcda1accec~mv2.jpg/v1/fill/w_1920,h_900,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/640c0f_d6e5622858894805b6b563dcda1accec~mv2.jpg');background-size:cover;background-position:center;background-attachment:fixed}
-.sb-overlay{position:absolute;inset:0;background:linear-gradient(90deg,rgba(10,38,23,.94) 0%,rgba(10,38,23,.7) 55%,rgba(10,38,23,.35) 100%)}
-.sb-inner{position:relative;z-index:10;display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:center}
-.sb-left .tag{color:var(--warm-l)}
-.sb-left .tag::before{background:var(--warm-l)}
-.sb-left .h2{color:var(--white)}
-.sb-left .h2 i{color:var(--warm-l)}
-.sb-rule{width:48px;height:3px;background:var(--warm);margin:1rem 0 1.8rem}
-.sb-list{list-style:none;margin-bottom:2.5rem}
-.sb-list li{display:flex;align-items:flex-start;gap:.9rem;color:rgba(255,255,255,.82);font-size:.9rem;line-height:1.7;padding:.6rem 0;border-bottom:1px solid rgba(255,255,255,.07)}
-.sb-list li::before{content:'✓';color:var(--warm-l);font-weight:700;flex-shrink:0;font-size:.9rem;margin-top:2px}
-.sb-right{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.15);backdrop-filter:blur(8px);padding:2.8rem}
-.sb-right h3{font-family:'Fraunces',serif;font-size:1.6rem;font-weight:500;color:var(--white);margin-bottom:.6rem}
-.sb-right p{color:rgba(255,255,255,.65);font-size:.84rem;line-height:1.8;margin-bottom:2rem}
-.sb-form .sf-row{display:grid;grid-template-columns:1fr 1fr;gap:.8rem;margin-bottom:.8rem}
-.sb-form input,.sb-form select{width:100%;padding:.8rem .95rem;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.2);color:var(--white);font-family:'Plus Jakarta Sans',sans-serif;font-size:.83rem;outline:none;transition:.25s;appearance:none}
-.sb-form input::placeholder{color:rgba(255,255,255,.4)}
-.sb-form input:focus,.sb-form select:focus{border-color:var(--mint)}
-.sb-form select option{background:#1A5C3A;color:var(--white)}
-.sb-form .mb8{margin-bottom:.8rem}
-.sb-submit{width:100%;padding:1rem;background:var(--warm);color:var(--white);border:none;font-family:'Plus Jakarta Sans',sans-serif;font-size:.78rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;cursor:pointer;transition:.3s;margin-top:.4rem}
-.sb-submit:hover{background:#b8963a}
-
-/* ═══════════════ TESTIMONIALS ═══════════════ */
-#reviews{padding:7rem 0;background:var(--cream)}
-.rev-header{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;margin-bottom:4.5rem}
-.rev-header-right{background:var(--white);padding:2.2rem;display:flex;flex-direction:column;align-items:center;text-align:center;border-bottom:4px solid var(--sage)}
-.rev-google-logo{height:22px;object-fit:contain;margin-bottom:.8rem}
-.rev-score{font-family:'Fraunces',serif;font-size:3.5rem;font-weight:500;color:var(--forest);line-height:1}
-.rev-stars{color:#FCA326;font-size:1.2rem;letter-spacing:.1em;margin:.4rem 0}
-.rev-count{font-size:.75rem;color:var(--silver);letter-spacing:.1em}
-.rev-link{display:inline-flex;align-items:center;gap:.4rem;margin-top:1rem;color:var(--sage);font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;transition:.25s}
-.rev-link:hover{color:var(--forest)}
-.rev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
-.rcard{background:var(--white);padding:2.5rem;border-top:3px solid var(--sage);position:relative}
-.rcard-q{font-family:'Fraunces',serif;font-size:3.8rem;color:var(--sage);opacity:.18;line-height:.55;display:block;margin-bottom:1rem}
-.rcard-stars{color:#FCA326;font-size:.8rem;letter-spacing:.12em;margin-bottom:1.1rem}
-.rcard-text{font-family:'Fraunces',serif;font-style:italic;font-size:1rem;color:var(--ink);line-height:1.75;margin-bottom:1.6rem}
-.rcard-author{display:flex;align-items:center;gap:.85rem}
-.rcard-av{width:44px;height:44px;border-radius:50%;background:var(--forest);display:flex;align-items:center;justify-content:center;font-family:'Fraunces',serif;font-size:1.1rem;font-weight:500;color:var(--white);flex-shrink:0}
-.rcard-name{font-weight:700;font-size:.82rem;color:var(--ink);display:block}
-.rcard-source{display:flex;align-items:center;gap:.3rem;font-size:.64rem;color:var(--silver);margin-top:.15rem}
-.g-g{color:#4285F4;font-weight:800;font-size:.75rem}
-
-/* ═══════════════ PRE-APPROVAL / FINANCE ═══════════════ */
-#finance{padding:7rem 0;background:var(--sky)}
-.fin-grid{display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:center}
-.fin-img{position:relative}
-.fin-img-main{width:100%;aspect-ratio:3/4;object-fit:cover;object-position:center top}
-.fin-badge{position:absolute;top:-1.5rem;right:-1.5rem;background:var(--forest);padding:1.8rem 2rem;text-align:center;min-width:160px}
-.fin-badge-n{font-family:'Fraunces',serif;font-size:2.5rem;font-weight:500;color:var(--warm-l);display:block;line-height:1}
-.fin-badge-t{font-size:.6rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.65);display:block;margin-top:.3rem}
-.fin-text .tag{margin-bottom:1rem}
-.fin-text .h2{color:var(--ocean)}
-.fin-text .h2 i{color:var(--sage)}
-.fin-rule{width:48px;height:3px;background:var(--ocean);margin:1rem 0 1.5rem}
-.fin-steps{display:flex;flex-direction:column;gap:1.1rem;margin:1.8rem 0 2.5rem}
-.fstep{display:flex;gap:1.1rem;align-items:flex-start}
-.fstep-dot{width:36px;height:36px;background:var(--ocean);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--white);font-size:.7rem;font-weight:700;flex-shrink:0;margin-top:.1rem}
-.fstep-title{font-weight:700;font-size:.88rem;color:var(--ink);margin-bottom:.2rem}
-.fstep-text{font-size:.8rem;color:var(--slate);line-height:1.7}
-
-/* ═══════════════ CONTACT ═══════════════ */
-#contact{padding:7rem 0;background:var(--forest-d)}
-.contact-inner{display:grid;grid-template-columns:5fr 7fr;gap:6rem;align-items:start}
-.ci-left .tag{color:var(--mint)}
-.ci-left .tag::before{background:var(--mint)}
-.ci-left .h2{color:var(--white);margin-bottom:.8rem}
-.ci-left .h2 i{color:var(--warm-l)}
-.ci-rule{width:48px;height:3px;background:var(--warm);margin:1rem 0 1.5rem}
-.ci-desc{color:rgba(255,255,255,.65);font-size:.9rem;line-height:1.9;margin-bottom:2.5rem;font-weight:300}
-.ci-rows{display:flex;flex-direction:column;gap:1.2rem;margin-bottom:2.5rem}
-.cirow{display:flex;align-items:flex-start;gap:1rem}
-.cirow-icon{width:44px;height:44px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0}
-.cirow-lbl{font-size:.6rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--warm-l);display:block;margin-bottom:.2rem}
-.cirow-val{color:rgba(255,255,255,.82);font-size:.88rem;line-height:1.6}
-.cirow-val a{color:inherit;transition:.2s}
-.cirow-val a:hover{color:var(--warm-l)}
-/* Form */
-.cform-card{background:var(--white);padding:3.2rem}
-.cfc-title{font-family:'Fraunces',serif;font-size:1.7rem;font-weight:500;color:var(--ink);margin-bottom:.5rem}
-.cfc-sub{font-size:.83rem;color:var(--slate);margin-bottom:2rem}
-.cf-row{display:grid;grid-template-columns:1fr 1fr;gap:.9rem}
-.cf-grp{margin-bottom:1rem}
-.cf-grp label{display:block;font-size:.62rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--ink);margin-bottom:.45rem}
-.cf-grp input,.cf-grp select,.cf-grp textarea{width:100%;padding:.8rem .95rem;border:1.5px solid var(--sand);background:var(--cream);font-family:'Plus Jakarta Sans',sans-serif;font-size:.86rem;color:var(--ink);outline:none;transition:.25s;appearance:none}
-.cf-grp input:focus,.cf-grp select:focus,.cf-grp textarea:focus{border-color:var(--sage)}
-.cf-grp textarea{resize:vertical;min-height:90px}
-.cf-submit{width:100%;padding:1rem;background:var(--forest);color:var(--white);border:none;font-family:'Plus Jakarta Sans',sans-serif;font-size:.76rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;cursor:pointer;transition:.3s;margin-top:.3rem}
-.cf-submit:hover{background:var(--sage)}
-.cf-disc{font-size:.64rem;color:var(--silver);line-height:1.6;margin-top:.9rem}
-
-/* ═══════════════ MAP ═══════════════ */
-.map-block{height:350px;position:relative;overflow:hidden}
-.map-block iframe{width:100%;height:100%;border:none;display:block}
-.map-pill{position:absolute;top:50%;left:4rem;transform:translateY(-50%);background:var(--white);padding:2rem 2.5rem;box-shadow:0 10px 50px rgba(0,0,0,.18)}
-.map-pill h3{font-family:'Fraunces',serif;font-size:1.4rem;font-weight:500;color:var(--ink);margin-bottom:.4rem}
-.map-pill p{font-size:.82rem;color:var(--slate);line-height:1.7;margin-bottom:1rem}
-
-/* ═══════════════ FOOTER ═══════════════ */
-footer{background:#091F14;padding:5rem 0 2.5rem;border-top:3px solid var(--sage)}
-.footer-grid{display:grid;grid-template-columns:2.3fr 1fr 1fr 1fr;gap:3.5rem;margin-bottom:3.5rem;padding-bottom:3.5rem;border-bottom:1px solid rgba(255,255,255,.07)}
-.fl-logo img{height:52px;filter:brightness(0) invert(1);display:block;margin-bottom:1.2rem}
-.fl-tag{color:rgba(255,255,255,.45);font-size:.82rem;line-height:1.85;max-width:300px;margin-bottom:1.6rem;font-weight:300}
-.fl-socials{display:flex;gap:.5rem}
-.fsocia{width:36px;height:36px;border:1px solid rgba(255,255,255,.18);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.5);font-size:.78rem;font-weight:700;transition:.25s}
-.fsocia:hover{border-color:var(--mint);color:var(--mint);background:rgba(91,175,135,.08)}
-.fc-head{font-family:'Fraunces',serif;font-size:.95rem;font-weight:500;color:var(--white);margin-bottom:1.3rem;padding-bottom:.65rem;border-bottom:1px solid rgba(200,169,110,.22)}
-.fl-links{list-style:none;display:flex;flex-direction:column;gap:.7rem}
-.fl-links a{color:rgba(255,255,255,.45);font-size:.81rem;transition:.25s;font-weight:400}
-.fl-links a:hover{color:var(--mint)}
-.footer-bottom{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
-.fb-copy{font-size:.7rem;color:rgba(255,255,255,.22);letter-spacing:.06em}
-.fb-links{display:flex;gap:1.5rem}
-.fb-links a{font-size:.7rem;color:rgba(255,255,255,.22);transition:.25s}
-.fb-links a:hover{color:var(--mint)}
-
-/* ═══════════════ RESPONSIVE ═══════════════ */
-@media(max-width:1100px){
-  #hero{grid-template-columns:1fr;height:auto}
-  .hero-left{padding:8rem 2.5rem 4rem}
-  .hero-left::after{display:none}
-  .hero-right{height:380px;display:block}
-  .hero-right-badge{bottom:1.5rem}
-  .about-grid{grid-template-columns:1fr}
-  .about-photo-side{min-height:440px}
-  .nh-grid{grid-template-columns:1fr 1fr;grid-auto-rows:220px}
-  .nhcard.feat{grid-row:span 1}
-  .nhcard.wide{grid-column:span 2}
-  .sb-inner{grid-template-columns:1fr;gap:3rem}
-  .rev-header{grid-template-columns:1fr}
-  .fin-grid{grid-template-columns:1fr;gap:3rem}
-  .fin-badge{right:.5rem;top:-1rem}
-  .contact-inner{grid-template-columns:1fr;gap:3.5rem}
-  .footer-grid{grid-template-columns:1fr 1fr;gap:2.5rem}
+/* ── LOGIN ─────────────────────────────────── */
+#loginScreen{
+  display:flex;align-items:center;justify-content:center;
+  min-height:100vh;background:linear-gradient(135deg,var(--green-d) 0%,var(--green) 100%);
+  padding:2rem;
 }
+.login-card{
+  background:var(--white);width:100%;max-width:420px;
+  padding:3rem;text-align:center;
+  box-shadow:0 20px 60px rgba(0,0,0,.2);
+}
+.login-logo{
+  font-family:'Fraunces',serif;font-size:1.6rem;font-weight:500;
+  color:var(--green);margin-bottom:.3rem;
+}
+.login-sub{
+  font-size:.72rem;font-weight:700;letter-spacing:.25em;
+  text-transform:uppercase;color:var(--silver);margin-bottom:2.5rem;
+}
+.login-divider{width:60px;height:3px;background:var(--gold);margin:0 auto 2.5rem}
+.login-card .netlify-identity-widget{display:block}
+/* Style the Netlify Identity widget inside login */
+#netlify-identity-widget{font-family:'Plus Jakarta Sans',sans-serif!important}
+
+/* ── HEADER ────────────────────────────────── */
+#adminPanel{display:none;min-height:100vh}
+.adm-header{
+  position:sticky;top:0;z-index:500;
+  background:var(--green-d);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 2rem;height:64px;
+  box-shadow:0 2px 12px rgba(0,0,0,.2);
+}
+.adm-logo{
+  font-family:'Fraunces',serif;font-size:1.1rem;font-weight:500;
+  color:var(--white);letter-spacing:.05em;
+  display:flex;align-items:center;gap:.7rem;
+}
+.adm-logo-badge{
+  background:var(--gold);color:var(--ink);
+  font-size:.55rem;font-weight:700;letter-spacing:.15em;
+  text-transform:uppercase;padding:.3rem .7rem;
+}
+.adm-header-right{display:flex;align-items:center;gap:.8rem}
+.btn-add{
+  display:flex;align-items:center;gap:.5rem;
+  background:var(--gold);color:var(--ink);
+  padding:.6rem 1.4rem;font-size:.75rem;font-weight:700;
+  letter-spacing:.08em;text-transform:uppercase;border:none;
+  transition:.25s;
+}
+.btn-add:hover{background:var(--gold-l)}
+.btn-logout{
+  background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);
+  color:rgba(255,255,255,.8);padding:.55rem 1.1rem;
+  font-size:.72rem;font-weight:600;letter-spacing:.06em;
+  text-transform:uppercase;transition:.25s;
+}
+.btn-logout:hover{background:rgba(255,255,255,.18);color:var(--white)}
+
+/* ── STATS BAR ─────────────────────────────── */
+.stats-bar{
+  background:var(--green);display:flex;
+  padding:0 2rem;gap:0;
+}
+.stat-item{
+  padding:1rem 2rem;text-align:center;
+  border-right:1px solid rgba(255,255,255,.15);
+  cursor:pointer;transition:background .25s;
+}
+.stat-item:hover,.stat-item.on{background:rgba(255,255,255,.08)}
+.stat-item:last-child{border-right:none}
+.stat-n{
+  font-family:'Fraunces',serif;font-size:1.7rem;font-weight:500;
+  color:var(--gold-l);display:block;line-height:1;
+}
+.stat-l{
+  font-size:.58rem;font-weight:700;letter-spacing:.18em;
+  text-transform:uppercase;color:rgba(255,255,255,.6);
+  display:block;margin-top:.25rem;
+}
+
+/* ── TOOLBAR ───────────────────────────────── */
+.toolbar{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1.2rem 2rem;background:var(--white);
+  border-bottom:1px solid var(--rule);flex-wrap:wrap;gap:.8rem;
+}
+.filter-tabs{display:flex;gap:.4rem;flex-wrap:wrap}
+.ftab{
+  padding:.45rem 1rem;font-size:.68rem;font-weight:700;
+  letter-spacing:.1em;text-transform:uppercase;
+  background:transparent;border:1.5px solid var(--rule);
+  color:var(--slate);transition:.25s;
+}
+.ftab.on,.ftab:hover{background:var(--green);border-color:var(--green);color:var(--white)}
+.search-box{
+  display:flex;align-items:center;gap:.5rem;
+  background:var(--cream);border:1.5px solid var(--rule);
+  padding:.45rem .9rem;
+}
+.search-box input{
+  border:none;background:transparent;font-size:.82rem;
+  color:var(--ink);outline:none;width:220px;
+}
+.search-box input::placeholder{color:var(--silver)}
+.listing-count{font-size:.75rem;color:var(--silver);font-weight:600;white-space:nowrap}
+
+/* ── LISTINGS GRID ─────────────────────────── */
+.listings-area{padding:1.5rem 2rem 4rem}
+.listings-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:1.2rem;
+}
+.listing-card{
+  background:var(--white);overflow:hidden;
+  box-shadow:0 2px 12px var(--shadow);
+  transition:transform .3s,box-shadow .3s;
+}
+.listing-card:hover{transform:translateY(-4px);box-shadow:0 8px 30px var(--shadow)}
+.lc-img{position:relative;aspect-ratio:16/9;overflow:hidden;background:#e0e8e2}
+.lc-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.listing-card:hover .lc-img img{transform:scale(1.04)}
+.lc-img-placeholder{
+  width:100%;height:100%;display:flex;align-items:center;
+  justify-content:center;font-size:2.5rem;background:var(--green-l);
+}
+.lc-badge{
+  position:absolute;top:.7rem;left:.7rem;
+  font-size:.55rem;font-weight:700;letter-spacing:.15em;
+  text-transform:uppercase;padding:.28rem .7rem;
+}
+.badge-jsold{background:var(--green);color:var(--white)}
+.badge-sold{background:var(--slate);color:var(--white)}
+.badge-sale{background:var(--gold);color:var(--ink)}
+.badge-rent{background:#1B6B8A;color:var(--white)}
+.lc-body{padding:1.1rem 1.2rem 1.2rem}
+.lc-city{
+  font-size:.6rem;font-weight:700;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--sage);margin-bottom:.25rem;
+}
+.lc-title{
+  font-family:'Fraunces',serif;font-size:.95rem;font-weight:500;
+  color:var(--ink);line-height:1.3;margin-bottom:.55rem;
+}
+.lc-price{
+  font-family:'Fraunces',serif;font-size:1.25rem;font-weight:500;
+  color:var(--green);margin-bottom:.7rem;
+}
+.lc-specs{
+  display:flex;gap:.9rem;flex-wrap:wrap;
+  padding-top:.65rem;border-top:1px solid var(--rule);
+  margin-bottom:.9rem;
+}
+.lc-spec{font-size:.68rem;color:var(--silver);font-weight:500}
+.lc-actions{display:flex;gap:.5rem}
+.btn-edit{
+  flex:1;background:var(--green-l);color:var(--green);
+  border:1px solid var(--mint);padding:.55rem;
+  font-size:.68rem;font-weight:700;letter-spacing:.06em;
+  text-transform:uppercase;transition:.25s;
+}
+.btn-edit:hover{background:var(--green);color:var(--white)}
+.btn-delete{
+  background:var(--red-l);color:var(--red);
+  border:1px solid #F1948A;padding:.55rem .85rem;
+  font-size:.8rem;transition:.25s;
+}
+.btn-delete:hover{background:var(--red);color:var(--white)}
+.status-select{
+  width:100%;padding:.5rem .7rem;
+  border:1.5px solid var(--rule);background:var(--cream);
+  font-family:'Plus Jakarta Sans',sans-serif;
+  font-size:.7rem;font-weight:600;color:var(--ink);
+  outline:none;cursor:pointer;margin-bottom:.5rem;
+}
+
+/* Loading / Empty states */
+.state-box{
+  grid-column:1/-1;text-align:center;
+  padding:5rem 2rem;color:var(--silver);
+}
+.state-spinner{
+  width:40px;height:40px;border:3px solid var(--rule);
+  border-top-color:var(--sage);border-radius:50%;
+  animation:spin 1s linear infinite;margin:0 auto 1.2rem;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+.state-icon{font-size:3rem;margin-bottom:1rem;display:block}
+.state-title{font-family:'Fraunces',serif;font-size:1.3rem;color:var(--slate);margin-bottom:.5rem}
+.state-text{font-size:.85rem}
+
+/* ── MODAL ─────────────────────────────────── */
+.modal-overlay{
+  display:none;position:fixed;inset:0;
+  background:rgba(10,25,15,.75);z-index:1000;
+  align-items:flex-start;justify-content:center;
+  padding:2rem 1rem;overflow-y:auto;backdrop-filter:blur(4px);
+}
+.modal-overlay.open{display:flex}
+.modal-box{
+  background:var(--white);width:100%;max-width:900px;
+  margin:auto;position:relative;
+  box-shadow:0 24px 80px rgba(0,0,0,.25);
+  animation:mSlide .3s ease;
+}
+@keyframes mSlide{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+.modal-header{
+  background:var(--green-d);padding:1.4rem 2rem;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.modal-title{
+  font-family:'Fraunces',serif;font-size:1.3rem;font-weight:500;
+  color:var(--white);
+}
+.modal-close{
+  width:36px;height:36px;background:rgba(255,255,255,.12);
+  border:none;color:var(--white);font-size:1.1rem;
+  display:flex;align-items:center;justify-content:center;
+  transition:.25s;
+}
+.modal-close:hover{background:rgba(255,255,255,.22)}
+.modal-body{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:0;max-height:78vh;overflow-y:auto;
+}
+.modal-left,.modal-right{padding:2rem}
+.modal-left{border-right:1px solid var(--rule)}
+.modal-right{background:var(--off)}
+.field-group{margin-bottom:1.1rem}
+.field-group label{
+  display:block;font-size:.62rem;font-weight:700;
+  letter-spacing:.18em;text-transform:uppercase;
+  color:var(--ink);margin-bottom:.4rem;
+}
+.field-group input,
+.field-group select,
+.field-group textarea{
+  width:100%;padding:.75rem .9rem;
+  border:1.5px solid var(--rule);background:var(--cream);
+  font-size:.86rem;color:var(--ink);outline:none;
+  transition:.25s;appearance:none;
+}
+.field-group input:focus,
+.field-group select:focus,
+.field-group textarea:focus{border-color:var(--sage)}
+.field-group textarea{resize:vertical;min-height:90px}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
+.field-hint{font-size:.62rem;color:var(--silver);margin-top:.3rem}
+
+/* Photo area */
+.photo-section-title{
+  font-size:.62rem;font-weight:700;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--ink);
+  margin-bottom:1rem;padding-bottom:.6rem;
+  border-bottom:2px solid var(--gold);
+}
+.main-photo-preview{
+  width:100%;aspect-ratio:4/3;background:var(--green-l);
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:.8rem;overflow:hidden;position:relative;
+}
+.main-photo-preview img{
+  width:100%;height:100%;object-fit:cover;
+}
+.main-photo-placeholder{
+  display:flex;flex-direction:column;align-items:center;
+  gap:.5rem;color:var(--silver);font-size:.82rem;
+}
+.main-photo-placeholder span{font-size:2rem}
+.btn-upload{
+  width:100%;padding:.75rem;background:var(--green);
+  color:var(--white);border:none;font-size:.72rem;
+  font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  transition:.25s;margin-bottom:1.2rem;
+}
+.btn-upload:hover{background:var(--sage)}
+.gallery-title{
+  font-size:.62rem;font-weight:700;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--ink);margin-bottom:.7rem;
+}
+.gallery-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:.5rem;margin-bottom:.7rem;
+}
+.gallery-thumb{
+  position:relative;aspect-ratio:1;overflow:hidden;
+  background:var(--green-l);
+}
+.gallery-thumb img{width:100%;height:100%;object-fit:cover}
+.gallery-thumb-remove{
+  position:absolute;top:.2rem;right:.2rem;
+  width:20px;height:20px;background:var(--red);
+  color:var(--white);border:none;font-size:.7rem;
+  display:flex;align-items:center;justify-content:center;
+  transition:.2s;
+}
+.gallery-thumb-remove:hover{background:#922b21}
+.btn-add-gallery{
+  width:100%;padding:.6rem;background:var(--green-l);
+  color:var(--green);border:1.5px dashed var(--mint);
+  font-size:.7rem;font-weight:700;letter-spacing:.08em;
+  text-transform:uppercase;transition:.25s;
+}
+.btn-add-gallery:hover{background:var(--green);color:var(--white);border-style:solid}
+
+/* Modal footer */
+.modal-footer{
+  padding:1.2rem 2rem;border-top:1px solid var(--rule);
+  display:flex;justify-content:flex-end;gap:.8rem;
+  background:var(--white);
+}
+.btn-cancel{
+  padding:.78rem 1.8rem;background:transparent;
+  border:1.5px solid var(--rule);color:var(--slate);
+  font-size:.74rem;font-weight:700;letter-spacing:.08em;
+  text-transform:uppercase;transition:.25s;
+}
+.btn-cancel:hover{border-color:var(--slate);background:var(--off)}
+.btn-save{
+  padding:.78rem 2rem;background:var(--green);
+  color:var(--white);border:none;
+  font-size:.74rem;font-weight:700;letter-spacing:.1em;
+  text-transform:uppercase;transition:.25s;
+  display:flex;align-items:center;gap:.5rem;
+}
+.btn-save:hover{background:var(--green-d)}
+.btn-save.saving{opacity:.7;pointer-events:none}
+.save-spinner{
+  width:14px;height:14px;border:2px solid rgba(255,255,255,.3);
+  border-top-color:var(--white);border-radius:50%;
+  animation:spin 1s linear infinite;display:none;
+}
+.btn-save.saving .save-spinner{display:block}
+.save-txt{font-size:.74rem}
+
+/* ── DELETE CONFIRM ────────────────────────── */
+.del-modal-overlay{
+  display:none;position:fixed;inset:0;
+  background:rgba(10,25,15,.8);z-index:2000;
+  align-items:center;justify-content:center;
+  backdrop-filter:blur(4px);
+}
+.del-modal-overlay.open{display:flex}
+.del-box{
+  background:var(--white);max-width:420px;width:90%;
+  padding:2.5rem;text-align:center;
+  box-shadow:0 20px 60px rgba(0,0,0,.3);
+}
+.del-icon{font-size:3rem;display:block;margin-bottom:1rem}
+.del-title{font-family:'Fraunces',serif;font-size:1.4rem;color:var(--ink);margin-bottom:.5rem}
+.del-text{font-size:.85rem;color:var(--slate);line-height:1.6;margin-bottom:2rem}
+.del-actions{display:flex;gap:.8rem;justify-content:center}
+.btn-del-confirm{
+  padding:.78rem 2rem;background:var(--red);
+  color:var(--white);border:none;font-size:.74rem;
+  font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  transition:.25s;
+}
+.btn-del-confirm:hover{background:#a93226}
+.btn-del-cancel{
+  padding:.78rem 1.8rem;background:transparent;
+  border:1.5px solid var(--rule);color:var(--slate);
+  font-size:.74rem;font-weight:700;letter-spacing:.08em;
+  text-transform:uppercase;transition:.25s;
+}
+
+/* ── TOAST ─────────────────────────────────── */
+.toast{
+  position:fixed;bottom:2rem;left:50%;transform:translateX(-50%);
+  padding:.85rem 2rem;font-size:.8rem;font-weight:600;
+  letter-spacing:.06em;color:var(--white);
+  box-shadow:0 4px 20px rgba(0,0,0,.2);
+  animation:toastIn .3s ease;z-index:3000;white-space:nowrap;
+  display:none;
+}
+.toast.show{display:block}
+.toast.success{background:var(--green)}
+.toast.error{background:var(--red)}
+.toast.info{background:var(--slate)}
+@keyframes toastIn{from{opacity:0;transform:translateX(-50%) translateY(10px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}
+
+/* ── RESPONSIVE ────────────────────────────── */
+@media(max-width:1100px){.listings-grid{grid-template-columns:1fr 1fr}}
 @media(max-width:768px){
-  #mainNav{padding:0 1.5rem}
-  .nav-menu{display:none}
-  .wrap{padding:0 1.5rem}
-  .hero-left{padding:7rem 1.5rem 3rem}
-  .hero-h1{font-size:2.5rem}
-  .process-grid{grid-template-columns:1fr 1fr}
-  .listings-grid,.rev-grid{grid-template-columns:1fr}
-  .nh-grid{grid-template-columns:1fr;grid-auto-rows:180px}
-  .nhcard.wide{grid-column:span 1}
-  .sb-form .sf-row,.cf-row{grid-template-columns:1fr}
-  .map-pill{left:1.5rem}
-  .footer-grid{grid-template-columns:1fr}
-  .footer-bottom{flex-direction:column;text-align:center}
-  .stats-strip{flex-direction:column}
-  .sstat{border-right:none;border-bottom:1px solid rgba(255,255,255,.1)}
+  .adm-header{padding:0 1rem}
+  .stats-bar{overflow-x:auto;flex-wrap:nowrap}
+  .stat-item{padding:.8rem 1.2rem;min-width:100px}
+  .toolbar{padding:1rem}
+  .listings-area{padding:1rem}
+  .listings-grid{grid-template-columns:1fr}
+  .modal-body{grid-template-columns:1fr}
+  .modal-left{border-right:none;border-bottom:1px solid var(--rule)}
+  .field-row{grid-template-columns:1fr}
 }
 </style>
-
-  <!-- Netlify Identity Widget -->
-  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-  <script>
-    // Explicitly detect invite / recovery / confirmation tokens and open popup
-    window.addEventListener('load', function() {
-      var hash = window.location.hash;
-      var isIdentityEvent =
-        hash.indexOf('invite_token')       > -1 ||
-        hash.indexOf('confirmation_token') > -1 ||
-        hash.indexOf('recovery_token')     > -1 ||
-        hash.indexOf('access_token')       > -1;
-
-      if (window.netlifyIdentity) {
-        // After login always redirect to /admin/
-        window.netlifyIdentity.on('login', function() {
-          document.location.href = '/admin/';
-        });
-        // If a token is present — force open the widget immediately
-        if (isIdentityEvent) {
-          window.netlifyIdentity.open();
-        }
-      }
-    });
-  </script>
-  <link rel="stylesheet" href="assets/sg-nav.css"/>
 </head>
 <body>
 
-<!-- ░░ FLOATING BUTTONS ░░ -->
-<div class="phone-bubble">
-  <a href="tel:6177770485" class="pb-btn pb-call">📞 (617) 777-0485</a>
-  <a href="mailto:sigoosh@gmail.com" class="pb-btn pb-email">✉ sigoosh@gmail.com</a>
-</div>
-
-<!-- ░░░ NAV ░░░ -->
-<nav id="mainNav">
-  <a href="#" class="nav-logo">
-    <img src="https://static.wixstatic.com/media/640c0f_de4855d5b90048c4b1b8b195ae36a064~mv2.png/v1/crop/x_0,y_56,w_500,h_240/fill/w_294,h_137,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Real%20Estate%20Logo_edited.png" alt="Sigal Group Realty"/>
-  </a>
-  <ul class="nav-menu">
-    <li class="nav-dd">
-      <a href="#">Buy ▾</a>
-      <div class="nav-dd-panel">
-        <a href="properties.html">Search Listings</a>
-        <a href="neighborhoods.html">Explore Areas</a>
-        <a href="contact.html">Get Pre-Approved</a>
-      </div>
-    </li>
-    <li><a href="sell.html">Sell</a></li>
-    <li><a href="neighborhoods.html">Top Areas</a></li>
-    <li><a href="about.html">About Sigal</a></li>
-    <li><a href="about.html#reviews">Reviews</a></li>
-    <li><a href="contact.html">Contact</a></li>
-    <li><a href="contact.html" class="nav-cta">Free Consultation</a></li>
-  </ul>
-</nav>
-
-<!-- ░░░ HERO ░░░ -->
-<section id="hero">
-  <div class="hero-left">
-    <div class="hero-pattern"></div>
-    <div class="hero-left-content">
-      <div class="hero-eyebrow"><span></span>South Florida's Trusted Realtor</div>
-      <h1 class="hero-h1">Find Your<br>Perfect Home<br>in <i>South Florida</i></h1>
-      <p class="hero-sub">35+ years of expertise across Boca Raton, Highland Beach, Delray Beach &amp; the Treasure Coast. Direct. Smart. Always in your corner.</p>
-
-      <div class="hero-search-card">
-        <div class="hsc-tabs">
-          <button class="hsc-tab on" onclick="switchTab(this)">&#127968; Buy</button>
-          <button class="hsc-tab" onclick="switchTab(this)">&#128176; Sell</button>
-          <button class="hsc-tab" onclick="switchTab(this)">&#128202; Home Value</button>
-        </div>
-        <div class="hsc-input-row">
-          <input class="hsc-input" type="text" placeholder="City, neighborhood, ZIP code&hellip;"/>
-          <button class="hsc-btn" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Search &rarr;</button>
-        </div>
-      </div>
-
-      <div class="hero-quick-links">
-        <a href="properties.html" class="hql">&#127969; Recent Sales</a>
-        <a href="neighborhoods.html" class="hql">&#128205; Top Areas</a>
-        <a href="contact.html" class="hql">&#128179; Get Pre-Approved</a>
-      </div>
-    </div>
-  </div></div>
-  <div class="hero-right">
-    <video autoplay muted loop playsinline
-      style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0">
-      <source src="Miami-Beach.mp4" type="video/mp4"/>
-    </video>
-    <div class="hero-right-badge">
-      <div>
-        <div class="hrb-num">4.9</div>
-        <div class="hrb-star">★★★★★</div>
-      </div>
-      <div>
-        <span class="hrb-txt">Google Rating</span>
-        <span class="hrb-src">Based on 36 verified reviews</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ░░░ STATS ░░░ -->
-<div class="stats-strip">
-  <div class="sstat rx"><span class="sstat-n">35+</span><span class="sstat-l">Years Experience</span></div>
-  <div class="sstat rx d1"><span class="sstat-n">$50M+</span><span class="sstat-l">Sold Volume</span></div>
-  <div class="sstat rx d2"><span class="sstat-n">20+</span><span class="sstat-l">Properties Closed</span></div>
-  <div class="sstat rx d3"><span class="sstat-n">4.9★</span><span class="sstat-l">Google Rating</span></div>
-  <div class="sstat rx d4"><span class="sstat-n">100%</span><span class="sstat-l">Client Focused</span></div>
-</div>
-
-<!-- ░░░ HOW WE WORK ░░░ -->
-<section id="process">
-  <div class="wrap">
-    <div class="process-top rx">
-      <div class="tag">How We Work</div>
-      <h2 class="h2" style="text-align:center">Your Path to a Successful<br><i>Real Estate Transaction</i></h2>
-      <p class="lead" style="text-align:center;margin-top:1rem">Four simple steps — from first conversation to closed deal. Sigal is with you every step of the way.</p>
-    </div>
-    <div class="process-grid">
-      <div class="pstep rx">
-        <div class="pstep-num">01</div>
-        <span class="pstep-icon">☎️</span>
-        <div class="pstep-title">Free Consultation</div>
-        <p class="pstep-text">We start with a no-obligation call or meeting to understand your goals, timeline, and budget. No pressure, just a real conversation.</p>
-        <a href="contact.html" class="pstep-link">Book Now →</a>
-      </div>
-      <div class="pstep rx d1">
-        <div class="pstep-num">02</div>
-        <span class="pstep-icon">🔍</span>
-        <div class="pstep-title">Market Analysis</div>
-        <p class="pstep-text">Armed with 35+ years of local knowledge, Sigal provides a detailed analysis of current market conditions, pricing, and opportunities specific to your needs.</p>
-        <a href="contact.html" class="pstep-link">Get Analysis →</a>
-      </div>
-      <div class="pstep rx d2">
-        <div class="pstep-num">03</div>
-        <span class="pstep-icon">🏡</span>
-        <div class="pstep-title">Find or List</div>
-        <p class="pstep-text">Whether buying or selling, Sigal leverages her extensive network, sharp negotiation skills, and marketing expertise to deliver exceptional results.</p>
-        <a href="properties.html" class="pstep-link">See Properties →</a>
-      </div>
-      <div class="pstep rx d3">
-        <div class="pstep-num">04</div>
-        <span class="pstep-icon">🔑</span>
-        <div class="pstep-title">Close with Confidence</div>
-        <p class="pstep-text">From contract to keys, Sigal manages every detail, vendor, and deadline — ensuring a smooth, stress-free closing every single time.</p>
-        <a href="contact.html" class="pstep-link">Start Today →</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ░░░ ABOUT ░░░ -->
-<section id="about">
-  <div class="about-grid">
-    <div class="about-photo-side rx">
-      <img src="https://static.wixstatic.com/media/640c0f_761d571bd6e0452fac1939f74ed1e5b3~mv2.jpg/v1/fill/w_900,h_1350,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/0J2A3503_JPG.jpg" alt="Sigal Fishman"/>
-      <div class="about-photo-overlay">
-        <div class="apo-stat">
-          <div class="apo-item"><span class="apo-n">35+</span><span class="apo-l">Years</span></div>
-          <div class="apo-item"><span class="apo-n">4.9★</span><span class="apo-l">Rated</span></div>
-          <div class="apo-item"><span class="apo-n">$50M+</span><span class="apo-l">Sold</span></div>
-        </div>
-      </div>
-    </div>
-    <div class="about-text-side">
-      <div class="tag rx">Meet Sigal</div>
-      <h2 class="h2 rx">Decades of Expertise.<br><i>Lifelong</i> Commitment.</h2>
-      <div class="about-rule rx"></div>
-      <div class="about-body">
-        <p class="rx">Sigal Fishman has been a trusted real estate professional since 1985, bringing decades of market expertise, strategic negotiation skills, and an unwavering commitment to her clients. With a direct, honest, and results-driven approach, she has built her reputation on identifying value, negotiating the strongest terms, and guiding transactions smoothly from contract to closing.</p>
-        <p class="rx">Her extensive experience spans residential sales, luxury properties, and investment opportunities — helping buyers and sellers navigate changing market conditions with confidence.</p>
-        <div class="about-pull rx">"Aggressive when it counts, strategic by nature, and committed to excellence — there is no better real estate professional than Sigal."</div>
-        <p class="rx">Sigal holds both a BA and an MBA from leading Boston universities and built a successful corporate career at Citizens Financial Group, Fidelity Investments, and Staples. This rare business background gives her clients a unique advantage in pricing, positioning, and negotiating.</p>
-      </div>
-      <div class="about-chips rx">
-        <span class="chip">🎓 BA &amp; MBA — Boston</span>
-        <span class="chip">📅 Licensed Since 1985</span>
-        <span class="chip">💼 Finance &amp; Marketing</span>
-        <span class="chip">📍 Boca Raton Specialist</span>
-      </div>
-      <div style="display:flex;gap:.9rem;flex-wrap:wrap" class="rx">
-        <a href="contact.html" class="btn-forest">Schedule a Free Call</a>
-        <a href="about.html#reviews" class="btn-ghost">See Client Reviews</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ░░░ NEIGHBORHOODS ░░░ -->
-<section id="neighborhoods">
-  <div class="wrap">
-    <div class="nh-header">
-      <div>
-        <div class="tag rx">Explore Markets</div>
-        <h2 class="h2 rx">Top South Florida<br><i>Areas We Serve</i></h2>
-      </div>
-      <a href="contact.html" class="btn-ghost rx">All Markets →</a>
-    </div>
-    <div class="nh-grid">
-
-      <div class="nhcard feat rx">
-        <img src="https://static.wixstatic.com/media/640c0f_b518cd0af328446185cc785797ed173df000.jpg/v1/fill/w_800,h_1000,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/640c0f_b518cd0af328446185cc785797ed173df000.jpg" alt="Boca Raton"/>
-        <div class="nhcard-body">
-          <div class="nhcard-sub">Primary Market</div>
-          <div class="nhcard-name">Boca Raton</div>
-          <div class="nhcard-count">Luxury Estates · Waterfront · Golf Communities</div>
-        </div>
-      </div>
-
-      <div class="nhcard rx d1">
-        <img src="https://static.wixstatic.com/media/640c0f_d93ad26e3d404ca580326ed123167e12~mv2.jpeg/v1/fill/w_600,h_400,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/Image-empty-state.jpeg" alt="Highland Beach"/>
-        <div class="nhcard-body">
-          <div class="nhcard-sub">Beachfront Living</div>
-          <div class="nhcard-name">Highland Beach</div>
-        </div>
-      </div>
-
-      <div class="nhcard rx d2">
-        <img src="https://static.wixstatic.com/media/640c0f_8c9744be0d6742a58cfc345521c3c680~mv2.jpg/v1/fill/w_600,h_400,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/Image-empty-state.jpg" alt="Delray Beach"/>
-        <div class="nhcard-body">
-          <div class="nhcard-sub">Vibrant Community</div>
-          <div class="nhcard-name">Delray Beach</div>
-        </div>
-      </div>
-
-      <div class="nhcard wide rx">
-        <img src="https://static.wixstatic.com/media/640c0f_c8e520e19fb7459694f0feb3f80a3492~mv2.png/v1/fill/w_1200,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Image-empty-state.png" alt="Palm Beach"/>
-        <div class="nhcard-body">
-          <div class="nhcard-sub">Prestige Address</div>
-          <div class="nhcard-name">Palm Beach County</div>
-          <div class="nhcard-count">Palm Beach · Wellington · West Palm Beach</div>
-        </div>
-      </div>
-
-      <div class="nhcard rx d1">
-        <img src="https://static.wixstatic.com/media/640c0f_2e071909cc3d42ba8317ce6304118425~mv2.jpeg/v1/fill/w_600,h_400,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/Image-empty-state.jpeg" alt="Treasure Coast"/>
-        <div class="nhcard-body">
-          <div class="nhcard-sub">Hidden Gems</div>
-          <div class="nhcard-name">Treasure Coast</div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- ░░░ PROPERTIES ░░░ -->
-<section id="listings">
-  <div class="wrap">
-    <div class="listings-header">
-      <div>
-        <div class="tag rx">Track Record</div>
-        <h2 class="h2 rx">Recent Sales &amp; <i>Active Listings</i></h2>
-      </div>
-      <div class="lh-right rx">
-        <button class="ftag on" data-f="all">All (20)</button>
-        <button class="ftag" data-f="sold">Sold</button>
-        <button class="ftag" data-f="sale">For Sale</button>
-      </div>
-    </div>
-    <div class="listings-grid" id="listGrid">
-
-      <a class="lcard rx" data-s="sold" href="properties.html">
-        <div class="lcard-img"><img src="https://static.wixstatic.com/media/640c0f_d93ad26e3d404ca580326ed123167e12~mv2.jpeg/v1/fill/w_600,h_450,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/Image-empty-state.jpeg" alt=""/><span class="lcard-badge lb-jsold">Just Sold</span><div class="lcard-price-bar"><div class="lcard-price">$690,000</div></div></div>
-        <div class="lcard-body"><div class="lcard-loc">📍 Valencia Lakes</div><div class="lcard-name">Newly Renovated Lakefront House in Valencia Lakes</div><div class="lcard-specs"><span class="lspec">🛏 3</span><span class="lspec">🛁 2</span><span class="lspec">📐 1,852 SF</span></div></div>
-      </a>
-
-      <a class="lcard rx d1" data-s="sold" href="properties.html">
-        <div class="lcard-img"><img src="https://ap.rdcpix.com/f3d2afdf63a455962d1943d1e4c537b6l-m2917912252rd-w2048_h1536.webp" alt=""/><span class="lcard-badge lb-jsold">Just Sold</span><div class="lcard-price-bar"><div class="lcard-price">$1,630,000</div></div></div>
-        <div class="lcard-body"><div class="lcard-loc">📍 Central Boca Raton</div><div class="lcard-name">Gorgeous Waterfront House in Central Boca Raton</div><div class="lcard-specs"><span class="lspec">🛏 4</span><span class="lspec">🛁 3.5</span><span class="lspec">📐 2,909 SF</span></div></div>
-      </a>
-
-      <a class="lcard rx d2" data-s="sold" href="properties.html">
-        <div class="lcard-img"><img src="https://static.wixstatic.com/media/640c0f_7236dc81f83449278f3791e532557339~mv2.png/v1/fill/w_600,h_450,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Image-empty-state.png" alt=""/><span class="lcard-badge lb-jsold">Just Sold</span><div class="lcard-price-bar"><div class="lcard-price">$1,900,000</div></div></div>
-        <div class="lcard-body"><div class="lcard-loc">📍 The Oaks</div><div class="lcard-name">A Gorgeous Renovated House on the Lake in the Oaks</div><div class="lcard-specs"><span class="lspec">🛏 5</span><span class="lspec">🛁 4.5</span><span class="lspec">📐 4,280 SF</span></div></div>
-      </a>
-
-      <a class="lcard rx" data-s="sold" href="properties.html">
-        <div class="lcard-img"><img src="https://static.wixstatic.com/media/640c0f_fecc4848ad0a4f3f8b397cc888460503~mv2.jpg/v1/fill/w_600,h_450,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/Image-empty-state.jpg" alt=""/><span class="lcard-badge lb-sold">Sold</span><div class="lcard-price-bar"><div class="lcard-price">$2,500,000</div></div></div>
-        <div class="lcard-body"><div class="lcard-loc">📍 Lotus, Boca Raton</div><div class="lcard-name">Luxurious Property with Customized Upgrades in Lotus</div><div class="lcard-specs"><span class="lspec">🛏 5</span><span class="lspec">🛁 5.5</span><span class="lspec">📐 5,315 SF</span></div></div>
-      </a>
-
-      <a class="lcard rx d1" data-s="sold" href="properties.html">
-        <div class="lcard-img"><img src="https://static.wixstatic.com/media/640c0f_2e071909cc3d42ba8317ce6304118425~mv2.jpeg/v1/fill/w_600,h_450,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/Image-empty-state.jpeg" alt=""/><span class="lcard-badge lb-jsold">Just Sold</span><div class="lcard-price-bar"><div class="lcard-price">$3,200,000</div></div></div>
-        <div class="lcard-body"><div class="lcard-loc">📍 Boca West Country Club</div><div class="lcard-name">Breathtaking Golf Views in Boca West Country Club</div><div class="lcard-specs"><span class="lspec">🛏 4</span><span class="lspec">🛁 4.5</span><span class="lspec">📐 3,589 SF</span></div></div>
-      </a>
-
-      <a class="lcard rx d2" data-s="sold" href="properties.html">
-        <div class="lcard-img"><img src="https://ap.rdcpix.com/767050479526b28c4e648edca0bf3a3cl-m1442752067rd-w1280_h960.webp" alt=""/><span class="lcard-badge lb-jsold">Just Sold</span><div class="lcard-price-bar"><div class="lcard-price">$1,050,000</div></div></div>
-        <div class="lcard-body"><div class="lcard-loc">📍 Loggers Run</div><div class="lcard-name">Beautiful Lakefront House with Large Private Lot in Loggers Run</div><div class="lcard-specs"><span class="lspec">🛏 4</span><span class="lspec">🛁 3</span><span class="lspec">📐 3,143 SF</span></div></div>
-      </a>
-
-      <a class="lcard rx" data-s="sold" href="properties.html">
-        <div class="lcard-img"><img src="https://static.wixstatic.com/media/640c0f_83318d6dee734e099d280669bbebfbd6~mv2.jpg/v1/fill/w_600,h_450,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/Image-empty-state.jpg" alt=""/><span class="lcard-badge lb-jsold">Just Sold</span><div class="lcard-price-bar"><div class="lcard-price">$1,718,000</div></div></div>
-        <div class="lcard-body"><div class="lcard-loc">📍 Lotus Palm</div><div class="lcard-name">A New Construction Property in Lotus Palm</div><div class="lcard-specs"><span class="lspec">🛏 5</span><span class="lspec">🛁 7</span><span class="lspec">📐 4,527 SF</span></div></div>
-      </a>
-
-      <a class="lcard rx d1" data-s="sold" href="properties.html">
-        <div class="lcard-img"><img src="https://static.wixstatic.com/media/640c0f_8c9744be0d6742a58cfc345521c3c680~mv2.jpg/v1/fill/w_600,h_450,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/Image-empty-state.jpg" alt=""/><span class="lcard-badge lb-sold">Sold</span><div class="lcard-price-bar"><div class="lcard-price">$1,576,000</div></div></div>
-        <div class="lcard-body"><div class="lcard-loc">📍 Carriage Hill</div><div class="lcard-name">Tropical Oasis in Carriage Hill</div><div class="lcard-specs"><span class="lspec">🛏 4</span><span class="lspec">🛁 3</span><span class="lspec">📐 2,560 SF</span></div></div>
-      </a>
-
-      <a class="lcard rx d2" data-s="sold" href="properties.html">
-        <div class="lcard-img"><img src="https://static.wixstatic.com/media/640c0f_c342e098053f4f7a8fac75ed440f3609~mv2.jpeg/v1/fill/w_600,h_450,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/Image-empty-state.jpeg" alt=""/><span class="lcard-badge lb-sold">Sold</span><div class="lcard-price-bar"><div class="lcard-price">$1,225,000</div></div></div>
-        <div class="lcard-body"><div class="lcard-loc">📍 East Boca Raton</div><div class="lcard-name">Beautiful Home in a Gated East Boca Community</div><div class="lcard-specs"><span class="lspec">🛏 6</span><span class="lspec">🛁 5</span><span class="lspec">📐 3,457 SF</span></div></div>
-      </a>
-
-      <a class="lcard rx" data-s="sold" href="properties.html">
-        <div class="lcard-img"><img src="https://static.wixstatic.com/media/640c0f_d70cafe8116449b09dab9a5fa03580c9~mv2.jpg/v1/fill/w_600,h_450,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/Image-empty-state.jpg" alt=""/><span class="lcard-badge lb-sold">Sold</span><div class="lcard-price-bar"><div class="lcard-price">$2,600,000</div></div></div>
-        <div class="lcard-body"><div class="lcard-loc">📍 East Boca Raton</div><div class="lcard-name">Renovated East Boca House W/ a Guest House</div><div class="lcard-specs"><span class="lspec">🛏 4</span><span class="lspec">🛁 4.5</span><span class="lspec">📐 3,671 SF</span></div></div>
-      </a>
-
-      <a class="lcard rx d1" data-s="sold" href="properties.html">
-        <div class="lcard-img"><img src="https://static.wixstatic.com/media/640c0f_d82a842d4c994bdb8009ee8ecbf6e87d~mv2.jpg/v1/fill/w_600,h_450,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/Image-empty-state.jpg" alt=""/><span class="lcard-badge lb-sold">Sold</span><div class="lcard-price-bar"><div class="lcard-price">$665,000</div></div></div>
-        <div class="lcard-body"><div class="lcard-loc">📍 West Boca Raton</div><div class="lcard-name">A Beautiful West Boca Home</div><div class="lcard-specs"><span class="lspec">🛏 4</span><span class="lspec">🛁 3</span><span class="lspec">📐 2,417 SF</span></div></div>
-      </a>
-
-      <a class="lcard rx d2" data-s="sold" href="properties.html">
-        <div class="lcard-img"><img src="https://ap.rdcpix.com/54961d57953da7fd1bbf64116a1a10ebl-m3184563383rd-w2048_h1536.webp" alt=""/><span class="lcard-badge lb-jsold">Just Sold</span><div class="lcard-price-bar"><div class="lcard-price">$1,200,000</div></div></div>
-        <div class="lcard-body"><div class="lcard-loc">📍 East Boca Raton</div><div class="lcard-name">Great Buy in Up and Coming Neighborhood in East Boca Raton</div><div class="lcard-specs"><span class="lspec">🛏 3</span><span class="lspec">🛁 2</span><span class="lspec">📐 1,741 SF</span></div></div>
-      </a>
-
-      <a class="lcard rx" data-s="sold" href="properties.html">
-        <div class="lcard-img"><img src="https://static.wixstatic.com/media/640c0f_c8e520e19fb7459694f0feb3f80a3492~mv2.png/v1/fill/w_600,h_450,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Image-empty-state.png" alt=""/><span class="lcard-badge lb-jsold">Just Sold</span><div class="lcard-price-bar"><div class="lcard-price">$3,500,000</div></div></div>
-        <div class="lcard-body"><div class="lcard-loc">📍 Boca Raton</div><div class="lcard-name">Breathtaking Lake Views — Beautiful Modern House</div><div class="lcard-specs"><span class="lspec">🛏 6</span><span class="lspec">🛁 6</span><span class="lspec">📐 6,005 SF</span></div></div>
-      </a>
-
-      <a class="lcard rx d1" data-s="sold" href="properties.html">
-        <div class="lcard-img"><img src="https://static.wixstatic.com/media/640c0f_edc2eac7dbc544c6beccde8b7ad64384~mv2.png/v1/fill/w_600,h_450,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Image-empty-state.png" alt=""/><span class="lcard-badge lb-sold">Sold</span><div class="lcard-price-bar"><div class="lcard-price">$525,000</div></div></div>
-        <div class="lcard-body"><div class="lcard-loc">📍 Gated Community</div><div class="lcard-name">A Magnificent Renovated Condo in a Gated Community</div><div class="lcard-specs"><span class="lspec">🛏 2</span><span class="lspec">🛁 2</span><span class="lspec">📐 1,216 SF</span></div></div>
-      </a>
-
-      <a class="lcard rx d2" data-s="sold" href="properties.html">
-        <div class="lcard-img"><img src="https://static.wixstatic.com/media/640c0f_5e377774eff24859b03b3bdb055b158f~mv2.png/v1/fill/w_600,h_450,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Image-empty-state.png" alt=""/><span class="lcard-badge lb-sold">Sold</span><div class="lcard-price-bar"><div class="lcard-price">$800,000</div></div></div>
-        <div class="lcard-body"><div class="lcard-loc">📍 Saturnia Isles</div><div class="lcard-name">Pool House with Gorgeous Lake View in Saturnia Isles</div><div class="lcard-specs"><span class="lspec">🛏 4</span><span class="lspec">🛁 3</span><span class="lspec">📐 2,778 SF</span></div></div>
-      </a>
-
-      <a class="lcard rx" data-s="sold" href="properties.html">
-        <div class="lcard-img"><img src="https://static.wixstatic.com/media/640c0f_97d1610054644bc3bc8f322412651863~mv2.png/v1/fill/w_600,h_450,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Image-empty-state.png" alt=""/><span class="lcard-badge lb-sold">Sold</span><div class="lcard-price-bar"><div class="lcard-price">$1,000,000</div></div></div>
-        <div class="lcard-body"><div class="lcard-loc">📍 East Boca Raton</div><div class="lcard-name">Renovated Home in a Gated East Boca Community</div><div class="lcard-specs"><span class="lspec">🛏 4</span><span class="lspec">🛁 3</span><span class="lspec">📐 3,022 SF</span></div></div>
-      </a>
-
-      <a class="lcard rx d1" data-s="sold" href="properties.html">
-        <div class="lcard-img"><img src="https://static.wixstatic.com/media/640c0f_4a0ddab8e112444491fbed07dba5f2e1~mv2.jpg/v1/fill/w_600,h_450,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/Image-empty-state.jpg" alt=""/><span class="lcard-badge lb-sold">Sold</span><div class="lcard-price-bar"><div class="lcard-price">$570,000</div></div></div>
-        <div class="lcard-body"><div class="lcard-loc">📍 Boca Fontana</div><div class="lcard-name">Charming House in Boca Fontana</div><div class="lcard-specs"><span class="lspec">🛏 3</span><span class="lspec">🛁 2</span><span class="lspec">📐 1,692 SF</span></div></div>
-      </a>
-
-      <a class="lcard rx d2" data-s="sold" href="properties.html">
-        <div class="lcard-img"><img src="https://static.wixstatic.com/media/640c0f_c0e0dbae7e4d469b9551a434d6d573fa~mv2.jpg/v1/fill/w_600,h_450,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/Image-empty-state.jpg" alt=""/><span class="lcard-badge lb-sold">Sold</span><div class="lcard-price-bar"><div class="lcard-price">$1,300,000</div></div></div>
-        <div class="lcard-body"><div class="lcard-loc">📍 Long Lake Estates</div><div class="lcard-name">One Acre Lot House in Long Lake Estates</div><div class="lcard-specs"><span class="lspec">🛏 5</span><span class="lspec">🛁 3</span><span class="lspec">📐 3,848 SF</span></div></div>
-      </a>
-
-      <!-- FOR SALE -->
-      <a class="lcard rx" data-s="sale" href="properties.html">
-        <div class="lcard-img"><img src="https://static.wixstatic.com/media/640c0f_b3ef9ab313f1447ea241ac5be179f0df~mv2.jpg/v1/fill/w_600,h_450,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/Image-empty-state.jpg" alt=""/><span class="lcard-badge lb-sale">For Sale</span><div class="lcard-price-bar"><div class="lcard-price">$625,000</div></div></div>
-        <div class="lcard-body"><div class="lcard-loc">📍 Boca Fontana</div><div class="lcard-name">Renovated 1-Level Home in Boca Fontana</div><div class="lcard-specs"><span class="lspec">🛏 3</span><span class="lspec">🛁 2</span><span class="lspec">📐 1,692 SF</span></div></div>
-      </a>
-
-      <a class="lcard rx d1" data-s="sold" href="properties.html">
-        <div class="lcard-img"><img src="https://static.wixstatic.com/media/640c0f_52b297058f1a45ecb2beea77a8f98731~mv2.jpg/v1/fill/w_600,h_450,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/Image-empty-state.jpg" alt=""/><span class="lcard-badge lb-sold">Sold</span><div class="lcard-price-bar"><div class="lcard-price">$480,000</div></div></div>
-        <div class="lcard-body"><div class="lcard-loc">📍 Wellington, FL</div><div class="lcard-name">A Furnished Starter Home in Wellington</div><div class="lcard-specs"><span class="lspec">🛏 3</span><span class="lspec">🛁 2.5</span><span class="lspec">📐 1,566 SF</span></div></div>
-      </a>
-
-    </div>
-  </div>
-</section>
-
-<!-- ░░░ SELL BAND ░░░ -->
-<section id="sell-band">
-  <div class="sb-bg"></div>
-  <div class="sb-overlay"></div>
-  <div class="wrap">
-    <div class="sb-inner">
-      <div class="sb-left">
-        <div class="tag rx">Selling Your Home</div>
-        <h2 class="h2 rx">Ready to Sell?<br>We'll Get You<br><i>Top Dollar.</i></h2>
-        <div class="sb-rule rx"></div>
-        <ul class="sb-list rx">
-          <li>Deep knowledge of every Boca Raton neighborhood — pricing you precisely right</li>
-          <li>Creative marketing that reaches qualified buyers, not just browsers</li>
-          <li>Professional photography, staging guidance, and MLS optimization</li>
-          <li>Aggressive negotiation that consistently delivers above-asking results</li>
-          <li>Personal attention from listing day through every last detail at closing</li>
-          <li>Trusted network of attorneys, inspectors, and vendors across South Florida</li>
-        </ul>
-        <div style="display:flex;gap:.8rem;flex-wrap:wrap" class="rx">
-          <a href="contact.html" class="btn-warm">Get a Free Home Valuation</a>
-          <a href="tel:6177770485" class="btn-white">📞 Call Sigal Now</a>
-        </div>
-      </div>
-      <div class="sb-right rx d1">
-        <h3>What's My Home Worth?</h3>
-        <p>Get a free, no-obligation market analysis from Sigal in 24 hours. Real numbers, expert insight, zero pressure.</p>
-        <div class="sb-form">
-          <div class="sf-row">
-            <input type="text" placeholder="First Name"/>
-            <input type="text" placeholder="Last Name"/>
-          </div>
-          <input type="text" placeholder="Property Address" class="mb8" style="width:100%"/>
-          <div class="sf-row">
-            <input type="email" placeholder="Email Address"/>
-            <input type="tel" placeholder="Phone Number"/>
-          </div>
-          <select class="mb8" style="width:100%">
-            <option>When are you planning to sell?</option>
-            <option>Right away</option>
-            <option>Within 0–6 months</option>
-            <option>6+ months</option>
-            <option>Just exploring</option>
-          </select>
-          <button class="sb-submit">Get My Free Market Analysis</button>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ░░░ REVIEWS ░░░ -->
-<section id="reviews">
-  <div class="wrap">
-    <div class="rev-header">
-      <div>
-        <div class="tag rx">Client Stories</div>
-        <h2 class="h2 rx">What Our Clients<br>Say About <i>Working With Sigal</i></h2>
-        <div style="width:48px;height:3px;background:var(--sage);margin:1rem 0 1.5rem" class="rx"></div>
-        <p class="lead rx" style="max-width:400px">Real reviews from real clients — most of our business comes from referrals. Here's why.</p>
-      </div>
-      <div class="rev-header-right rx">
-        <img src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_92x30dp.png" alt="Google" class="rev-google-logo"/>
-        <div class="rev-score">4.9</div>
-        <div class="rev-stars">★★★★★</div>
-        <div class="rev-count">Based on 36 Google Reviews</div>
-        <a href="https://www.google.com/search?q=Sigal+Group+Realty+Boca+Raton" target="_blank" class="rev-link">View All Reviews →</a>
-      </div>
-    </div>
-    <div class="rev-grid">
-      <div class="rcard rx">
-        <span class="rcard-q">"</span>
-        <div class="rcard-stars">★★★★★</div>
-        <p class="rcard-text">Sigal was professional, courteous, knowledgeable, and always available when we needed her. She guided us through every step and made the entire process completely stress-free.</p>
-        <div class="rcard-author">
-          <div class="rcard-av">SK</div>
-          <div><span class="rcard-name">Sarah Khan</span><span class="rcard-source"><span class="g-g">G</span> Posted on Google · 2 months ago</span></div>
-        </div>
-      </div>
-      <div class="rcard rx d1">
-        <span class="rcard-q">"</span>
-        <div class="rcard-stars">★★★★★</div>
-        <p class="rcard-text">Sigal is an excellent realtor. She is extremely detail-oriented and does a fantastic job negotiating on behalf of her clients. I would recommend her to anyone buying or selling.</p>
-        <div class="rcard-author">
-          <div class="rcard-av">SH</div>
-          <div><span class="rcard-name">Shevonne Hanna</span><span class="rcard-source"><span class="g-g">G</span> Posted on Google · 3 months ago</span></div>
-        </div>
-      </div>
-      <div class="rcard rx d2">
-        <span class="rcard-q">"</span>
-        <div class="rcard-stars">★★★★★</div>
-        <p class="rcard-text">Very professional. A pleasure to work with. Sigal made our home sale completely seamless and achieved a fantastic result. We couldn't be happier with her service and dedication.</p>
-        <div class="rcard-author">
-          <div class="rcard-av">SF</div>
-          <div><span class="rcard-name">Sherri Feuer</span><span class="rcard-source"><span class="g-g">G</span> Posted on Google · 3 months ago</span></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ░░░ FINANCE ░░░ -->
-<section id="finance">
-  <div class="wrap">
-    <div class="fin-grid">
-      <div class="fin-img rx">
-        <img class="fin-img-main" src="/sigalphoto.jpg" style="object-position:center top" alt="Sigal Fishman"/>
-        <div class="fin-badge">
-          <span class="fin-badge-n">Free</span>
-          <span class="fin-badge-t">Pre-Approval Help</span>
-        </div>
-      </div>
-      <div class="fin-text">
-        <div class="tag rx">Financing</div>
-        <h2 class="h2 rx">Get Pre-Approved<br>Before You <i>Start Your Search</i></h2>
-        <div class="fin-rule rx"></div>
-        <p class="lead rx">As your trusted South Florida real estate guide, Sigal will connect you with the best local loan officers offering competitive rates and programs tailored to your needs.</p>
-        <div class="fin-steps rx">
-          <div class="fstep">
-            <div class="fstep-dot">1</div>
-            <div><div class="fstep-title">Contact Sigal</div><div class="fstep-text">Share your goals — budget, timeline, and property type. A simple 15-minute call is all it takes to get started.</div></div>
-          </div>
-          <div class="fstep">
-            <div class="fstep-dot">2</div>
-            <div><div class="fstep-title">Meet a Preferred Lender</div><div class="fstep-text">Sigal connects you with trusted local mortgage professionals who offer competitive rates and transparent terms.</div></div>
-          </div>
-          <div class="fstep">
-            <div class="fstep-dot">3</div>
-            <div><div class="fstep-title">Shop with Confidence</div><div class="fstep-text">Pre-approval in hand, you'll search and make offers as a serious, qualified buyer — with a real advantage in competitive situations.</div></div>
-          </div>
-        </div>
-        <div style="display:flex;gap:.9rem;flex-wrap:wrap" class="rx">
-          <a href="contact.html" class="btn-forest">Get Pre-Approved Today</a>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ░░░ CONTACT ░░░ -->
-<section id="contact">
-  <div class="wrap">
-    <div class="contact-inner">
-      <div class="ci-left">
-        <div class="tag">Get In Touch</div>
-        <h2 class="h2">Let's Talk<br><i>Real Estate</i></h2>
-        <div class="ci-rule"></div>
-        <p class="ci-desc">Our job is to make sure you have all the information you need — at the time you need it. Feel free to reach out any time. Sigal responds promptly, 7 days a week.</p>
-        <div class="ci-rows">
-          <div class="cirow"><div class="cirow-icon">📞</div><div><span class="cirow-lbl">Call or Text</span><span class="cirow-val"><a href="tel:6177770485">(617) 777-0485</a></span></div></div>
-          <div class="cirow"><div class="cirow-icon">✉️</div><div><span class="cirow-lbl">Email</span><span class="cirow-val"><a href="mailto:sigoosh@gmail.com">sigoosh@gmail.com</a></span></div></div>
-          <div class="cirow"><div class="cirow-icon">📍</div><div><span class="cirow-lbl">Service Area</span><span class="cirow-val">Boca Raton · Highland Beach<br>Delray Beach · Palm Beach · Wellington</span></div></div>
-          <div class="cirow"><div class="cirow-icon">🕐</div><div><span class="cirow-lbl">Hours</span><span class="cirow-val">7 Days a Week — Always Accessible</span></div></div>
-        </div>
-        <div style="display:flex;gap:.8rem;flex-wrap:wrap">
-          <a href="tel:6177770485" class="btn-warm">📞 Call Now</a>
-          <a href="mailto:sigoosh@gmail.com" class="btn-white">✉ Send Email</a>
-        </div>
-      </div>
-      <div class="cform-card rx">
-        <div class="cfc-title">Send a Message</div>
-        <p class="cfc-sub">Tell us about your real estate goals — Sigal will respond promptly.</p>
-        <div class="cf-row">
-          <div class="cf-grp"><label>First Name</label><input type="text" placeholder="Your first name"/></div>
-          <div class="cf-grp"><label>Last Name</label><input type="text" placeholder="Your last name"/></div>
-        </div>
-        <div class="cf-grp"><label>Email</label><input type="email" placeholder="your@email.com"/></div>
-        <div class="cf-grp"><label>Phone</label><input type="tel" placeholder="(617) 777-0485"/></div>
-        <div class="cf-grp">
-          <label>I Am Interested In</label>
-          <select><option>Buying a Home</option><option>Selling My Home</option><option>Free Home Evaluation</option><option>Getting Pre-Approved</option><option>Investment Property</option><option>Other</option></select>
-        </div>
-        <div class="cf-row">
-          <div class="cf-grp"><label>Bedrooms</label><select><option>Any</option><option>2+</option><option>3+</option><option>4+</option><option>5+</option></select></div>
-          <div class="cf-grp"><label>Property Type</label><select><option>Single Family</option><option>Condo / Townhouse</option><option>Waterfront</option><option>Golf Community</option><option>New Construction</option></select></div>
-        </div>
-        <div class="cf-grp"><label>Message</label><textarea placeholder="Tell Sigal about your real estate goals…"></textarea></div>
-        <button class="cf-submit">Send Message — I'll Respond Promptly</button>
-        <p class="cf-disc">By submitting you consent to receive communication from Sigal Group Realty. Your information is kept private and never sold. <a href="#" style="color:var(--sage)">Privacy Policy</a></p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ░░░ MAP ░░░ -->
-<div class="map-block">
-  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d57292!2d-80.1317!3d26.3683!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88d8db7e8c7af947%3A0x5e8e0f7bffd5d47f!2sBoca%20Raton%2C%20FL!5e0!3m2!1sen!2sus" loading="lazy" title="Boca Raton"></iframe>
-  <div class="map-pill">
-    <h3>Sigal Group Realty</h3>
-    <p>Proudly serving Boca Raton, Highland Beach,<br>Delray Beach & all of South Florida</p>
-    <a href="tel:6177770485">📞 (617) 777-0485 →</a>
+<!-- ── LOGIN SCREEN ─────────────────────────────────── -->
+<div id="loginScreen">
+  <div class="login-card">
+    <div class="login-logo">Sigal Group Realty</div>
+    <div class="login-sub">Listings Manager</div>
+    <div class="login-divider"></div>
+    <p style="font-size:.82rem;color:var(--slate);margin-bottom:1.5rem;line-height:1.6">
+      Sign in with your admin account to manage your property listings.
+    </p>
+    <!-- Netlify Identity widget renders here -->
+    <div id="loginWidgetArea"></div>
   </div>
 </div>
 
-<!-- ░░░ FOOTER ░░░ -->
-<footer>
-  <div class="wrap">
-    <div class="footer-grid">
-      <div>
-        <div class="fl-logo"><img src="https://static.wixstatic.com/media/640c0f_09000c1816174075966619a837ef40c3~mv2.png/v1/crop/x_0,y_63,w_500,h_231/fill/w_240,h_101,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Real%20Estate%20Logo_edited.png" alt="Sigal Group Realty"/></div>
-        <p class="fl-tag">South Florida's boutique real estate firm. Over 35 years of expertise in Boca Raton, Highland Beach, Delray Beach, Palm Beach &amp; beyond. Direct, smart, and always working for you.</p>
-        <div class="fl-socials">
-          <a href="https://www.instagram.com" target="_blank" class="fsocia">ig</a>
-          <a href="#" class="fsocia">fb</a>
-          <a href="#" class="fsocia">in</a>
-        </div>
-      </div>
-      <div>
-        <div class="fc-head">Quick Links</div>
-        <ul class="fl-links">
-          <li><a href="index.html">Home</a></li>
-          <li><a href="properties.html">Search Listings</a></li>
-          <li><a href="sell.html">Sell Your Home</a></li>
-          <li><a href="about.html">About Sigal</a></li>
-          <li><a href="about.html#reviews">Client Reviews</a></li>
-          <li><a href="contact.html">Get Pre-Approved</a></li>
-          <li><a href="contact.html">Contact</a></li>
-        </ul>
-      </div>
-      <div>
-        <div class="fc-head">Markets</div>
-        <ul class="fl-links">
-          <li><a href="neighborhoods.html">Boca Raton</a></li>
-          <li><a href="neighborhoods.html">Highland Beach</a></li>
-          <li><a href="neighborhoods.html">Delray Beach</a></li>
-          <li><a href="neighborhoods.html">Palm Beach</a></li>
-          <li><a href="neighborhoods.html">Wellington</a></li>
-          <li><a href="neighborhoods.html">West Palm Beach</a></li>
-          <li><a href="neighborhoods.html">Treasure Coast</a></li>
-        </ul>
-      </div>
-      <div>
-        <div class="fc-head">Contact</div>
-        <ul class="fl-links">
-          <li><a href="tel:6177770485">📞 (617) 777-0485</a></li>
-          <li><a href="mailto:sigoosh@gmail.com">✉ sigoosh@gmail.com</a></li>
-          <li><a href="contact.html">Free Consultation</a></li>
-          <li><a href="contact.html">Free Home Valuation</a></li>
-          <li><a href="contact.html">Financing Help</a></li>
-        </ul>
-      </div>
+<!-- ── ADMIN PANEL ──────────────────────────────────── -->
+<div id="adminPanel">
+
+  <!-- Header -->
+  <header class="adm-header">
+    <div class="adm-logo">
+      🏠 Sigal Group Realty
+      <span class="adm-logo-badge">Listings Manager</span>
     </div>
-    <div class="footer-bottom">
-      <span class="fb-copy">© 2026 Sigal Fishman · Sigal Group Realty · All Rights Reserved</span>
-      <div class="fb-links">
-        <a href="#">DMCA Notice</a>
-        <a href="#">Privacy Policy</a>
-        <a href="#">Terms of Service</a>
+    <div class="adm-header-right">
+      <button class="btn-add" onclick="openModal()">＋ Add New Listing</button>
+      <button class="btn-logout" onclick="logout()">Log Out</button>
+    </div>
+  </header>
+
+  <!-- Stats Bar -->
+  <div class="stats-bar" id="statsBar">
+    <div class="stat-item on" onclick="filterByStatus('all')">
+      <span class="stat-n" id="countAll">—</span>
+      <span class="stat-l">All Listings</span>
+    </div>
+    <div class="stat-item" onclick="filterByStatus('sale')">
+      <span class="stat-n" id="countSale">—</span>
+      <span class="stat-l">For Sale</span>
+    </div>
+    <div class="stat-item" onclick="filterByStatus('jsold')">
+      <span class="stat-n" id="countJsold">—</span>
+      <span class="stat-l">Just Sold</span>
+    </div>
+    <div class="stat-item" onclick="filterByStatus('sold')">
+      <span class="stat-n" id="countSold">—</span>
+      <span class="stat-l">Sold</span>
+    </div>
+    <div class="stat-item" onclick="filterByStatus('rent')">
+      <span class="stat-n" id="countRent">—</span>
+      <span class="stat-l">For Rent</span>
+    </div>
+  </div>
+
+  <!-- Toolbar -->
+  <div class="toolbar">
+    <div class="filter-tabs" id="filterTabs">
+      <button class="ftab on" data-f="all">All</button>
+      <button class="ftab" data-f="sale">For Sale</button>
+      <button class="ftab" data-f="jsold">Just Sold</button>
+      <button class="ftab" data-f="sold">Sold</button>
+      <button class="ftab" data-f="rent">For Rent</button>
+    </div>
+    <div style="display:flex;align-items:center;gap:1rem;flex-wrap:wrap">
+      <div class="search-box">
+        🔍 <input type="text" id="searchInput" placeholder="Search by title or city…" oninput="renderGrid()"/>
+      </div>
+      <span class="listing-count" id="listingCount">Loading…</span>
+    </div>
+  </div>
+
+  <!-- Listings Grid -->
+  <div class="listings-area">
+    <div class="listings-grid" id="listingsGrid">
+      <div class="state-box">
+        <div class="state-spinner"></div>
+        <p>Loading your listings…</p>
       </div>
     </div>
   </div>
-</footer>
+
+</div><!-- /adminPanel -->
+
+<!-- ── ADD/EDIT MODAL ───────────────────────────────── -->
+<div class="modal-overlay" id="listingModal">
+  <div class="modal-box">
+    <div class="modal-header">
+      <div class="modal-title" id="modalTitle">Add New Listing</div>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="modal-body">
+
+      <!-- Left: Fields -->
+      <div class="modal-left">
+        <div class="field-row">
+          <div class="field-group">
+            <label>Status *</label>
+            <select id="fStatus">
+              <option value="sale">For Sale</option>
+              <option value="jsold">Just Sold</option>
+              <option value="sold">Sold</option>
+              <option value="rent">For Rent</option>
+            </select>
+          </div>
+          <div class="field-group">
+            <label>Price *</label>
+            <input type="text" id="fPrice" placeholder="e.g. $1,250,000"/>
+          </div>
+        </div>
+        <div class="field-group">
+          <label>Property Title *</label>
+          <input type="text" id="fTitle" placeholder="e.g. Beautiful Lakefront Home in Boca Raton"/>
+        </div>
+        <div class="field-row">
+          <div class="field-group">
+            <label>City / Community *</label>
+            <input type="text" id="fCity" placeholder="e.g. Boca Raton"/>
+          </div>
+          <div class="field-group">
+            <label>Property Type</label>
+            <select id="fType">
+              <option value="Single Family">Single Family</option>
+              <option value="Condo">Condo</option>
+              <option value="Townhouse">Townhouse</option>
+              <option value="Waterfront">Waterfront</option>
+              <option value="Golf Community">Golf Community</option>
+              <option value="New Construction">New Construction</option>
+              <option value="Multi-Family">Multi-Family</option>
+            </select>
+          </div>
+        </div>
+        <div class="field-group">
+          <label>Full Address</label>
+          <input type="text" id="fAddress" placeholder="e.g. 123 Main St, Boca Raton, FL 33496"/>
+        </div>
+        <div class="field-row">
+          <div class="field-group">
+            <label>Bedrooms</label>
+            <input type="text" id="fBeds" placeholder="e.g. 4"/>
+          </div>
+          <div class="field-group">
+            <label>Bathrooms</label>
+            <input type="text" id="fBaths" placeholder="e.g. 3.5"/>
+          </div>
+        </div>
+        <div class="field-row">
+          <div class="field-group">
+            <label>Size</label>
+            <input type="text" id="fSize" placeholder="e.g. 2,450 SF"/>
+          </div>
+          <div class="field-group">
+            <label>Year Built</label>
+            <input type="text" id="fYear" placeholder="e.g. 2018"/>
+          </div>
+        </div>
+        <div class="field-group">
+          <label>Description</label>
+          <textarea id="fDesc" placeholder="Full property description shown when a visitor clicks the listing…"></textarea>
+        </div>
+      </div>
+
+      <!-- Right: Photos -->
+      <div class="modal-right">
+        <div class="photo-section-title">Main Photo</div>
+        <div class="main-photo-preview" id="mainPhotoPreview">
+          <div class="main-photo-placeholder">
+            <span>🏠</span>
+            <p>No photo uploaded yet</p>
+          </div>
+        </div>
+        <button class="btn-upload" onclick="uploadMainPhoto()">
+          📷 Upload Main Photo
+        </button>
+        <input type="hidden" id="fImage"/>
+
+        <div class="gallery-title">Photo Gallery <span style="color:var(--silver);font-size:.7em">(up to 12)</span></div>
+        <div class="gallery-grid" id="galleryGrid"></div>
+        <button class="btn-add-gallery" onclick="uploadGalleryPhoto()">
+          ＋ Add Gallery Photo
+        </button>
+      </div>
+
+    </div><!-- /modal-body -->
+
+    <div class="modal-footer">
+      <button class="btn-cancel" onclick="closeModal()">Cancel</button>
+      <button class="btn-save" id="saveBtn" onclick="saveListing()">
+        <div class="save-spinner" id="saveSpinner"></div>
+        <span class="save-txt">Save Listing</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ── DELETE CONFIRM ───────────────────────────────── -->
+<div class="del-modal-overlay" id="deleteModal">
+  <div class="del-box">
+    <span class="del-icon">🗑</span>
+    <div class="del-title">Delete Listing?</div>
+    <p class="del-text" id="delText">This will permanently remove this listing from your website. This cannot be undone.</p>
+    <div class="del-actions">
+      <button class="btn-del-cancel" onclick="closeDeleteModal()">Cancel</button>
+      <button class="btn-del-confirm" onclick="confirmDelete()">Yes, Delete</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── TOAST ────────────────────────────────────────── -->
+<div class="toast" id="toast"></div>
+
+<!-- Scripts -->
+<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+<script src="https://upload-widget.cloudinary.com/global/all.js" type="text/javascript"></script>
 
 <script>
-// Sticky Nav
-const nav = document.getElementById('mainNav');
-window.addEventListener('scroll',()=>{ nav.classList.toggle('solid', scrollY > 70) });
+// ═══════════════════════════════════════════════════════
+// STATE
+// ═══════════════════════════════════════════════════════
+let ALL_LISTINGS  = [];
+let CURRENT_SHA   = null;
+let activeFilter  = 'all';
+let editingIndex  = -1;   // -1 = new listing
+let galleryUrls   = [];
+let deleteIndex   = -1;
 
-// Scroll Reveal
-const obs = new IntersectionObserver(e=>{
-  e.forEach(x=>{ if(x.isIntersecting) x.target.classList.add('in') })
-},{ threshold:.08 });
-document.querySelectorAll('.rx').forEach(el=>obs.observe(el));
+const CLOUDINARY_CLOUD  = 'dlbhwfm7b';
+const CLOUDINARY_PRESET = 'sigal_listings';
 
-// Hero Search Tab
-function switchTab(el){
-  document.querySelectorAll('.hsc-tab').forEach(t=>t.classList.remove('on'));
-  el.classList.add('on');
-  const placeholders = {
-    '🏠 Buy': 'City, neighborhood, ZIP code…',
-    '💰 Sell': 'Enter your property address…',
-    '📊 Home Value': 'Enter your home address for a free estimate…'
-  };
-  const inp = document.querySelector('.hsc-input');
-  inp.placeholder = placeholders[el.textContent.trim()] || 'Search…';
+// ═══════════════════════════════════════════════════════
+// AUTH
+// ═══════════════════════════════════════════════════════
+window.netlifyIdentity.on('init', user => {
+  if (user) showAdmin();
+  else      showLogin();
+});
+
+window.netlifyIdentity.on('login', user => {
+  showAdmin();
+  window.netlifyIdentity.close();
+});
+
+window.netlifyIdentity.on('logout', () => {
+  showLogin();
+});
+
+function showLogin() {
+  document.getElementById('loginScreen').style.display = 'flex';
+  document.getElementById('adminPanel').style.display  = 'none';
+  window.netlifyIdentity.open('login');
 }
 
-// Filter Listings
-document.querySelectorAll('.ftag').forEach(btn=>{
-  btn.addEventListener('click',()=>{
-    document.querySelectorAll('.ftag').forEach(b=>b.classList.remove('on'));
-    btn.classList.add('on');
-    const f = btn.dataset.f;
-    document.querySelectorAll('#listGrid .lcard').forEach(c=>{
-      c.style.display = (f==='all' || c.dataset.s===f) ? 'block' : 'none';
-    });
+function showAdmin() {
+  document.getElementById('loginScreen').style.display = 'none';
+  document.getElementById('adminPanel').style.display  = 'block';
+  loadListings();
+}
+
+function logout() {
+  window.netlifyIdentity.logout();
+}
+
+// ═══════════════════════════════════════════════════════
+// API — calls Netlify function → GitHub
+// ═══════════════════════════════════════════════════════
+async function getJWT() {
+  const user = window.netlifyIdentity.currentUser();
+  if (!user) throw new Error('Not logged in');
+  return await user.jwt();
+}
+
+async function apiGet() {
+  const token = await getJWT();
+  const res = await fetch('/.netlify/functions/github-api', {
+    method: 'GET',
+    headers: { 'Authorization': `Bearer ${token}` }
   });
+  if (!res.ok) throw new Error(`API error: ${res.status}`);
+  return res.json();
+}
+
+async function apiPut(listings, sha) {
+  const token = await getJWT();
+  const res = await fetch('/.netlify/functions/github-api', {
+    method: 'PUT',
+    headers: {
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ listings, sha })
+  });
+  if (!res.ok) {
+    const err = await res.json();
+    throw new Error(err.error || `Save failed: ${res.status}`);
+  }
+  return res.json();
+}
+
+// ═══════════════════════════════════════════════════════
+// LOAD LISTINGS
+// ═══════════════════════════════════════════════════════
+async function loadListings() {
+  setGrid('<div class="state-box"><div class="state-spinner"></div><p>Loading your listings…</p></div>');
+  try {
+    const { data, sha } = await apiGet();
+    ALL_LISTINGS = Array.isArray(data) ? data : (data.listings || []);
+    CURRENT_SHA  = sha;
+    updateStats();
+    renderGrid();
+    showToast(`✅ ${ALL_LISTINGS.length} listings loaded`, 'success');
+  } catch(err) {
+    setGrid(`<div class="state-box"><span class="state-icon">⚠️</span><div class="state-title">Could not load listings</div><div class="state-text">${err.message}</div></div>`);
+    showToast('Error loading listings', 'error');
+  }
+}
+
+// ═══════════════════════════════════════════════════════
+// RENDER GRID
+// ═══════════════════════════════════════════════════════
+const STATUS_LABEL = { jsold:'Just Sold', sold:'Sold', sale:'For Sale', rent:'For Rent' };
+const STATUS_CLASS = { jsold:'badge-jsold', sold:'badge-sold', sale:'badge-sale', rent:'badge-rent' };
+
+function renderGrid() {
+  const query  = (document.getElementById('searchInput')?.value || '').toLowerCase();
+  const filtered = ALL_LISTINGS.filter((p, i) => {
+    const statusOk = activeFilter === 'all' || p.status === activeFilter;
+    const searchOk = !query ||
+      (p.title || '').toLowerCase().includes(query) ||
+      (p.city  || '').toLowerCase().includes(query);
+    return statusOk && searchOk;
+  });
+
+  document.getElementById('listingCount').textContent =
+    `Showing ${filtered.length} of ${ALL_LISTINGS.length} listings`;
+
+  if (!filtered.length) {
+    setGrid('<div class="state-box"><span class="state-icon">🏠</span><div class="state-title">No listings found</div><div class="state-text">Try adjusting your filter or search.</div></div>');
+    return;
+  }
+
+  // Map filtered back to original indices for edit/delete
+  const html = filtered.map(p => {
+    const idx = ALL_LISTINGS.indexOf(p);
+    const bc  = STATUS_CLASS[p.status] || 'badge-sold';
+    const bl  = STATUS_LABEL[p.status] || p.status;
+    const img = p.image
+      ? `<img src="${p.image}" alt="${p.title}" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\\'lc-img-placeholder\\'>🏠</div>'">`
+      : '<div class="lc-img-placeholder">🏠</div>';
+
+    return `<div class="listing-card">
+  <div class="lc-img">
+    ${img}
+    <span class="lc-badge ${bc}">${bl}</span>
+  </div>
+  <div class="lc-body">
+    <div class="lc-city">📍 ${p.city || 'South Florida'}</div>
+    <div class="lc-title">${p.title || 'Untitled'}</div>
+    <div class="lc-price">${p.price || '—'}</div>
+    <div class="lc-specs">
+      ${p.beds  ? `<span class="lc-spec">🛏 ${p.beds}</span>`  : ''}
+      ${p.baths ? `<span class="lc-spec">🛁 ${p.baths}</span>` : ''}
+      ${p.size  ? `<span class="lc-spec">📐 ${p.size}</span>`  : ''}
+      ${p.year && p.year !== '0' ? `<span class="lc-spec">🏗 ${p.year}</span>` : ''}
+    </div>
+    <select class="status-select" onchange="quickStatus(${idx}, this.value)">
+      <option value="sale"  ${p.status==='sale' ?'selected':''}>For Sale</option>
+      <option value="jsold" ${p.status==='jsold'?'selected':''}>Just Sold</option>
+      <option value="sold"  ${p.status==='sold' ?'selected':''}>Sold</option>
+      <option value="rent"  ${p.status==='rent' ?'selected':''}>For Rent</option>
+    </select>
+    <div class="lc-actions">
+      <button class="btn-edit" onclick="openModal(${idx})">✏️ Edit</button>
+      <button class="btn-delete" onclick="openDeleteModal(${idx})">🗑</button>
+    </div>
+  </div>
+</div>`;
+  }).join('');
+
+  document.getElementById('listingsGrid').innerHTML = html;
+}
+
+function setGrid(html) {
+  document.getElementById('listingsGrid').innerHTML = html;
+}
+
+// ═══════════════════════════════════════════════════════
+// STATS
+// ═══════════════════════════════════════════════════════
+function updateStats() {
+  const counts = { all:0, sale:0, jsold:0, sold:0, rent:0 };
+  ALL_LISTINGS.forEach(p => {
+    counts.all++;
+    if (counts[p.status] !== undefined) counts[p.status]++;
+  });
+  document.getElementById('countAll').textContent   = counts.all;
+  document.getElementById('countSale').textContent  = counts.sale;
+  document.getElementById('countJsold').textContent = counts.jsold;
+  document.getElementById('countSold').textContent  = counts.sold;
+  document.getElementById('countRent').textContent  = counts.rent;
+}
+
+// ═══════════════════════════════════════════════════════
+// FILTER
+// ═══════════════════════════════════════════════════════
+function filterByStatus(status) {
+  activeFilter = status;
+  document.querySelectorAll('.stat-item').forEach((el,i) => {
+    const s = ['all','sale','jsold','sold','rent'][i];
+    el.classList.toggle('on', s === status);
+  });
+  document.querySelectorAll('.ftab').forEach(b => {
+    b.classList.toggle('on', b.dataset.f === status);
+  });
+  renderGrid();
+}
+
+document.querySelectorAll('.ftab').forEach(b => {
+  b.addEventListener('click', () => filterByStatus(b.dataset.f));
+});
+
+// ═══════════════════════════════════════════════════════
+// QUICK STATUS CHANGE
+// ═══════════════════════════════════════════════════════
+async function quickStatus(idx, newStatus) {
+  ALL_LISTINGS[idx].status = newStatus;
+  updateStats();
+  renderGrid();
+  await saveToGitHub('Status updated');
+}
+
+// ═══════════════════════════════════════════════════════
+// MODAL — OPEN / CLOSE
+// ═══════════════════════════════════════════════════════
+function openModal(idx = -1) {
+  editingIndex = idx;
+  galleryUrls  = [];
+
+  if (idx === -1) {
+    // New listing
+    document.getElementById('modalTitle').textContent = 'Add New Listing';
+    document.getElementById('fTitle').value   = '';
+    document.getElementById('fPrice').value   = '';
+    document.getElementById('fStatus').value  = 'sale';
+    document.getElementById('fCity').value    = '';
+    document.getElementById('fAddress').value = '';
+    document.getElementById('fBeds').value    = '';
+    document.getElementById('fBaths').value   = '';
+    document.getElementById('fSize').value    = '';
+    document.getElementById('fYear').value    = '';
+    document.getElementById('fType').value    = 'Single Family';
+    document.getElementById('fDesc').value    = '';
+    document.getElementById('fImage').value   = '';
+    setMainPhotoPreview('');
+  } else {
+    // Edit existing
+    const p = ALL_LISTINGS[idx];
+    document.getElementById('modalTitle').textContent = 'Edit Listing';
+    document.getElementById('fTitle').value   = p.title   || '';
+    document.getElementById('fPrice').value   = p.price   || '';
+    document.getElementById('fStatus').value  = p.status  || 'sold';
+    document.getElementById('fCity').value    = p.city    || '';
+    document.getElementById('fAddress').value = p.address || '';
+    document.getElementById('fBeds').value    = p.beds    || '';
+    document.getElementById('fBaths').value   = p.baths   || '';
+    document.getElementById('fSize').value    = p.size    || '';
+    document.getElementById('fYear').value    = p.year    || '';
+    document.getElementById('fType').value    = p.type    || 'Single Family';
+    document.getElementById('fDesc').value    = p.description || '';
+    document.getElementById('fImage').value   = p.image   || '';
+    galleryUrls = Array.isArray(p.gallery) ? [...p.gallery] : [];
+    setMainPhotoPreview(p.image || '');
+  }
+
+  renderGalleryGrid();
+  document.getElementById('listingModal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  document.getElementById('listingModal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+// ═══════════════════════════════════════════════════════
+// PHOTO PREVIEW
+// ═══════════════════════════════════════════════════════
+function setMainPhotoPreview(url) {
+  const el = document.getElementById('mainPhotoPreview');
+  el.innerHTML = url
+    ? `<img src="${url}" alt="Main photo"/>`
+    : `<div class="main-photo-placeholder"><span>🏠</span><p>No photo uploaded yet</p></div>`;
+}
+
+function renderGalleryGrid() {
+  const grid = document.getElementById('galleryGrid');
+  grid.innerHTML = galleryUrls.map((url, i) =>
+    `<div class="gallery-thumb">
+      <img src="${url}" alt="Gallery ${i+1}" loading="lazy"/>
+      <button class="gallery-thumb-remove" onclick="removeGalleryPhoto(${i})">✕</button>
+    </div>`
+  ).join('');
+}
+
+function removeGalleryPhoto(i) {
+  galleryUrls.splice(i, 1);
+  renderGalleryGrid();
+}
+
+// ═══════════════════════════════════════════════════════
+// CLOUDINARY UPLOAD
+// ═══════════════════════════════════════════════════════
+function makeWidget(onSuccess) {
+  return cloudinary.createUploadWidget({
+    cloudName: CLOUDINARY_CLOUD,
+    uploadPreset: CLOUDINARY_PRESET,
+    multiple: false,
+    maxFiles: 1,
+    sources: ['local', 'url', 'camera'],
+    folder: 'sigal-listings',
+    cropping: false,
+    showAdvancedOptions: false,
+    styles: {
+      palette: {
+        window: '#FDFCF9',
+        windowBorder: '#1A5C3A',
+        tabIcon: '#1A5C3A',
+        menuIcons: '#5A6474',
+        textDark: '#1A2820',
+        textLight: '#FDFCF9',
+        link: '#1A5C3A',
+        action: '#C9A96E',
+        inactiveTabIcon: '#8FA89A',
+        error: '#C0392B',
+        inProgress: '#1A5C3A',
+        complete: '#3D8B64',
+        sourceBg: '#F8F3EA'
+      },
+      fonts: { default: null, "'Plus Jakarta Sans', sans-serif": { url: 'https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600', active: true } }
+    }
+  }, (error, result) => {
+    if (!error && result && result.event === 'success') {
+      onSuccess(result.info.secure_url);
+    }
+  });
+}
+
+function uploadMainPhoto() {
+  makeWidget(url => {
+    document.getElementById('fImage').value = url;
+    setMainPhotoPreview(url);
+    showToast('✅ Main photo uploaded', 'success');
+  }).open();
+}
+
+function uploadGalleryPhoto() {
+  if (galleryUrls.length >= 12) {
+    showToast('Maximum 12 gallery photos reached', 'info');
+    return;
+  }
+  makeWidget(url => {
+    galleryUrls.push(url);
+    renderGalleryGrid();
+    showToast('✅ Gallery photo added', 'success');
+  }).open();
+}
+
+// ═══════════════════════════════════════════════════════
+// SAVE LISTING
+// ═══════════════════════════════════════════════════════
+async function saveListing() {
+  const title = document.getElementById('fTitle').value.trim();
+  const price = document.getElementById('fPrice').value.trim();
+  const city  = document.getElementById('fCity').value.trim();
+
+  if (!title) { showToast('Please enter a property title', 'error'); document.getElementById('fTitle').focus(); return; }
+  if (!price) { showToast('Please enter a price', 'error'); document.getElementById('fPrice').focus(); return; }
+
+  const listing = {
+    title,
+    price,
+    status:      document.getElementById('fStatus').value,
+    city,
+    address:     document.getElementById('fAddress').value.trim(),
+    beds:        document.getElementById('fBeds').value.trim(),
+    baths:       document.getElementById('fBaths').value.trim(),
+    size:        document.getElementById('fSize').value.trim(),
+    year:        document.getElementById('fYear').value.trim(),
+    type:        document.getElementById('fType').value,
+    description: document.getElementById('fDesc').value.trim(),
+    image:       document.getElementById('fImage').value.trim(),
+    gallery:     [...galleryUrls],
+  };
+
+  const btn = document.getElementById('saveBtn');
+  btn.classList.add('saving');
+  document.querySelector('.save-txt').textContent = 'Saving…';
+
+  try {
+    if (editingIndex === -1) {
+      ALL_LISTINGS.unshift(listing); // Add to top
+    } else {
+      ALL_LISTINGS[editingIndex] = listing;
+    }
+
+    await saveToGitHub(editingIndex === -1 ? 'New listing added' : 'Listing updated');
+    closeModal();
+    updateStats();
+    renderGrid();
+    showToast(editingIndex === -1 ? '✅ Listing added! Site updating…' : '✅ Listing saved! Site updating…', 'success');
+  } catch(err) {
+    // Rollback
+    if (editingIndex === -1) ALL_LISTINGS.shift();
+    showToast(`Error saving: ${err.message}`, 'error');
+  } finally {
+    btn.classList.remove('saving');
+    document.querySelector('.save-txt').textContent = 'Save Listing';
+  }
+}
+
+async function saveToGitHub(message = 'CMS update') {
+  const result = await apiPut(ALL_LISTINGS, CURRENT_SHA);
+  if (result.sha) CURRENT_SHA = result.sha;
+}
+
+// ═══════════════════════════════════════════════════════
+// DELETE
+// ═══════════════════════════════════════════════════════
+function openDeleteModal(idx) {
+  deleteIndex = idx;
+  const p = ALL_LISTINGS[idx];
+  document.getElementById('delText').textContent =
+    `"${p.title || 'This listing'}" will be permanently removed from your website. This cannot be undone.`;
+  document.getElementById('deleteModal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeDeleteModal() {
+  document.getElementById('deleteModal').classList.remove('open');
+  document.body.style.overflow = '';
+  deleteIndex = -1;
+}
+
+async function confirmDelete() {
+  if (deleteIndex === -1) return;
+  const removed = ALL_LISTINGS.splice(deleteIndex, 1);
+  closeDeleteModal();
+  updateStats();
+  renderGrid();
+  try {
+    await saveToGitHub('Listing deleted');
+    showToast('🗑 Listing deleted. Site updating…', 'info');
+  } catch(err) {
+    // Rollback
+    ALL_LISTINGS.splice(deleteIndex, 0, removed[0]);
+    updateStats();
+    renderGrid();
+    showToast(`Error deleting: ${err.message}`, 'error');
+  }
+}
+
+// ═══════════════════════════════════════════════════════
+// TOAST
+// ═══════════════════════════════════════════════════════
+let toastTimer;
+function showToast(msg, type = 'info') {
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.className = `toast show ${type}`;
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => el.classList.remove('show'), 3500);
+}
+
+// ═══════════════════════════════════════════════════════
+// CLOSE MODALS ON OVERLAY CLICK / ESC
+// ═══════════════════════════════════════════════════════
+document.getElementById('listingModal').addEventListener('click', e => {
+  if (e.target === document.getElementById('listingModal')) closeModal();
+});
+document.getElementById('deleteModal').addEventListener('click', e => {
+  if (e.target === document.getElementById('deleteModal')) closeDeleteModal();
+});
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') { closeModal(); closeDeleteModal(); }
 });
 </script>
-  <script src="assets/sg-nav.js" defer></script>
 </body>
 </html>
