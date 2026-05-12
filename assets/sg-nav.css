@@ -429,14 +429,24 @@ body.sg-locked{overflow:hidden}
   }
 }
 
-/* Mobile: ALWAYS solid cream nav — never transparent
-   This is what keeps the hamburger visible at the top of the page */
+/* ═══ HAMBURGER VISIBILITY ═══
+   Subtle backing so the hamburger is always visible —
+   transparent over dark hero, fades to nothing when scrolled */
 @media (max-width:900px){
-  body[data-hero="true"] .sg-nav,
-  body[data-hero="true"] .sg-nav:not(.scrolled){
-    background:rgba(253,252,249,.94) !important;
-    backdrop-filter:saturate(180%) blur(20px) !important;
-    -webkit-backdrop-filter:saturate(180%) blur(20px) !important;
-    border-bottom:1px solid var(--sg-rule) !important;
+  .sg-nav-toggle{
+    background:transparent;
+    border-radius:4px;
+    transition:background .3s ease;
+  }
+  /* When transparent over hero, give the hamburger a soft dark backing */
+  body[data-hero="true"] .sg-nav:not(.scrolled) .sg-nav-toggle{
+    background:rgba(0,0,0,.18);
+    backdrop-filter:blur(6px);
+    -webkit-backdrop-filter:blur(6px);
+  }
+  /* Spans stay white on transparent nav */
+  body[data-hero="true"] .sg-nav:not(.scrolled) .sg-nav-toggle span{
+    background:#fff;
   }
 }
+

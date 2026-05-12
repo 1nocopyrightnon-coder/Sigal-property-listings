@@ -623,5 +623,53 @@ async function loadListings(){
 loadListings();
 </script>
   <script src="assets/sg-nav.js" defer></script>
+
+<script>
+// Read URL query parameter and pre-filter properties
+(function(){
+  var params = new URLSearchParams(window.location.search);
+  var cityFilter = params.get('city');
+  if(!cityFilter) return;
+  // Wait for listings to load, then filter by city
+  var attempts = 0;
+  var interval = setInterval(function(){
+    attempts++;
+    if(attempts > 50){ clearInterval(interval); return; }
+    var grid = document.getElementById('propsGrid');
+    if(!grid || grid.querySelector('.state-spinner') || grid.querySelector('.state-box')) return;
+    var cards = grid.querySelectorAll('.pcard');
+    if(!cards.length) return;
+    clearInterval(interval);
+
+    // Filter cards by city
+    var found = 0;
+    cards.forEach(function(card){
+      var locText = card.querySelector('.pcard-loc');
+      var matches = locText && locText.textContent.toLowerCase().indexOf(cityFilter.toLowerCase()) !== -1;
+      card.style.display = matches ? '' : 'none';
+      if(matches) found++;
+    });
+
+    // Update count
+    var countEl = document.getElementById('propCount');
+    if(countEl) countEl.textContent = 'Showing ' + found + ' properties in ' + cityFilter;
+
+    // Add a clear filter badge
+    var ctx = grid.parentElement;
+    if(ctx && !document.getElementById('cityFilterBadge')){
+      var badge = document.createElement('div');
+      badge.id = 'cityFilterBadge';
+      badge.style.cssText = 'background:#1A5C3A;color:#fff;padding:14px 24px;display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem;border-radius:2px;font-size:.85rem;letter-spacing:.04em';
+      badge.innerHTML = '<span>📍 Filtered by location: <strong>' + cityFilter + '</strong> &middot; ' + found + ' propert' + (found===1?'y':'ies') + ' found</span><a href="properties.html" style="color:#F0DFA0;text-decoration:underline;font-size:.78rem;letter-spacing:.1em;text-transform:uppercase">✕ Clear filter</a>';
+      ctx.insertBefore(badge, grid);
+    }
+
+    if(found === 0){
+      grid.innerHTML = '<div class="state-box" style="grid-column:1/-1;text-align:center;padding:4rem 2rem;color:#8FA89A"><span style="font-size:3rem">🏠</span><div style="font-family:\'Fraunces\',serif;font-size:1.3rem;color:#4A6058;margin:1rem 0 .5rem">No listings in ' + cityFilter + ' yet</div><div style="font-size:.85rem;margin-bottom:1.5rem">Try browsing all listings, or contact Sigal for off-market opportunities.</div><a href="properties.html" style="background:#1A5C3A;color:#fff;padding:12px 24px;text-decoration:none;font-size:.75rem;letter-spacing:.1em;text-transform:uppercase">View All Properties</a></div>';
+    }
+  }, 200);
+})();
+</script>
+
 </body>
 </html>
