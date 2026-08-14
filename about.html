@@ -143,6 +143,22 @@ footer{background:#091F14;padding:5rem 0 2.5rem;border-top:3px solid var(--sage)
 .cred{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);color:rgba(255,255,255,.8);font-size:.68rem;font-weight:600;padding:.4rem .85rem;letter-spacing:.06em}
 .bio-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start}
 .bio-pull{border-left:4px solid var(--sage);padding:1.2rem 1.5rem;background:var(--foam);font-size:.9rem;font-weight:600;color:var(--forest);line-height:1.7;margin:1.5rem 0}
+.bio-photo-inset{
+  margin:2.5rem 0;
+  width:calc(100% + 3rem);
+  margin-left:-1.5rem;
+  box-shadow:0 20px 48px rgba(26,40,32,.16);
+}
+.bio-photo-caption{
+  display:flex;align-items:center;gap:.7rem;
+  padding:.9rem 1.5rem;
+  font-size:.72rem;letter-spacing:.04em;color:var(--slate);
+  font-style:italic;font-family:'Fraunces',serif;
+}
+.bio-photo-line{width:28px;height:1px;background:var(--sage);flex-shrink:0}
+@media(max-width:640px){
+  .bio-photo-inset{width:100%;margin-left:0}
+}
 .timeline{position:relative;padding-left:2rem}
 .timeline::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,var(--sage),var(--foam))}
 .tl-item{position:relative;padding-left:2rem;margin-bottom:2rem}
@@ -172,7 +188,7 @@ footer{background:#091F14;padding:5rem 0 2.5rem;border-top:3px solid var(--sage)
   <div class="wrap">
     <div class="ah-inner">
       <div class="ah-photo rx" style="position:relative">
-        <img src="/sigalphoto.jpg" style="object-position:center top" alt="Sigal Fishman — South Florida Real Estate"/>
+        <img src="/sigalphoto-hero.jpg" style="object-position:center top" alt="Sigal Fishman — South Florida Real Estate"/>
         <div class="ah-photo-badge"><span class="ah-pb-n">35+</span><span class="ah-pb-t">Years of Excellence</span></div>
       </div>
       <div class="ah-text">
@@ -202,8 +218,12 @@ footer{background:#091F14;padding:5rem 0 2.5rem;border-top:3px solid var(--sage)
         <p class="lead" style="margin-bottom:1rem">Sigal Fishman has been a trusted real estate professional since 1985, bringing decades of market expertise, strategic negotiation skills, and an unwavering commitment to her clients. With a direct, honest, and results-driven approach, Sigal has built her reputation on identifying value, negotiating the strongest terms, and guiding transactions smoothly from contract to closing.</p>
         <p class="lead" style="margin-bottom:1rem">Her extensive experience spans residential sales, luxury properties, investment opportunities, and helping buyers and sellers navigate changing market conditions with confidence.</p>
         <div class="bio-pull">"Aggressive when it counts, strategic by nature, and committed to excellence. There is no better real estate agent than Sigal." — Longtime Client</div>
-        <div class="bio-photo-inset" style="margin:2rem 0;max-width:360px">
-          <img src="/sigalphoto2.jpg" alt="Sigal Fishman — Sigal Group Realty" style="width:100%;aspect-ratio:2/3;object-fit:cover;object-position:center 20%;display:block;box-shadow:0 12px 32px rgba(26,40,32,.14)"/>
+        <div class="bio-photo-inset">
+          <img src="/sigalphoto2.jpg" alt="Sigal Fishman — Sigal Group Realty" style="width:100%;aspect-ratio:4/3;object-fit:cover;object-position:center 18%;display:block"/>
+          <div class="bio-photo-caption">
+            <span class="bio-photo-line"></span>
+            <span>Sigal Fishman, on-site with clients in Boca Raton</span>
+          </div>
         </div>
         <p class="lead">Specializing in Boca Raton, Highland Beach, Delray Beach, and luxury South Florida real estate. Sigal's current clients include relocating families from the Northeast, cash investors, and long-time South Florida residents.</p>
       </div>
