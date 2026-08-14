@@ -1,0 +1,111 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_library:
+  name: cloudinary
+  config:
+    cloud_name: dlbhwfm7b
+    upload_preset: sigal_listings
+
+locale: en
+publish_mode: simple
+
+collections:
+  - name: listings
+    label: Property Listings
+    files:
+      - name: all_listings
+        label: All Listings
+        file: listings/listings.json
+        fields:
+          - label: Listings
+            name: listings
+            widget: list
+            summary: "{{fields.title}} | {{fields.price}} | {{fields.status}}"
+            fields:
+              - label: Property Title
+                name: title
+                widget: string
+                hint: "e.g. Beautiful Lakefront Home in Boca Raton"
+
+              - label: Price
+                name: price
+                widget: string
+                hint: "e.g. $1,250,000 or $3,500/mo for rentals"
+
+              - label: Status
+                name: status
+                widget: select
+                options:
+                  - { label: "Just Sold", value: "jsold" }
+                  - { label: "Sold",      value: "sold"  }
+                  - { label: "For Sale",  value: "sale"  }
+                  - { label: "For Rent",  value: "rent"  }
+                default: sold
+
+              - label: City / Community
+                name: city
+                widget: string
+                hint: "e.g. Boca Raton, Valencia Lakes, Palm Beach"
+
+              - label: Full Address
+                name: address
+                widget: string
+                required: false
+                hint: "e.g. 123 Main St, Boca Raton, FL 33496"
+
+              - label: Bedrooms
+                name: beds
+                widget: string
+                hint: "e.g. 3"
+
+              - label: Bathrooms
+                name: baths
+                widget: string
+                hint: "e.g. 2.5"
+
+              - label: Size
+                name: size
+                widget: string
+                hint: "e.g. 2,450 SF"
+
+              - label: Year Built
+                name: year
+                widget: string
+                required: false
+                hint: "e.g. 2018"
+
+              - label: Property Type
+                name: type
+                widget: select
+                options:
+                  - Single Family
+                  - Condo
+                  - Townhouse
+                  - Waterfront
+                  - Golf Community
+                  - New Construction
+                  - Multi-Family
+                default: Single Family
+
+              - label: Main Photo
+                name: image
+                widget: image
+                hint: "Primary photo shown on the listing card — uploaded to Cloudinary automatically"
+
+              - label: Photo Gallery
+                name: gallery
+                widget: list
+                required: false
+                hint: "Upload additional photos (up to 12). Click + to add more."
+                field:
+                  label: Photo
+                  name: photo
+                  widget: image
+
+              - label: Description
+                name: description
+                widget: text
+                required: false
+                hint: "Full property description shown when visitor clicks the listing"
