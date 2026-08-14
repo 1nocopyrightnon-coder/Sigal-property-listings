@@ -1,0 +1,198 @@
+// ═══════════════════════════════════════════════════════════════
+// SIGAL GROUP REALTY — UNIFIED NAVIGATION SCRIPT
+// Injects nav at top of body on every page, identical behavior
+// ═══════════════════════════════════════════════════════════════
+(function(){
+  'use strict';
+
+  var LOGO = 'https://static.wixstatic.com/media/640c0f_de4855d5b90048c4b1b8b195ae36a064~mv2.png/v1/crop/x_0,y_56,w_500,h_240/fill/w_294,h_137,al_c,q_85/Real%20Estate%20Logo_edited.png';
+
+  // Nav items — single source of truth, used for both desktop & mobile
+  var ITEMS = [
+    { num:'01', href:'index.html',         label:'Home',        italic:''           },
+    { num:'02', href:'properties.html',    label:'Properties',  italic:''           },
+    { num:'03', href:'sell.html',          label:'Sell ',       italic:'Your Home'  },
+    { num:'04', href:'neighborhoods.html', label:'Top ',        italic:'Areas'      },
+    { num:'05', href:'about.html',         label:'About ',      italic:'Sigal'      },
+    { num:'06', href:'contact.html',       label:'Contact',     italic:''           }
+  ];
+
+  function build(){
+    if(document.querySelector('.sg-nav')) return; // already built
+
+    // Determine if this is the homepage (transparent-over-hero treatment)
+    var path = window.location.pathname.replace(/\/$/,'');
+    var isHome = path === '' || path === '/index.html' || path.endsWith('/index.html') || path.endsWith('/');
+    if(isHome) document.body.setAttribute('data-hero','true');
+    document.body.classList.add('sg-pad');
+
+    // ── Top bar ──────────────────────────────────────
+    var nav = document.createElement('nav');
+    nav.className = 'sg-nav';
+
+    var logoLink = document.createElement('a');
+    logoLink.href = 'index.html';
+    logoLink.className = 'sg-nav-logo';
+    logoLink.setAttribute('aria-label','Sigal Group Realty home');
+    var logoImg = document.createElement('img');
+    logoImg.src = LOGO;
+    logoImg.alt = 'Sigal Group Realty';
+    logoLink.appendChild(logoImg);
+    nav.appendChild(logoLink);
+
+    // Desktop menu
+    var ul = document.createElement('ul');
+    ul.className = 'sg-nav-menu';
+    ITEMS.forEach(function(item, i){
+      var li = document.createElement('li');
+      var a = document.createElement('a');
+      a.href = item.href;
+      // Only Contact gets the CTA treatment on desktop
+      if(item.label === 'Contact'){
+        a.className = 'sg-nav-cta';
+        a.textContent = 'Free Consultation';
+        a.href = 'contact.html';
+      } else {
+        a.textContent = item.label.trim() + (item.italic ? ' ' + item.italic : '');
+      }
+      li.appendChild(a);
+      ul.appendChild(li);
+    });
+    nav.appendChild(ul);
+
+    // Hamburger toggle
+    var toggle = document.createElement('button');
+    toggle.className = 'sg-nav-toggle';
+    toggle.id = 'sgNavToggle';
+    toggle.setAttribute('aria-label','Open menu');
+    toggle.setAttribute('aria-expanded','false');
+    for(var s=0;s<3;s++){
+      toggle.appendChild(document.createElement('span'));
+    }
+    toggle.addEventListener('click', toggleMenu);
+    nav.appendChild(toggle);
+
+    document.body.insertBefore(nav, document.body.firstChild);
+
+    // ── Mobile menu overlay ──────────────────────────
+    var mobmenu = document.createElement('div');
+    mobmenu.className = 'sg-mobmenu';
+    mobmenu.id = 'sgMobMenu';
+    mobmenu.setAttribute('aria-hidden','true');
+
+    var eyebrow = document.createElement('div');
+    eyebrow.className = 'sg-mob-eyebrow';
+    eyebrow.textContent = 'Navigate';
+    mobmenu.appendChild(eyebrow);
+
+    var mobUl = document.createElement('ul');
+    mobUl.className = 'sg-mob-list';
+    ITEMS.forEach(function(item){
+      var li = document.createElement('li');
+      var a = document.createElement('a');
+      a.href = item.href;
+      a.addEventListener('click', closeMenu);
+
+      var num = document.createElement('span');
+      num.className = 'sg-mob-num';
+      num.textContent = item.num;
+      a.appendChild(num);
+
+      var label = document.createElement('span');
+      label.className = 'sg-mob-label';
+      if(item.italic){
+        label.appendChild(document.createTextNode(item.label));
+        var i = document.createElement('i');
+        i.textContent = item.italic;
+        label.appendChild(i);
+      } else {
+        label.textContent = item.label;
+      }
+      a.appendChild(label);
+
+      var arrow = document.createElement('span');
+      arrow.className = 'sg-mob-arrow';
+      arrow.textContent = '→';
+      a.appendChild(arrow);
+
+      li.appendChild(a);
+      mobUl.appendChild(li);
+    });
+    mobmenu.appendChild(mobUl);
+
+    var footer = document.createElement('div');
+    footer.className = 'sg-mob-footer';
+
+    var contactLabel = document.createElement('div');
+    contactLabel.className = 'sg-mob-footer-label';
+    contactLabel.textContent = 'Get in Touch';
+    footer.appendChild(contactLabel);
+
+    var contactDiv = document.createElement('div');
+    contactDiv.className = 'sg-mob-contact';
+
+    var phone = document.createElement('a');
+    phone.href = 'tel:6177770485';
+    phone.textContent = '(617) 777-0485';
+    contactDiv.appendChild(phone);
+
+    var email = document.createElement('a');
+    email.href = 'mailto:sigoosh@gmail.com';
+    email.textContent = 'sigoosh@gmail.com';
+    contactDiv.appendChild(email);
+
+    footer.appendChild(contactDiv);
+    mobmenu.appendChild(footer);
+
+    document.body.appendChild(mobmenu);
+
+    // ── Scroll handler — adds 'scrolled' class ───────
+    var lastScroll = 0;
+    window.addEventListener('scroll', function(){
+      var y = window.scrollY;
+      if(y > 40) nav.classList.add('scrolled');
+      else nav.classList.remove('scrolled');
+    }, { passive:true });
+
+    // Initial state
+    if(window.scrollY > 40) nav.classList.add('scrolled');
+
+    // Close menu on Escape
+    document.addEventListener('keydown', function(e){
+      if(e.key === 'Escape' && mobmenu.classList.contains('is-open')){
+        closeMenu();
+      }
+    });
+  }
+
+  function toggleMenu(){
+    var menu = document.querySelector('.sg-mobmenu');
+    var btn = document.querySelector('.sg-nav-toggle');
+    if(!menu || !btn) return;
+    var isOpen = menu.classList.toggle('is-open');
+    btn.classList.toggle('is-open', isOpen);
+    btn.setAttribute('aria-expanded', String(isOpen));
+    menu.setAttribute('aria-hidden', String(!isOpen));
+    document.body.classList.toggle('sg-locked', isOpen);
+  }
+
+  function closeMenu(){
+    var menu = document.querySelector('.sg-mobmenu');
+    var btn = document.querySelector('.sg-nav-toggle');
+    if(!menu) return;
+    menu.classList.remove('is-open');
+    if(btn){
+      btn.classList.remove('is-open');
+      btn.setAttribute('aria-expanded','false');
+    }
+    menu.setAttribute('aria-hidden','true');
+    document.body.classList.remove('sg-locked');
+  }
+
+  // Build on load
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', build);
+  } else {
+    build();
+  }
+})();
