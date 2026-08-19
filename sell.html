@@ -2,35 +2,45 @@
 <html lang="en"><head>
 <meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <title>Sell Your Home | Free Valuation | Sigal Group Realty</title><meta name="description" content="Get a free, no-obligation home valuation from Sigal Fishman — 35+ years of Boca Raton expertise."/>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,700;1,9..144,300;1,9..144,500&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/><style>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900&display=swap" rel="stylesheet"/><style>
 :root{
   --forest:#1A5C3A;--forest-d:#0E3D26;--sage:#3D8B64;--mint:#5BAF87;
   --foam:#D4EDE0;--cream:#F8F3EA;--sand:#EDE4D3;--warm:#C9A96E;
   --warm-l:#F0DFA0;--ocean:#1B6B8A;--sky:#E8F4F8;--ink:#1A2820;
   --slate:#4A6058;--silver:#8FA89A;--rule:#D9E8E0;--white:#FDFCF9;--off:#F4F0E8;
 }
+/* ── New aqua accent — applied safely where light color works ── */
+input:focus,select:focus,textarea:focus{
+  outline:none;border-color:var(--forest)!important;
+  box-shadow:0 0 0 3px rgba(161,255,255,.35);
+}
+.btn-forest:hover,.hsc-btn:hover,.cf-submit:hover,.sb-submit:hover,.fsubmit:hover{
+  box-shadow:0 0 0 4px rgba(161,255,255,.3);
+}
+.nav-menu a:hover::after,.sg-nav-menu a:hover::after{background:var(--forest)!important}
+
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--white);color:var(--ink);overflow-x:hidden;animation:pgFade .4s ease}
+body{font-family:'Archivo',sans-serif;background:var(--white);color:var(--ink);overflow-x:hidden;animation:pgFade .4s ease}
 @keyframes pgFade{from{opacity:0}to{opacity:1}}
 img{display:block;max-width:100%}
 a{text-decoration:none;color:inherit}
 .wrap{max-width:1260px;margin:0 auto;padding:0 2.5rem}
 .tag{font-size:.62rem;font-weight:700;letter-spacing:.3em;text-transform:uppercase;color:var(--sage);display:inline-flex;align-items:center;gap:.6rem}
 .tag::before{content:'';width:22px;height:2px;background:var(--sage)}
-.h2{font-family:'Fraunces',serif;font-size:clamp(1.8rem,3.2vw,2.8rem);font-weight:500;line-height:1.1;color:var(--ink)}
-.h2 i{font-style:italic;color:var(--sage)}
-.h3{font-family:'Fraunces',serif;font-size:1.4rem;font-weight:500;color:var(--ink)}
+.h2{font-family:'Archivo',sans-serif;font-size:clamp(1.8rem,3.2vw,2.8rem);font-weight:500;line-height:1.1;color:var(--ink)}
+.h2 i{font-style:normal;font-weight:800;color:var(--sage)}
+.h3{font-family:'Archivo',sans-serif;font-size:1.4rem;font-weight:500;color:var(--ink)}
 .lead{color:var(--slate);font-size:.95rem;line-height:1.9}
 .rule{width:48px;height:3px;background:var(--sage);margin:1rem 0 1.6rem}
-.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.88rem 2rem;font-size:.76rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;transition:.3s;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;border:2px solid transparent}
-.btn-forest{background:var(--forest);color:var(--white);border-color:var(--forest)}
+.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.88rem 2rem;font-size:.76rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;transition:.3s;cursor:pointer;font-family:'Archivo',sans-serif;border:2px solid transparent}
+.btn-forest{background:var(--forest-deep);color:var(--white);border-color:var(--forest-deep)}
 .btn-forest:hover{background:var(--forest-d);transform:translateY(-2px)}
-.btn-ghost{background:transparent;color:var(--forest);border-color:var(--forest)}
-.btn-ghost:hover{background:var(--forest);color:var(--white)}
+.btn-ghost{background:transparent;color:var(--forest-deep);border-color:var(--forest-deep)}
+.btn-ghost:hover{background:var(--forest-deep);color:var(--white)}
 .btn-warm{background:var(--warm);color:var(--white);border-color:var(--warm)}
 .btn-warm:hover{background:#b8963a;transform:translateY(-2px)}
-.btn-white{background:var(--white);color:var(--forest);border-color:var(--white)}
+.btn-white{background:var(--white);color:var(--forest-deep);border-color:var(--white)}
 .btn-white:hover{background:transparent;color:var(--white)}
 .btn-outline-white{background:transparent;color:var(--white);border-color:rgba(255,255,255,.55)}
 .btn-outline-white:hover{background:rgba(255,255,255,.12);border-color:var(--white)}
@@ -41,10 +51,10 @@ a{text-decoration:none;color:inherit}
 .float-cta{position:fixed;bottom:1.8rem;right:1.8rem;z-index:900;display:flex;flex-direction:column;align-items:flex-end;gap:.5rem}
 .fcta-btn{display:flex;align-items:center;gap:.55rem;padding:.78rem 1.3rem;font-size:.76rem;font-weight:700;color:var(--white);white-space:nowrap;transition:.25s}
 .fcta-btn:hover{transform:translateY(-3px)}
-.fcta-call{background:var(--forest);box-shadow:0 4px 20px rgba(26,92,58,.35);animation:fcPulse 3s ease infinite}
+.fcta-call{background:var(--forest-deep);box-shadow:0 4px 20px rgba(26,92,58,.35);animation:fcPulse 3s ease infinite}
 .fcta-email{background:var(--ocean)}
 @keyframes fcPulse{0%,100%{box-shadow:0 4px 20px rgba(26,92,58,.35)}50%{box-shadow:0 4px 32px rgba(26,92,58,.65)}}
-#btt{position:fixed;bottom:1.8rem;left:1.8rem;z-index:800;width:44px;height:44px;background:var(--forest);color:var(--white);border:none;cursor:pointer;font-size:1.1rem;display:none;align-items:center;justify-content:center;transition:.25s;box-shadow:0 4px 16px rgba(0,0,0,.2)}
+#btt{position:fixed;bottom:1.8rem;left:1.8rem;z-index:800;width:44px;height:44px;background:var(--forest-deep);color:var(--white);border:none;cursor:pointer;font-size:1.1rem;display:none;align-items:center;justify-content:center;transition:.25s;box-shadow:0 4px 16px rgba(0,0,0,.2)}
 #btt:hover{background:var(--sage);transform:translateY(-3px)}
 #btt.show{display:flex}
 /* NAV — solid by default for sub-pages */
@@ -54,9 +64,9 @@ a{text-decoration:none;color:inherit}
 .nav-menu>li>a{font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink);transition:.25s;padding:5px 0;position:relative;white-space:nowrap}
 .nav-menu>li>a::after{content:'';position:absolute;bottom:0;left:0;width:0;height:2px;background:var(--sage);transition:.3s}
 .nav-menu>li>a:hover::after,.nav-menu>li>a.active::after{width:100%}
-.nav-menu>li>a:hover{color:var(--forest)}
+.nav-menu>li>a:hover{color:var(--forest-deep)}
 .nav-cta-link{background:var(--sage)!important;color:var(--white)!important;padding:.48rem 1.2rem;font-size:.68rem!important}
-.nav-cta-link:hover{background:var(--forest)!important}
+.nav-cta-link:hover{background:var(--forest-deep)!important}
 .nav-cta-link::after{display:none!important}
 .nav-dd{position:relative}
 .nav-dd-panel{display:none;position:absolute;top:calc(100%+10px);left:-1rem;min-width:200px;background:var(--white);border-top:3px solid var(--sage);box-shadow:0 16px 50px rgba(0,0,0,.12)}
@@ -72,7 +82,7 @@ a{text-decoration:none;color:inherit}
 /* MOBILE MENU — critical: hidden by default */
 .mobile-menu{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:var(--forest-d);z-index:799;flex-direction:column;justify-content:center;align-items:center;gap:2rem}
 .mobile-menu.open{display:flex}
-.mobile-menu a{font-family:'Fraunces',serif;font-size:2rem;color:var(--white);font-style:italic;transition:.25s}
+.mobile-menu a{font-family:'Archivo',sans-serif;font-size:2rem;color:var(--white);font-style:italic;transition:.25s}
 .mobile-menu a:hover{color:var(--warm-l)}
 /* PAGE HERO */
 .page-hero{background:var(--forest-d);padding:7.5rem 0 4rem;position:relative;overflow:hidden}
@@ -86,19 +96,19 @@ a{text-decoration:none;color:inherit}
 /* FORMS */
 .fgrp{margin-bottom:1.1rem}
 .fgrp label{display:block;font-size:.62rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--ink);margin-bottom:.45rem}
-.fgrp input,.fgrp select,.fgrp textarea{width:100%;padding:.82rem .95rem;border:1.5px solid var(--sand);background:var(--cream);font-family:'Plus Jakarta Sans',sans-serif;font-size:.87rem;color:var(--ink);outline:none;transition:.25s;appearance:none}
+.fgrp input,.fgrp select,.fgrp textarea{width:100%;padding:.82rem .95rem;border:1.5px solid var(--sand);background:var(--cream);font-family:'Archivo',sans-serif;font-size:.87rem;color:var(--ink);outline:none;transition:.25s;appearance:none}
 .fgrp input:focus,.fgrp select:focus,.fgrp textarea:focus{border-color:var(--sage)}
 .fgrp textarea{resize:vertical;min-height:95px}
 .f2col{display:grid;grid-template-columns:1fr 1fr;gap:.9rem}
-.fsubmit{width:100%;padding:1rem;background:var(--forest);color:var(--white);font-family:'Plus Jakarta Sans',sans-serif;font-size:.78rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;border:none;cursor:pointer;transition:.3s}
+.fsubmit{width:100%;padding:1rem;background:var(--forest-deep);color:var(--white);font-family:'Archivo',sans-serif;font-size:.78rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;border:none;cursor:pointer;transition:.3s}
 .fsubmit:hover{background:var(--sage)}
 /* REVIEW CARDS */
 .rcard{background:var(--off);padding:2.2rem;border-top:3px solid var(--sage)}
-.rcard-q{font-family:'Fraunces',serif;font-size:3.5rem;color:var(--sage);opacity:.18;line-height:.6;display:block;margin-bottom:.9rem}
+.rcard-q{font-family:'Archivo',sans-serif;font-size:3.5rem;color:var(--sage);opacity:.18;line-height:.6;display:block;margin-bottom:.9rem}
 .rcard-stars{color:#FCA326;font-size:.8rem;letter-spacing:.15em;margin-bottom:1rem}
-.rcard-text{font-family:'Fraunces',serif;font-style:italic;font-size:.98rem;color:var(--ink);line-height:1.75;margin-bottom:1.4rem}
+.rcard-text{font-family:'Archivo',sans-serif;font-style:italic;font-size:.98rem;color:var(--ink);line-height:1.75;margin-bottom:1.4rem}
 .rcard-foot{display:flex;align-items:center;gap:.8rem}
-.rcard-av{width:42px;height:42px;border-radius:50%;background:var(--forest);display:flex;align-items:center;justify-content:center;font-family:'Fraunces',serif;font-size:1.1rem;font-weight:500;color:var(--white);flex-shrink:0}
+.rcard-av{width:42px;height:42px;border-radius:50%;background:var(--forest-deep);display:flex;align-items:center;justify-content:center;font-family:'Archivo',sans-serif;font-size:1.1rem;font-weight:500;color:var(--white);flex-shrink:0}
 .rcard-name{font-weight:700;font-size:.82rem;color:var(--ink);display:block}
 .rcard-src{font-size:.63rem;color:var(--silver);margin-top:.15rem;display:flex;align-items:center;gap:.3rem}
 .g-g{color:#4285F4;font-weight:800;font-size:.72rem}
@@ -110,7 +120,7 @@ footer{background:#091F14;padding:5rem 0 2.5rem;border-top:3px solid var(--sage)
 .fl-socials{display:flex;gap:.5rem}
 .fsoc{width:36px;height:36px;border:1px solid rgba(255,255,255,.18);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.5);font-size:.75rem;font-weight:700;transition:.25s}
 .fsoc:hover{border-color:var(--mint);color:var(--mint)}
-.fc-head{font-family:'Fraunces',serif;font-size:.95rem;font-weight:500;color:var(--white);margin-bottom:1.2rem;padding-bottom:.6rem;border-bottom:1px solid rgba(200,168,110,.22)}
+.fc-head{font-family:'Archivo',sans-serif;font-size:.95rem;font-weight:500;color:var(--white);margin-bottom:1.2rem;padding-bottom:.6rem;border-bottom:1px solid rgba(200,168,110,.22)}
 .fl-links{list-style:none;display:flex;flex-direction:column;gap:.7rem}
 .fl-links a{color:rgba(255,255,255,.45);font-size:.81rem;transition:.25s}
 .fl-links a:hover{color:var(--mint)}
@@ -137,20 +147,20 @@ footer{background:#091F14;padding:5rem 0 2.5rem;border-top:3px solid var(--sage)
 .sh-left .tag{color:var(--mint)}.sh-left .tag::before{background:var(--mint)}
 .sh-stat{display:flex;gap:1.5rem;flex-wrap:wrap;margin:2rem 0}
 .shs{text-align:center;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);padding:1rem 1.4rem}
-.shs-n{font-family:'Fraunces',serif;font-size:1.9rem;font-weight:500;color:var(--warm-l);display:block;line-height:1}
+.shs-n{font-family:'Archivo',sans-serif;font-size:1.9rem;font-weight:500;color:var(--warm-l);display:block;line-height:1}
 .shs-l{font-size:.57rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.5);display:block;margin-top:.3rem}
 .sh-list{list-style:none;margin:1.5rem 0 2rem}
 .sh-list li{display:flex;align-items:flex-start;gap:.8rem;color:rgba(255,255,255,.8);font-size:.88rem;line-height:1.7;padding:.5rem 0;border-bottom:1px solid rgba(255,255,255,.07)}
 .sh-list li::before{content:'✓';color:var(--warm-l);font-weight:700;flex-shrink:0}
 .sh-right{background:var(--cream);display:flex;align-items:center;justify-content:center;padding:8rem 3.5rem 5rem}
 .val-form{background:var(--white);padding:2.8rem;width:100%;max-width:480px;box-shadow:0 8px 40px rgba(26,92,58,.1)}
-.val-tag{display:inline-block;background:var(--foam);color:var(--forest);font-size:.6rem;font-weight:700;padding:.3rem .8rem;letter-spacing:.15em;text-transform:uppercase;margin-bottom:1.2rem;border:1px solid var(--sage)}
+.val-tag{display:inline-block;background:var(--foam);color:var(--forest-deep);font-size:.6rem;font-weight:700;padding:.3rem .8rem;letter-spacing:.15em;text-transform:uppercase;margin-bottom:1.2rem;border:1px solid var(--sage)}
 .proc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:var(--rule)}
 .pstep{background:var(--white);padding:2.8rem 2rem;position:relative;transition:transform .35s,box-shadow .35s}
 .pstep:hover{transform:translateY(-5px);box-shadow:0 18px 55px rgba(26,92,58,.1);z-index:1}
-.pstep-n{font-family:'Fraunces',serif;font-size:4.5rem;font-weight:300;color:var(--foam);line-height:1;position:absolute;top:.5rem;right:1rem}
+.pstep-n{font-family:'Archivo',sans-serif;font-size:4.5rem;font-weight:300;color:var(--foam);line-height:1;position:absolute;top:.5rem;right:1rem}
 .pstep-icon{font-size:1.8rem;display:block;margin-bottom:1.2rem}
-.pstep-title{font-family:'Fraunces',serif;font-size:1.15rem;font-weight:500;color:var(--ink);margin-bottom:.7rem}
+.pstep-title{font-family:'Archivo',sans-serif;font-size:1.15rem;font-weight:500;color:var(--ink);margin-bottom:.7rem}
 .pstep-text{font-size:.82rem;color:var(--slate);line-height:1.8}
 .why-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
 @media(max-width:900px){
@@ -171,7 +181,7 @@ footer{background:#091F14;padding:5rem 0 2.5rem;border-top:3px solid var(--sage)
   <div class="sh-left">
     <div class="sh-lc">
       <div class="tag">Sell Your Home</div>
-      <h1 style="font-family:'Fraunces',serif;font-size:clamp(2.5rem,5vw,4rem);font-weight:500;line-height:1.05;color:var(--white);margin:.8rem 0 1rem">What Is Your<br>Home Worth <i style="font-style:italic;color:var(--warm-l)">Today?</i></h1>
+      <h1 style="font-family:'Archivo',sans-serif;font-size:clamp(2.5rem,5vw,4rem);font-weight:500;line-height:1.05;color:var(--white);margin:.8rem 0 1rem">What Is Your<br>Home Worth <i style="font-style:italic;color:var(--warm-l)">Today?</i></h1>
       <p style="color:rgba(255,255,255,.7);font-size:.95rem;line-height:1.85;font-weight:300;max-width:440px;margin-bottom:1.5rem">The Boca Raton market has shifted. Sellers who price precisely and present professionally are still closing fast — at top dollar. Get Sigal's expert, no-obligation analysis of your home's current value.</p>
       <div class="sh-stat">
         <div class="shs"><span class="shs-n">78</span><span class="shs-l">Avg. Days on Market</span></div>
@@ -194,7 +204,7 @@ footer{background:#091F14;padding:5rem 0 2.5rem;border-top:3px solid var(--sage)
   <div class="sh-right">
     <div class="val-form">
       <div class="val-tag">No Obligation · 100% Free</div>
-      <div style="font-family:'Fraunces',serif;font-size:1.7rem;font-weight:500;color:var(--ink);margin-bottom:.4rem">Get My Free<br>Home Valuation</div>
+      <div style="font-family:'Archivo',sans-serif;font-size:1.7rem;font-weight:500;color:var(--ink);margin-bottom:.4rem">Get My Free<br>Home Valuation</div>
       <p style="font-size:.82rem;color:var(--slate);margin-bottom:2rem;line-height:1.6">Sigal responds within 24 hours with a detailed, data-driven market analysis.</p>
       <div class="fgrp"><label>Your Name</label><input type="text" placeholder="First and last name"/></div>
       <div class="fgrp"><label>Property Address</label><input type="text" placeholder="Full property address"/></div>
@@ -241,7 +251,7 @@ footer{background:#091F14;padding:5rem 0 2.5rem;border-top:3px solid var(--sage)
         <div class="rule"></div>
         <p class="lead" style="margin-bottom:1rem">Yes, inventory is up 17% — but well-priced, well-presented homes in premium Boca Raton neighborhoods are still attracting serious buyers. The $1M–$3M segment is the engine of Boca's market right now.</p>
         <div style="background:var(--foam);border-left:4px solid var(--sage);padding:1.2rem 1.5rem;margin:1.5rem 0">
-          <p style="font-size:.88rem;color:var(--forest);font-weight:600;line-height:1.7">"Aggressive when it counts, strategic by nature. There is no better agent than Sigal when it comes to pricing, positioning, and getting to the closing table."</p>
+          <p style="font-size:.88rem;color:var(--forest-deep);font-weight:600;line-height:1.7">"Aggressive when it counts, strategic by nature. There is no better agent than Sigal when it comes to pricing, positioning, and getting to the closing table."</p>
         </div>
         <div style="display:flex;gap:.8rem;flex-wrap:wrap;margin-top:2rem">
           <a href="contact.html" class="btn btn-forest">Get My Free Valuation</a>

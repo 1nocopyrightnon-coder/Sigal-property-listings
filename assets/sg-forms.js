@@ -128,7 +128,7 @@
     card.innerHTML =
       '<div style="padding:3.5rem 2rem;text-align:center">' +
         '<div style="width:72px;height:72px;border-radius:50%;background:#E8F5EE;display:inline-flex;align-items:center;justify-content:center;margin-bottom:1.5rem;font-size:2rem;color:#1A5C3A">✓</div>' +
-        '<h3 style="font-family:\'Fraunces\',serif;font-size:1.8rem;color:#1A2820;margin-bottom:.6rem;font-weight:500">Thank You!</h3>' +
+        '<h3 style="font-family:\'Archivo\',sans-serif;font-size:1.8rem;color:#1A2820;margin-bottom:.6rem;font-weight:800">Thank You!</h3>' +
         '<p style="color:#4A6058;font-size:.95rem;line-height:1.6;max-width:380px;margin:0 auto 2rem">' + msg + '</p>' +
         '<div style="display:flex;gap:.8rem;justify-content:center;flex-wrap:wrap">' +
           '<a href="tel:6177770485" style="background:#1A5C3A;color:#fff;padding:.85rem 1.6rem;text-decoration:none;font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;font-weight:600">📞 Call Now</a>' +
