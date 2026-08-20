@@ -4,8 +4,8 @@
    ═══════════════════════════════════════════════════════════════ */
 
 :root{
-  --sg-green:#a1ffff;
-  --sg-green-d:#a1ffff;
+  --sg-green:#D8FFFF;
+  --sg-green-d:#D8FFFF;
   --sg-gold:#C9A96E;
   --sg-gold-l:#F0DFA0;
   --sg-cream:#F8F3EA;
@@ -297,60 +297,8 @@ body.sg-locked{overflow:hidden}
   body.sg-pad{padding-top:0}
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   HOMEPAGE HERO NAV TREATMENT
-   Deliberate green-to-sky-blue gradient that mirrors the hero's
-   split layout. Not just video bleed — a designed brand element.
-   ═══════════════════════════════════════════════════════════════ */
-body[data-hero="true"] .sg-nav:not(.scrolled){
-  background:linear-gradient(
-    to right,
-    rgba(14, 61, 38, 0.92) 0%,
-    rgba(26, 92, 58, 0.82) 22%,
-    rgba(46, 119, 130, 0.62) 48%,
-    rgba(91, 168, 208, 0.58) 72%,
-    rgba(135, 196, 226, 0.55) 100%
-  );
-  backdrop-filter:saturate(160%) blur(14px);
-  -webkit-backdrop-filter:saturate(160%) blur(14px);
-  border-bottom-color:rgba(255,255,255,0.08);
-  box-shadow:0 1px 28px rgba(0,0,0,0.10);
-}
-
-/* White logo over the colored gradient */
-body[data-hero="true"] .sg-nav:not(.scrolled) .sg-nav-logo img{
-  filter:brightness(0) invert(1);
-}
-
-/* White menu links over the gradient */
-body[data-hero="true"] .sg-nav:not(.scrolled) .sg-nav-menu a{
-  color:#fff;
-}
-body[data-hero="true"] .sg-nav:not(.scrolled) .sg-nav-menu a:hover{
-  color:var(--sg-gold-l);
-}
-body[data-hero="true"] .sg-nav:not(.scrolled) .sg-nav-menu a:not(.sg-nav-cta)::after{
-  background:var(--sg-gold-l);
-}
-
-/* Gold CTA on the bluish side */
-body[data-hero="true"] .sg-nav:not(.scrolled) .sg-nav-cta{
-  background:var(--sg-gold);
-  color:var(--sg-ink) !important;
-  box-shadow:0 2px 12px rgba(0,0,0,0.15);
-}
-body[data-hero="true"] .sg-nav:not(.scrolled) .sg-nav-cta:hover{
-  background:var(--sg-gold-l);
-  color:var(--sg-ink) !important;
-}
-
-/* Hamburger over gradient — white spans, subtle dark pill */
-body[data-hero="true"] .sg-nav:not(.scrolled) .sg-nav-toggle{
-  background:rgba(0,0,0,0.15);
-}
-body[data-hero="true"] .sg-nav:not(.scrolled) .sg-nav-toggle span{
-  background:#fff;
-}
+/* Hero-transparent nav treatment removed — nav now stays
+   consistently cream-glass everywhere, on every page and scroll state */
 
 /* Hide any legacy navs */
 #mainNav,#nav,#sgrMobNav,#lxNav,#sgMobBar,#lxMenu,#sgMobMenu,#sgrMobMenu,#mobMenu{
