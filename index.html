@@ -208,6 +208,18 @@ a{text-decoration:none;color:inherit}
 .lspec{font-size:.7rem;color:var(--silver);display:flex;align-items:center;gap:.25rem;font-weight:500}
 
 /* ═══════════════ SELL BAND ═══════════════ */
+/* ── Real Estate Inquiry section ── */
+#inquiry{padding:7rem 0;background:var(--forest);position:relative}
+.inq-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start}
+.inq-point{display:flex;gap:1.3rem;margin-bottom:2rem}
+.inq-num{font-family:'Archivo',sans-serif;font-size:1.6rem;font-weight:800;color:rgba(26,40,32,.3);flex-shrink:0;min-width:2.4rem}
+.inq-point-title{font-family:'Archivo',sans-serif;font-size:1.02rem;font-weight:700;color:var(--ink);margin-bottom:.4rem}
+.inq-point-text{font-size:.85rem;line-height:1.65;color:rgba(26,40,32,.72)}
+.form-card{background:var(--white);padding:2.8rem;box-shadow:0 20px 60px rgba(26,40,32,.14)}
+@media(max-width:900px){
+  .inq-grid{grid-template-columns:1fr;gap:2.5rem}
+}
+
 #sell-band{position:relative;padding:8rem 0;overflow:hidden}
 .sb-bg{position:absolute;inset:0;background-image:url('https://static.wixstatic.com/media/640c0f_d6e5622858894805b6b563dcda1accec~mv2.jpg/v1/fill/w_1920,h_900,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/640c0f_d6e5622858894805b6b563dcda1accec~mv2.jpg');background-size:cover;background-position:center;background-attachment:fixed}
 .sb-overlay{position:absolute;inset:0;background:linear-gradient(90deg,rgba(10,38,23,.94) 0%,rgba(10,38,23,.7) 55%,rgba(10,38,23,.35) 100%)}
@@ -711,6 +723,65 @@ footer{background:#091F14;padding:5rem 0 2.5rem;border-top:3px solid var(--sage)
 </section>
 
 <!-- ░░░ SELL BAND ░░░ -->
+<!-- ░░░ REAL ESTATE INQUIRY ░░░ -->
+<section id="inquiry">
+  <div class="wrap">
+    <div class="inq-grid">
+      <div class="inq-left rx">
+        <div class="tag">Get Started</div>
+        <h2 class="h2" style="color:var(--ink);margin-top:.8rem">Start the Conversation</h2>
+        <p class="lead" style="color:rgba(26,40,32,.75);margin-bottom:2.2rem">Every inquiry gets Sigal's personal attention — not an algorithm, not a call center.</p>
+
+        <div class="inq-point">
+          <span class="inq-num">01</span>
+          <div>
+            <div class="inq-point-title">Direct Access, No Middleman</div>
+            <p class="inq-point-text">Every inquiry comes straight to Sigal. No assistants, no automated triage — just a direct line to 35+ years of expertise.</p>
+          </div>
+        </div>
+        <div class="inq-point">
+          <span class="inq-num">02</span>
+          <div>
+            <div class="inq-point-title">Tailored to Your Goals</div>
+            <p class="inq-point-text">Buying, selling, or just exploring the market — Sigal reviews every inquiry personally and responds with guidance specific to your situation.</p>
+          </div>
+        </div>
+        <div class="inq-point">
+          <span class="inq-num">03</span>
+          <div>
+            <div class="inq-point-title">Fast, Honest Follow-Up</div>
+            <p class="inq-point-text">Most inquiries hear back within hours. Sigal believes speed and honesty build trust — from the very first conversation.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-card rx d1">
+        <h3 class="h3" style="margin-bottom:.5rem">Real Estate Inquiry</h3>
+        <p style="color:var(--slate);font-size:.85rem;margin-bottom:1.6rem">Share a few details and Sigal will follow up personally.</p>
+
+        <div class="fgrp"><label>Inquiry Type</label>
+          <select><option>Buying a Home</option><option>Selling a Home</option><option>Renting</option><option>Just Exploring</option></select>
+        </div>
+        <div class="f2col">
+          <div class="fgrp"><label>First Name</label><input type="text" placeholder="Jane"/></div>
+          <div class="fgrp"><label>Last Name</label><input type="text" placeholder="Smith"/></div>
+        </div>
+        <div class="f2col">
+          <div class="fgrp"><label>Email</label><input type="email" placeholder="your@email.com"/></div>
+          <div class="fgrp"><label>Phone</label><input type="tel" placeholder="(000) 000-0000"/></div>
+        </div>
+        <div class="fgrp"><label>City or Area of Interest</label><input type="text" placeholder="e.g. Boca Raton"/></div>
+        <div class="fgrp"><label>Budget Range</label>
+          <select><option>Under $500K</option><option>$500K – $1M</option><option>$1M – $2M</option><option>$2M – $5M</option><option>$5M+</option></select>
+        </div>
+        <div class="fgrp"><label>Message (Optional)</label><textarea rows="3" placeholder="Anything else Sigal should know?"></textarea></div>
+
+        <button class="fsubmit">Send Inquiry &rarr;</button>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section id="sell-band">
   <div class="sb-bg"></div>
   <div class="sb-overlay"></div>
