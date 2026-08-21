@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"><head>
 <meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>Top Areas | South Florida Neighborhoods | Sigal Group Realty</title><meta name="description" content="Explore Boca Raton, Highland Beach, Delray Beach, Palm Beach, Wellington and more — expert neighborhood guides from Sigal Fishman."/>
+<title>Top Areas | South Florida Neighborhoods | Sigal Group Realty</title><meta name="description" content="Explore Boca Raton, Delray Beach, Highland Beach, Oakland Park, Deerfield Beach and Boynton Beach — expert neighborhood guides from Sigal Fishman."/>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900&display=swap" rel="stylesheet"/><style>
 :root{
   --forest-deep:#1B2A4A;--forest:#1B2A4A;--forest-d:#E7EAF0;--sage:#E4E6E9;--mint:#E4E6E9;
@@ -151,99 +151,161 @@ footer{background:#0F1B30;padding:5rem 0 2.5rem;border-top:3px solid var(--sage)
 .acard-price{font-family:'Archivo',sans-serif;font-size:1.1rem;font-weight:500;color:var(--white)}
 .acard-body{padding:1.5rem}
 .acard-name{font-family:'Archivo',sans-serif;font-size:1.4rem;font-weight:500;color:var(--ink);margin-bottom:.4rem}
+.acard-title{display:flex;align-items:center;gap:.55rem;margin-bottom:.4rem}
+.acard-title .acard-name{margin-bottom:0}
+.acard-title svg.i{width:20px;height:20px;stroke:#1B2A4A;flex-shrink:0;vertical-align:0}
 .acard-meta{display:flex;gap:1.2rem;margin-bottom:.9rem;flex-wrap:wrap}
 .acard-meta span{font-size:.65rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase}
-.reloc-bar{background:var(--sky);border:1px solid rgba(27,42,74,.15);padding:2rem;margin-bottom:3.5rem;display:flex;align-items:center;gap:2rem;flex-wrap:wrap}
+.reloc-bar{
+  display:grid;
+  grid-template-columns:auto 1fr auto;
+  gap:1.6rem 1.8rem;
+  align-items:center;
+  padding:1.7rem 2rem 1.7rem 1.9rem;
+  margin-bottom:3.5rem;
+  overflow:hidden;
+}
+.reloc-bar::before{
+  content:'';
+  position:absolute;
+  left:0;top:0;bottom:0;
+  width:4px;
+  background:#1B2A4A;
+}
+.reloc-ico{
+  width:56px;height:56px;
+  display:flex;align-items:center;justify-content:center;
+  background:#1B2A4A;
+  color:#F8F4EC;
+  flex-shrink:0;
+}
+.reloc-ico svg.i{
+  width:24px;height:24px;
+  stroke:#F8F4EC;
+  vertical-align:0;
+}
+.reloc-copy{min-width:0}
+.reloc-kicker{
+  font-size:.62rem;
+  font-weight:700;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  color:#56607A;
+  margin-bottom:.4rem;
+}
+.reloc-bar h4{
+  font-family:'Archivo',sans-serif;
+  font-size:1.22rem;
+  font-weight:500;
+  color:#1B2A4A;
+  margin:0 0 .45rem;
+  letter-spacing:-.02em;
+}
+.reloc-bar p{
+  font-size:.86rem;
+  color:#56607A;
+  line-height:1.75;
+  margin:0;
+  max-width:62ch;
+}
+.reloc-bar p strong{color:#1B2A4A;font-weight:700}
+.reloc-cta{white-space:nowrap}
+@media(max-width:820px){
+  .reloc-bar{grid-template-columns:auto 1fr;padding:1.5rem 1.4rem 1.5rem 1.5rem}
+  .reloc-cta{grid-column:1/-1;justify-content:center}
+}
 @media(max-width:1000px){.areas-grid{grid-template-columns:1fr 1fr}}
 @media(max-width:600px){.areas-grid{grid-template-columns:1fr}}
 </style>  <link rel="stylesheet" href="assets/sg-nav.css"/>
 </head>
 <body><div class="float-cta">
-  <a href="tel:6177770485" class="fcta-btn fcta-call">📞 (617) 777-0485</a>
-  <a href="mailto:sigoosh@gmail.com" class="fcta-btn fcta-email">✉ sigoosh@gmail.com</a>
+  <a href="tel:6177770485" class="fcta-btn fcta-call"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg> (617) 777-0485</a>
+  <a href="mailto:info@sigalgrouprealty.com" class="fcta-btn fcta-email"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="1.5"/><path d="m3 7 9 7 9-7"/></svg> info@sigalgrouprealty.com</a>
 </div>
 <button id="btt" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button><div class="page-hero">
   <div class="wrap page-hero-inner">
     <div class="breadcrumb"><a href="index.html">Home</a> › <span>Top Areas</span></div>
     <div class="tag">South Florida Markets</div>
-    <h1 class="h2" style="color:var(--ink);margin-top:.6rem">Explore the Best<br><i style="color:var(--warm-l)">Neighborhoods</i> We Serve</h1>
-    <p class="ph-sub">From Boca Raton's gated golf estates to Palm Beach's ultra-luxury ocean-to-lake properties — Sigal knows every market, every community, and every micro-trend across South Florida.</p>
+    <h1 class="h2" style="margin-top:.6rem">Explore the Best<br><i>Neighborhoods</i> We Serve</h1>
+    <p class="ph-sub">From Boca Raton's gated golf estates to Delray's Atlantic Avenue, Highland Beach's oceanfront, and nearby Deerfield, Boynton, and Oakland Park — Sigal knows every market, every community, and every micro-trend.</p>
   </div>
 </div>
 <section style="padding:5rem 0 7rem;background:var(--off)">
   <div class="wrap">
     <div class="reloc-bar rx">
-      <span style="font-size:2.5rem;flex-shrink:0">✈️</span>
-      <div>
-        <h4 style="font-family:'Archivo',sans-serif;font-size:1.2rem;color:var(--ink);margin-bottom:.4rem">Relocating to South Florida? You're Not Alone.</h4>
-        <p style="font-size:.84rem;color:var(--slate);line-height:1.7">The top buyer groups arriving in Boca Raton are from <strong>New York, California, and Chicago</strong> — seeking tax advantages, luxury lifestyle, and strong real estate value. Sigal has helped dozens of relocating families find their perfect South Florida home. <a href="contact.html" style="color:var(--ink);font-weight:700;text-decoration:underline">Talk to Sigal about your relocation →</a></p>
+      <span class="reloc-ico" aria-hidden="true"><svg class="i" viewBox="0 0 24 24"><path d="M2.4 20.2 21 12 2.4 3.8v6.3L15.2 12 2.4 13.9z"/></svg></span>
+      <div class="reloc-copy">
+        <div class="reloc-kicker">Buyer Relocation</div>
+        <h4>Relocating to South Florida? You're not alone.</h4>
+        <p>The top buyer groups arriving in Boca Raton are from <strong>New York, California, and Chicago</strong> — seeking tax advantages, luxury lifestyle, and strong real estate value. Sigal has helped dozens of relocating families find their perfect South Florida home.</p>
       </div>
+      <a href="contact.html" class="btn btn-forest reloc-cta">Talk to Sigal</a>
     </div>
     <div class="areas-grid"><div class="acard rx ">
   <div class="acard-img"><img src="https://static.wixstatic.com/media/640c0f_b518cd0af328446185cc785797ed173df000.jpg/v1/fill/w_600,h_340,al_c,q_80/640c0f_b518cd0af328446185cc785797ed173df000.jpg" alt="Boca Raton" loading="lazy"/>
     <div class="acard-ov"><span class="acard-tag">Primary Market</span><span class="acard-price">$480K–$20M+</span></div>
   </div>
   <div class="acard-body">
-    <div style="display:flex;align-items:center;gap:.6rem;margin-bottom:.4rem"><span style="font-size:1.4rem">🏆</span><div class="acard-name">Boca Raton</div></div>
+    <div class="acard-title"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 4.5h8v4a4 4 0 0 1-4 4 4 4 0 0 1-4-4v-4z"/><path d="M8 6.2H5.6A2.2 2.2 0 0 0 7.8 9"/><path d="M16 6.2h2.4A2.2 2.2 0 0 1 16.2 9"/><path d="M12 12.5V16"/><path d="M9 19.5h6"/><path d="M10.5 16h3v3.5"/></svg><div class="acard-name">Boca Raton</div></div>
     <div class="acard-meta"><span style="color:var(--ink)">Median: $828K</span><span style="color:var(--silver)">~78 Days on Market</span></div>
     <p style="font-size:.82rem;color:var(--slate);line-height:1.75;margin-bottom:1.1rem">Sigal's home market for 35+ years. From Boca West Country Club golf estates to waterfront East Boca luxury — the most diverse and desirable market in Palm Beach County.</p>
     <ul style="list-style:none;margin-bottom:1.3rem"><li style="font-size:.78rem;color:var(--slate);padding:.22rem 0;border-bottom:1px solid var(--rule)">Royal Palm Yacht & Country Club</li><li style="font-size:.78rem;color:var(--slate);padding:.22rem 0;border-bottom:1px solid var(--rule)">Boca West Country Club</li><li style="font-size:.78rem;color:var(--slate);padding:.22rem 0;border-bottom:1px solid var(--rule)">Lotus & Lotus Palm (New Construction)</li><li style="font-size:.78rem;color:var(--slate);padding:.22rem 0;border-bottom:1px solid var(--rule)">Saturnia Isles</li><li style="font-size:.78rem;color:var(--slate);padding:.22rem 0;border-bottom:1px solid var(--rule)">Long Lake Estates</li></ul>
     <a href="contact.html" class="btn btn-ghost" style="font-size:.68rem;padding:.7rem 1.3rem">Explore Boca Raton →</a>
   </div>
 </div><div class="acard rx d1">
+  <div class="acard-img"><img src="https://static.wixstatic.com/media/640c0f_8c9744be0d6742a58cfc345521c3c680~mv2.jpg/v1/fill/w_600,h_340,al_c,q_80/Image-empty-state.jpg" alt="Delray Beach" loading="lazy"/>
+    <div class="acard-ov"><span class="acard-tag">Vibrant & Growing</span><span class="acard-price">$350K–$5M</span></div>
+  </div>
+  <div class="acard-body">
+    <div class="acard-title"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21.5V10.8"/><path d="M12 11C8.5 7 5 7.2 3.5 8.8c3 .2 5.2 2 6.8 5"/><path d="M12 11c3.5-4 7-3.8 8.5-2.2-3 .2-5.2 2-6.8 5"/><path d="M12 11c-4.2-2-6.5-5.5-6-8.5 2 2.2 4.5 3.8 6 5"/><path d="M12 11c4.2-2 6.5-5.5 6-8.5-2 2.2-4.5 3.8-6 5"/><path d="M8.5 21.5h7"/></svg><div class="acard-name">Delray Beach</div></div>
+    <div class="acard-meta"><span style="color:var(--ink)">Median: $520K</span><span style="color:var(--silver)">~72 Days on Market</span></div>
+    <p style="font-size:.82rem;color:var(--slate);line-height:1.75;margin-bottom:1.1rem">Named one of America's most fun small cities. Atlantic Avenue dining, Pineapple Grove arts district, and some of the best beaches in South Florida — just north of Boca Raton.</p>
+    <ul style="list-style:none;margin-bottom:1.3rem"><li style="font-size:.78rem;color:var(--slate);padding:.22rem 0;border-bottom:1px solid var(--rule)">Atlantic Avenue dining & nightlife</li><li style="font-size:.78rem;color:var(--slate);padding:.22rem 0;border-bottom:1px solid var(--rule)">Pineapple Grove Arts District</li><li style="font-size:.78rem;color:var(--slate);padding:.22rem 0;border-bottom:1px solid var(--rule)">Strong rental income potential</li><li style="font-size:.78rem;color:var(--slate);padding:.22rem 0;border-bottom:1px solid var(--rule)">Vibrant growing community</li><li style="font-size:.78rem;color:var(--slate);padding:.22rem 0;border-bottom:1px solid var(--rule)">Close to Boca & Palm Beach County beaches</li></ul>
+    <a href="contact.html" class="btn btn-ghost" style="font-size:.68rem;padding:.7rem 1.3rem">Explore Delray Beach →</a>
+  </div>
+</div><div class="acard rx d2">
   <div class="acard-img"><img src="https://static.wixstatic.com/media/640c0f_c8e520e19fb7459694f0feb3f80a3492~mv2.png/v1/fill/w_600,h_340,al_c,q_80/Image-empty-state.png" alt="Highland Beach" loading="lazy"/>
     <div class="acard-ov"><span class="acard-tag">Oceanfront Enclave</span><span class="acard-price">$800K–$15M+</span></div>
   </div>
   <div class="acard-body">
-    <div style="display:flex;align-items:center;gap:.6rem;margin-bottom:.4rem"><span style="font-size:1.4rem">🌊</span><div class="acard-name">Highland Beach</div></div>
+    <div class="acard-title"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 13.2c1.8-2.2 3.4-2.2 5 0 1.6 2.2 3.2 2.2 4.8 0 1.6-2.2 3.2-2.2 4.8 0 1.6 2.2 3.2 2.2 4.9 0"/><path d="M2.5 18c1.8-2.2 3.4-2.2 5 0 1.6 2.2 3.2 2.2 4.8 0 1.6-2.2 3.2-2.2 4.8 0 1.6 2.2 3.2 2.2 4.9 0"/></svg><div class="acard-name">Highland Beach</div></div>
     <div class="acard-meta"><span style="color:var(--ink)">Median: $1.8M</span><span style="color:var(--silver)">~90 Days on Market</span></div>
     <p style="font-size:.82rem;color:var(--slate);line-height:1.75;margin-bottom:1.1rem">A 2.5-mile strip of exclusive oceanfront between Boca Raton and Delray Beach. No commercial zoning — just pristine beach access and ultimate privacy.</p>
     <ul style="list-style:none;margin-bottom:1.3rem"><li style="font-size:.78rem;color:var(--slate);padding:.22rem 0;border-bottom:1px solid var(--rule)">Direct Atlantic Ocean access</li><li style="font-size:.78rem;color:var(--slate);padding:.22rem 0;border-bottom:1px solid var(--rule)">Luxury high-rise condos</li><li style="font-size:.78rem;color:var(--slate);padding:.22rem 0;border-bottom:1px solid var(--rule)">Private single-family estates</li><li style="font-size:.78rem;color:var(--slate);padding:.22rem 0;border-bottom:1px solid var(--rule)">No commercial zoning</li><li style="font-size:.78rem;color:var(--slate);padding:.22rem 0;border-bottom:1px solid var(--rule)">Strong long-term appreciation</li></ul>
     <a href="contact.html" class="btn btn-ghost" style="font-size:.68rem;padding:.7rem 1.3rem">Explore Highland Beach →</a>
   </div>
-</div><div class="acard rx d2">
-  <div class="acard-img"><img src="https://static.wixstatic.com/media/640c0f_8c9744be0d6742a58cfc345521c3c680~mv2.jpg/v1/fill/w_600,h_340,al_c,q_80/Image-empty-state.jpg" alt="Delray Beach" loading="lazy"/>
-    <div class="acard-ov"><span class="acard-tag">Vibrant & Growing</span><span class="acard-price">$350K–$5M</span></div>
-  </div>
-  <div class="acard-body">
-    <div style="display:flex;align-items:center;gap:.6rem;margin-bottom:.4rem"><span style="font-size:1.4rem">🌴</span><div class="acard-name">Delray Beach</div></div>
-    <div class="acard-meta"><span style="color:var(--ink)">Median: $520K</span><span style="color:var(--silver)">~72 Days on Market</span></div>
-    <p style="font-size:.82rem;color:var(--slate);line-height:1.75;margin-bottom:1.1rem">Named one of America's most fun small cities. Atlantic Avenue dining, Pineapple Grove arts district, and some of the best beaches in South Florida.</p>
-    <ul style="list-style:none;margin-bottom:1.3rem"><li style="font-size:.78rem;color:var(--slate);padding:.22rem 0;border-bottom:1px solid var(--rule)">Atlantic Avenue dining & nightlife</li><li style="font-size:.78rem;color:var(--slate);padding:.22rem 0;border-bottom:1px solid var(--rule)">Pineapple Grove Arts District</li><li style="font-size:.78rem;color:var(--slate);padding:.22rem 0;border-bottom:1px solid var(--rule)">Strong rental income potential</li><li style="font-size:.78rem;color:var(--slate);padding:.22rem 0;border-bottom:1px solid var(--rule)">Vibrant growing community</li><li style="font-size:.78rem;color:var(--slate);padding:.22rem 0;border-bottom:1px solid var(--rule)">Close to Boca & Palm Beach</li></ul>
-    <a href="contact.html" class="btn btn-ghost" style="font-size:.68rem;padding:.7rem 1.3rem">Explore Delray Beach →</a>
-  </div>
 </div><div class="acard rx ">
-  <div class="acard-img"><img src="https://static.wixstatic.com/media/640c0f_2e071909cc3d42ba8317ce6304118425~mv2.jpeg/v1/fill/w_600,h_340,al_c,q_80/Image-empty-state.jpeg" alt="Palm Beach" loading="lazy"/>
-    <div class="acard-ov"><span class="acard-tag">Ultra-Luxury</span><span class="acard-price">$2M–$50M+</span></div>
+  <div class="acard-img"><img src="https://static.wixstatic.com/media/640c0f_2e071909cc3d42ba8317ce6304118425~mv2.jpeg/v1/fill/w_600,h_340,al_c,q_80/Image-empty-state.jpeg" alt="Oakland Park" loading="lazy"/>
+    <div class="acard-ov"><span class="acard-tag">Broward Hub</span><span class="acard-price">$250K–$1.5M</span></div>
   </div>
   <div class="acard-body">
-    <div style="display:flex;align-items:center;gap:.6rem;margin-bottom:.4rem"><span style="font-size:1.4rem">💎</span><div class="acard-name">Palm Beach</div></div>
-    <div class="acard-meta"><span style="color:var(--ink)">Median: $4.2M</span><span style="color:var(--silver)">~95 Days on Market</span></div>
-    <p style="font-size:.82rem;color:var(--slate);line-height:1.75;margin-bottom:1.1rem">The pinnacle of South Florida luxury. Worth Avenue, ocean-to-lake estates, and one of the wealthiest zip codes in America.</p>
-    <ul style="list-style:none;margin-bottom:1.3rem"><li style="font-size:.78rem;color:var(--slate);padding:.22rem 0;border-bottom:1px solid var(--rule)">Worth Avenue world-class shopping</li><li style="font-size:.78rem;color:var(--slate);padding:.22rem 0;border-bottom:1px solid var(--rule)">Ocean-to-lake estates</li><li style="font-size:.78rem;color:var(--slate);padding:.22rem 0;border-bottom:1px solid var(--rule)">Celebrity & executive clientele</li><li style="font-size:.78rem;color:var(--slate);padding:.22rem 0;border-bottom:1px solid var(--rule)">All-cash buyers dominate</li><li style="font-size:.78rem;color:var(--slate);padding:.22rem 0;border-bottom:1px solid var(--rule)">International investment demand</li></ul>
-    <a href="contact.html" class="btn btn-ghost" style="font-size:.68rem;padding:.7rem 1.3rem">Explore Palm Beach →</a>
+    <div class="acard-title"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 21V8h6V21"/><path d="M10 21V4.5h10V21"/><path d="M3 21h18"/><path d="M13 8h1.8M16.8 8H18.6M13 11.5h1.8M16.8 11.5H18.6M13 15h1.8M16.8 15H18.6"/></svg><div class="acard-name">Oakland Park</div></div>
+    <div class="acard-meta"><span style="color:var(--ink)">Median: $450K</span><span style="color:var(--silver)">~70 Days on Market</span></div>
+    <p style="font-size:.82rem;color:var(--slate);line-height:1.75;margin-bottom:1.1rem">Just north of Fort Lauderdale, Oakland Park has a walkable downtown on NE 12th Avenue, mid-century and canal-front homes, and a more accessible Broward price point — about 15 minutes from the beach and downtown.</p>
+    <ul style="list-style:none;margin-bottom:1.3rem"><li style="font-size:.78rem;color:var(--slate);padding:.22rem 0;border-bottom:1px solid var(--rule)">Downtown Oakland Park · NE 12th Avenue</li><li style="font-size:.78rem;color:var(--slate);padding:.22rem 0;border-bottom:1px solid var(--rule)">North Andrews Gardens</li><li style="font-size:.78rem;color:var(--slate);padding:.22rem 0;border-bottom:1px solid var(--rule)">The Corals</li><li style="font-size:.78rem;color:var(--slate);padding:.22rem 0;border-bottom:1px solid var(--rule)">Canal-front single-family homes</li><li style="font-size:.78rem;color:var(--slate);padding:.22rem 0;border-bottom:1px solid var(--rule)">15 minutes to Fort Lauderdale Beach</li></ul>
+    <a href="contact.html" class="btn btn-ghost" style="font-size:.68rem;padding:.7rem 1.3rem">Explore Oakland Park →</a>
   </div>
 </div><div class="acard rx d1">
-  <div class="acard-img"><img src="https://static.wixstatic.com/media/640c0f_52b297058f1a45ecb2beea77a8f98731~mv2.jpg/v1/fill/w_600,h_340,al_c,q_80/Image-empty-state.jpg" alt="Wellington" loading="lazy"/>
-    <div class="acard-ov"><span class="acard-tag">Equestrian Capital</span><span class="acard-price">$350K–$5M</span></div>
+  <div class="acard-img"><img src="https://static.wixstatic.com/media/640c0f_52b297058f1a45ecb2beea77a8f98731~mv2.jpg/v1/fill/w_600,h_340,al_c,q_80/Image-empty-state.jpg" alt="Deerfield Beach" loading="lazy"/>
+    <div class="acard-ov"><span class="acard-tag">Beach Town</span><span class="acard-price">$180K–$3M</span></div>
   </div>
   <div class="acard-body">
-    <div style="display:flex;align-items:center;gap:.6rem;margin-bottom:.4rem"><span style="font-size:1.4rem">🐎</span><div class="acard-name">Wellington</div></div>
-    <div class="acard-meta"><span style="color:var(--ink)">Median: $650K</span><span style="color:var(--silver)">~65 Days on Market</span></div>
-    <p style="font-size:.82rem;color:var(--slate);line-height:1.75;margin-bottom:1.1rem">The winter equestrian capital of the world. Wellington hosts the International Polo Club and Global Dressage Festival, attracting elite international buyers.</p>
-    <ul style="list-style:none;margin-bottom:1.3rem"><li style="font-size:.78rem;color:var(--slate);padding:.22rem 0;border-bottom:1px solid var(--rule)">International Polo Club</li><li style="font-size:.78rem;color:var(--slate);padding:.22rem 0;border-bottom:1px solid var(--rule)">Global Dressage Festival</li><li style="font-size:.78rem;color:var(--slate);padding:.22rem 0;border-bottom:1px solid var(--rule)">Strong international buyer pool</li><li style="font-size:.78rem;color:var(--slate);padding:.22rem 0;border-bottom:1px solid var(--rule)">Excellent A-rated schools</li><li style="font-size:.78rem;color:var(--slate);padding:.22rem 0;border-bottom:1px solid var(--rule)">Year-round equestrian lifestyle</li></ul>
-    <a href="contact.html" class="btn btn-ghost" style="font-size:.68rem;padding:.7rem 1.3rem">Explore Wellington →</a>
+    <div class="acard-title"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5v3.2"/><path d="M8.5 6.7h7L14.2 19H9.8z"/><path d="M4 21h16"/><path d="M9.5 12h5"/></svg><div class="acard-name">Deerfield Beach</div></div>
+    <div class="acard-meta"><span style="color:var(--ink)">Median: $360K</span><span style="color:var(--silver)">~75 Days on Market</span></div>
+    <p style="font-size:.82rem;color:var(--slate);line-height:1.75;margin-bottom:1.1rem">Directly south of Boca Raton, Deerfield Beach is a true beach city — the International Fishing Pier, oceanfront towers, and inland neighborhoods at a lower entry point than Boca, with a wide mix of condos and single-family homes.</p>
+    <ul style="list-style:none;margin-bottom:1.3rem"><li style="font-size:.78rem;color:var(--slate);padding:.22rem 0;border-bottom:1px solid var(--rule)">Deerfield Beach International Pier</li><li style="font-size:.78rem;color:var(--slate);padding:.22rem 0;border-bottom:1px solid var(--rule)">Oceanfront high-rise condos</li><li style="font-size:.78rem;color:var(--slate);padding:.22rem 0;border-bottom:1px solid var(--rule)">Deer Creek</li><li style="font-size:.78rem;color:var(--slate);padding:.22rem 0;border-bottom:1px solid var(--rule)">Crystal Lake</li><li style="font-size:.78rem;color:var(--slate);padding:.22rem 0;border-bottom:1px solid var(--rule)">Hillsboro Boulevard corridor</li></ul>
+    <a href="contact.html" class="btn btn-ghost" style="font-size:.68rem;padding:.7rem 1.3rem">Explore Deerfield Beach →</a>
   </div>
 </div><div class="acard rx d2">
-  <div class="acard-img"><img src="https://static.wixstatic.com/media/640c0f_fecc4848ad0a4f3f8b397cc888460503~mv2.jpg/v1/fill/w_600,h_340,al_c,q_80/Image-empty-state.jpg" alt="Treasure Coast" loading="lazy"/>
-    <div class="acard-ov"><span class="acard-tag">Hidden Gem</span><span class="acard-price">$250K–$2M</span></div>
+  <div class="acard-img"><img src="https://static.wixstatic.com/media/640c0f_fecc4848ad0a4f3f8b397cc888460503~mv2.jpg/v1/fill/w_600,h_340,al_c,q_80/Image-empty-state.jpg" alt="Boynton Beach" loading="lazy"/>
+    <div class="acard-ov"><span class="acard-tag">Growing Market</span><span class="acard-price">$220K–$2M+</span></div>
   </div>
   <div class="acard-body">
-    <div style="display:flex;align-items:center;gap:.6rem;margin-bottom:.4rem"><span style="font-size:1.4rem">🪙</span><div class="acard-name">Treasure Coast</div></div>
-    <div class="acard-meta"><span style="color:var(--ink)">Median: $380K</span><span style="color:var(--silver)">~80 Days on Market</span></div>
-    <p style="font-size:.82rem;color:var(--slate);line-height:1.75;margin-bottom:1.1rem">Martin and St. Lucie counties offer incredible value — oceanfront communities and a relaxed Florida lifestyle at significantly lower price points.</p>
-    <ul style="list-style:none;margin-bottom:1.3rem"><li style="font-size:.78rem;color:var(--slate);padding:.22rem 0;border-bottom:1px solid var(--rule)">Pristine uncrowded beaches</li><li style="font-size:.78rem;color:var(--slate);padding:.22rem 0;border-bottom:1px solid var(--rule)">Excellent value vs Palm Beach County</li><li style="font-size:.78rem;color:var(--slate);padding:.22rem 0;border-bottom:1px solid var(--rule)">Stuart, Jensen Beach, Hobe Sound</li><li style="font-size:.78rem;color:var(--slate);padding:.22rem 0;border-bottom:1px solid var(--rule)">Growing retirement community</li><li style="font-size:.78rem;color:var(--slate);padding:.22rem 0;border-bottom:1px solid var(--rule)">Remote worker demand rising</li></ul>
-    <a href="contact.html" class="btn btn-ghost" style="font-size:.68rem;padding:.7rem 1.3rem">Explore Treasure Coast →</a>
+    <div class="acard-title"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="10" r="3.2"/><path d="M12 3.5v1.8M12 14.8v1.8M4.8 10h1.8M19.4 10h1.8M6.6 4.8l1.3 1.3M16.1 13.9l1.3 1.3M6.6 15.2l1.3-1.3M16.1 6.1l1.3-1.3"/><path d="M4 20h16"/><path d="M7 20v-2.2h10V20"/></svg><div class="acard-name">Boynton Beach</div></div>
+    <div class="acard-meta"><span style="color:var(--ink)">Median: $399K</span><span style="color:var(--silver)">~54 Days on Market</span></div>
+    <p style="font-size:.82rem;color:var(--slate);line-height:1.75;margin-bottom:1.1rem">Between Delray Beach and Lake Worth, Boynton Beach offers Palm Beach County living at a lower median — a downtown marina, ocean access, and established golf and waterfront communities.</p>
+    <ul style="list-style:none;margin-bottom:1.3rem"><li style="font-size:.78rem;color:var(--slate);padding:.22rem 0;border-bottom:1px solid var(--rule)">Boynton Harbor Marina & downtown</li><li style="font-size:.78rem;color:var(--slate);padding:.22rem 0;border-bottom:1px solid var(--rule)">Oceanfront condos</li><li style="font-size:.78rem;color:var(--slate);padding:.22rem 0;border-bottom:1px solid var(--rule)">Valencia Isles</li><li style="font-size:.78rem;color:var(--slate);padding:.22rem 0;border-bottom:1px solid var(--rule)">Quail Ridge</li><li style="font-size:.78rem;color:var(--slate);padding:.22rem 0;border-bottom:1px solid var(--rule)">Hunters Run</li></ul>
+    <a href="contact.html" class="btn btn-ghost" style="font-size:.68rem;padding:.7rem 1.3rem">Explore Boynton Beach →</a>
   </div>
 </div></div>
     <div style="text-align:center;margin-top:4rem;padding:3rem;background:var(--white);border:1px solid var(--rule)">
@@ -256,18 +318,18 @@ footer{background:#0F1B30;padding:5rem 0 2.5rem;border-top:3px solid var(--sage)
   <div class="footer-grid">
     <div><div class="fl-logo"><img src="https://static.wixstatic.com/media/640c0f_09000c1816174075966619a837ef40c3~mv2.png/v1/crop/x_0,y_63,w_500,h_231/fill/w_240,h_101,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Real%20Estate%20Logo_edited.png" alt="Sigal Group Realty"/></div>
       <p class="fl-tag">South Florida's boutique real estate firm. 35+ years of expertise. Direct, smart, and always working for you.</p>
-      <div class="fl-socials"><a href="https://www.instagram.com" target="_blank" class="fsoc">ig</a><a href="#" class="fsoc">fb</a><a href="#" class="fsoc">in</a></div></div>
+      <div class="fl-socials"><a href="https://www.instagram.com" target="_blank" rel="noopener" class="fsoc" aria-label="Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.5 3h9A4.5 4.5 0 0 1 21 7.5v9A4.5 4.5 0 0 1 16.5 21h-9A4.5 4.5 0 0 1 3 16.5v-9A4.5 4.5 0 0 1 7.5 3zm0 1.8A2.7 2.7 0 0 0 4.8 7.5v9A2.7 2.7 0 0 0 7.5 19.2h9a2.7 2.7 0 0 0 2.7-2.7v-9A2.7 2.7 0 0 0 16.5 4.8h-9zM12 7.6A4.4 4.4 0 1 1 7.6 12 4.4 4.4 0 0 1 12 7.6zm0 1.7A2.7 2.7 0 1 0 14.7 12 2.7 2.7 0 0 0 12 9.3zm5.05-3.55a1.05 1.05 0 1 1-1.05 1.05 1.05 1.05 0 0 1 1.05-1.05z"/></svg></a><a href="https://www.facebook.com" target="_blank" rel="noopener" class="fsoc" aria-label="Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 9h3.2V6h-3.2C11.6 6 10 7.6 10 10.2V12H8v3h2v7h3v-7h2.7l.5-3H13v-1.6c0-.8.4-1.4 1-1.4z"/></svg></a><a href="https://www.linkedin.com" target="_blank" rel="noopener" class="fsoc" aria-label="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 9.2H4V20h2.5zM5.25 4.2a1.45 1.45 0 1 0 .02 2.9 1.45 1.45 0 0 0-.02-2.9zM20 20h-2.5v-5.3c0-1.5-.5-2.5-1.9-2.5-1 0-1.6.7-1.9 1.3-.1.2-.1.6-.1.9V20h-2.5s0-8.8 0-9.7H13v1.4c.3-.6 1.2-1.7 3.1-1.7 2.2 0 3.4 1.4 3.4 4.4V20z"/></svg></a></div></div>
     <div><div class="fc-head">Navigate</div><ul class="fl-links">
       <li><a href="index.html">Home</a></li><li><a href="properties.html">All Properties</a></li>
       <li><a href="sell.html">Sell Your Home</a></li><li><a href="neighborhoods.html">Top Areas</a></li>
       <li><a href="about.html">About Sigal</a></li><li><a href="contact.html">Contact</a></li></ul></div>
     <div><div class="fc-head">Markets</div><ul class="fl-links">
-      <li><a href="neighborhoods.html">Boca Raton</a></li><li><a href="neighborhoods.html">Highland Beach</a></li>
-      <li><a href="neighborhoods.html">Delray Beach</a></li><li><a href="neighborhoods.html">Palm Beach</a></li>
-      <li><a href="neighborhoods.html">Wellington</a></li><li><a href="neighborhoods.html">Treasure Coast</a></li></ul></div>
+      <li><a href="neighborhoods.html">Boca Raton</a></li><li><a href="neighborhoods.html">Delray Beach</a></li>
+      <li><a href="neighborhoods.html">Highland Beach</a></li><li><a href="neighborhoods.html">Oakland Park</a></li>
+      <li><a href="neighborhoods.html">Deerfield Beach</a></li><li><a href="neighborhoods.html">Boynton Beach</a></li></ul></div>
     <div><div class="fc-head">Contact</div><ul class="fl-links">
-      <li><a href="tel:6177770485">📞 (617) 777-0485</a></li>
-      <li><a href="mailto:sigoosh@gmail.com">✉ sigoosh@gmail.com</a></li>
+      <li><a href="tel:6177770485"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg> (617) 777-0485</a></li>
+      <li><a href="mailto:info@sigalgrouprealty.com"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="1.5"/><path d="m3 7 9 7 9-7"/></svg> info@sigalgrouprealty.com</a></li>
       <li><a href="sell.html">Free Valuation</a></li>
       <li><a href="contact.html">Schedule a Call</a></li></ul></div>
   </div>

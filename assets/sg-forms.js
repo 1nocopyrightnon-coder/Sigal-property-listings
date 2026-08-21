@@ -131,7 +131,7 @@
         '<h3 style="font-family:\'Archivo\',sans-serif;font-size:1.8rem;color:#1B2A4A;margin-bottom:.6rem;font-weight:800">Thank You!</h3>' +
         '<p style="color:#56607A;font-size:.95rem;line-height:1.6;max-width:380px;margin:0 auto 2rem">' + msg + '</p>' +
         '<div style="display:flex;gap:.8rem;justify-content:center;flex-wrap:wrap">' +
-          '<a href="tel:6177770485" style="background:#1B2A4A;color:#fff;padding:.85rem 1.6rem;text-decoration:none;font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;font-weight:600">📞 Call Now</a>' +
+          '<a href="tel:6177770485" style="background:#1B2A4A;color:#fff;padding:.85rem 1.6rem;text-decoration:none;font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;font-weight:600"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg> Call Now</a>' +
           '<a href="index.html" style="background:transparent;color:#1B2A4A;padding:.85rem 1.6rem;text-decoration:none;font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;font-weight:600;border:1.5px solid #1B2A4A">← Back Home</a>' +
         '</div>' +
       '</div>';

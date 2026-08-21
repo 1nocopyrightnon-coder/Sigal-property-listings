@@ -73,40 +73,40 @@
     var card = document.querySelector('.hero-search-card, .hero-sc');
     if(!card) return;
 
-    var tabs   = card.querySelectorAll('.hsc-tab, .hsc-btn-tab, [class*="hsc-tab"]');
-    var input  = card.querySelector('input');
+    var tabs   = card.querySelectorAll('.hsc-tab');
+    var input  = card.querySelector('input.hsc-input, input');
     var button = card.querySelector('.hsc-sbtn, .hsc-btn:not(.hsc-tab)');
+    var hint   = card.querySelector('.hsc-hint');
     if(!input || !button) return;
 
     var mode = 'buy';
     function setMode(newMode){
-      mode = newMode;
+      mode = newMode || 'buy';
       if(mode === 'buy'){
-        input.placeholder = '🔍  City, neighborhood, or ZIP code';
+        input.placeholder = 'City, neighborhood, ZIP code…';
         button.textContent = 'Search →';
+        if(hint) hint.textContent = 'Search listings by city, neighborhood, or ZIP.';
       } else if(mode === 'sell'){
-        input.placeholder = '🏡  Enter your home address';
-        button.textContent = 'Get Selling Strategy →';
-      } else if(mode === 'value'){
-        input.placeholder = '📊  Enter your home address';
+        input.placeholder = 'Enter your home address';
+        button.textContent = 'Get Selling Plan →';
+        if(hint) hint.textContent = 'Enter your address and Sigal will outline a selling strategy.';
+      } else {
+        input.placeholder = 'Enter your home address';
         button.textContent = "What's My Home Worth? →";
+        if(hint) hint.textContent = 'Free, no-obligation valuation — Sigal replies within 24 hours.';
       }
       hideDropdown();
       input.value = '';
     }
 
-    // Set up tab clicks
+    // Set up tab clicks — only real tab buttons, not the .hsc-tabs wrapper
     tabs.forEach(function(tab){
-      var label = (tab.textContent || '').toLowerCase();
-      if(label.indexOf('buy') !== -1) tab.dataset.sgMode = 'buy';
-      else if(label.indexOf('sell') !== -1) tab.dataset.sgMode = 'sell';
-      else if(label.indexOf('value') !== -1 || label.indexOf('worth') !== -1) tab.dataset.sgMode = 'value';
-
       tab.addEventListener('click', function(e){
         e.preventDefault();
+        e.stopPropagation();
         tabs.forEach(function(t){ t.classList.remove('on','active','is-active'); });
         tab.classList.add('on');
-        setMode(tab.dataset.sgMode || 'buy');
+        setMode(tab.getAttribute('data-sg-mode') || 'buy');
         input.focus();
       });
     });
@@ -125,7 +125,7 @@
       'box-shadow:0 12px 40px rgba(0,0,0,.18)',
       'max-height:380px',
       'overflow-y:auto',
-      'z-index:1050',
+      'z-index:2000',
       'border:1px solid rgba(27,42,74,.1)'
     ].join(';');
     var inputWrap = input.parentElement;
@@ -145,7 +145,7 @@
       }
       dropdown.innerHTML = items.map(function(item, i){
         return '<div class="sg-dd-item" data-value="' + escapeAttr(item.full) + '" data-i="' + i + '" style="padding:14px 18px;cursor:pointer;border-bottom:1px solid rgba(27,42,74,.06);display:flex;align-items:flex-start;gap:14px;line-height:1.4;transition:background .15s">' +
-          '<span style="font-size:1.1rem;flex-shrink:0;color:#1B2A4A">📍</span>' +
+          '<span style="font-size:1.1rem;flex-shrink:0;color:#1B2A4A"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-6.4 7-11.4A7 7 0 0 0 5 9.6C5 14.6 12 21 12 21z"/><circle cx="12" cy="9.6" r="2.2"/></svg></span>' +
           '<div style="flex:1;min-width:0">' +
             '<div style="font-weight:600;color:#1B2A4A;font-size:.95rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' + escapeHtml(item.primary || item.full) + '</div>' +
             (item.secondary ? '<div style="font-size:.78rem;color:#9CA3AE;margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' + escapeHtml(item.secondary) + '</div>' : '') +
@@ -169,7 +169,7 @@
       if(!cities.length){ hideDropdown(); return; }
       dropdown.innerHTML = cities.map(function(c){
         return '<div class="sg-dd-item" data-value="' + escapeAttr(c) + '" style="padding:14px 18px;cursor:pointer;border-bottom:1px solid rgba(27,42,74,.06);display:flex;align-items:center;gap:12px;font-size:.95rem;color:#1B2A4A;transition:background .15s">' +
-          '<span style="color:#1B2A4A">📍</span><span>' + escapeHtml(c) + '</span>' +
+          '<span style="color:#1B2A4A"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-6.4 7-11.4A7 7 0 0 0 5 9.6C5 14.6 12 21 12 21z"/><circle cx="12" cy="9.6" r="2.2"/></svg></span><span>' + escapeHtml(c) + '</span>' +
         '</div>';
       }).join('');
       dropdown.style.display = 'block';
@@ -236,14 +236,15 @@
 
     function submit(){
       var q = input.value.trim();
-      if(!q){ input.focus(); return; }
       if(mode === 'buy'){
-        window.location.href = 'properties.html?city=' + encodeURIComponent(q);
-      } else if(mode === 'sell'){
-        window.location.href = 'sell.html?address=' + encodeURIComponent(q) + '&mode=sell';
-      } else if(mode === 'value'){
-        window.location.href = 'sell.html?address=' + encodeURIComponent(q) + '&mode=value';
+        window.location.href = q
+          ? 'properties.html?city=' + encodeURIComponent(q)
+          : 'properties.html';
+        return;
       }
+      var dest = 'sell.html?mode=' + encodeURIComponent(mode);
+      if(q) dest += '&address=' + encodeURIComponent(q);
+      window.location.href = dest;
     }
 
     button.addEventListener('click', function(e){ e.preventDefault(); submit(); });
@@ -270,10 +271,20 @@
   function prefillFromURL(){
     var params = new URLSearchParams(window.location.search);
     var address = params.get('address');
+    var mode = params.get('mode');
+    var form = document.querySelector('.val-form');
+    if(form && mode === 'sell'){
+      var heading = form.querySelector('.val-form-title');
+      if(heading) heading.textContent = 'Start My Selling Plan';
+      var sub = form.querySelector('.val-form-sub');
+      if(sub) sub.textContent = 'Tell Sigal about your home. She will follow up with a pricing strategy and next steps — no obligation.';
+      var btn = form.querySelector('.fsubmit');
+      if(btn) btn.textContent = 'Get My Selling Plan';
+    }
     if(!address) return;
     setTimeout(function(){
       var addressInput = document.querySelector(
-        'input[placeholder*="address" i], input[placeholder*="property" i], input[name*="address" i]'
+        'input[name="address"], input[placeholder*="address" i], input[placeholder*="property" i], input[name*="address" i]'
       );
       if(addressInput){
         addressInput.value = decodeURIComponent(address);
@@ -395,7 +406,7 @@
         '<h3 style="font-family:'Archivo',sans-serif;font-size:1.8rem;color:#1B2A4A;margin:0 0 .6rem;font-weight:500">Thank You!</h3>' +
         '<p style="color:#56607A;font-size:.95rem;line-height:1.6;max-width:380px;margin:0 auto 2rem">' + msg + '</p>' +
         '<div style="display:flex;gap:.8rem;justify-content:center;flex-wrap:wrap">' +
-          '<a href="tel:6177770485" style="background:#1B2A4A;color:#fff;padding:.85rem 1.6rem;text-decoration:none;font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;font-weight:600;border-radius:2px">📞 Call Now</a>' +
+          '<a href="tel:6177770485" style="background:#1B2A4A;color:#fff;padding:.85rem 1.6rem;text-decoration:none;font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;font-weight:600;border-radius:2px"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg> Call Now</a>' +
           '<a href="index.html" style="background:transparent;color:#1B2A4A;padding:.85rem 1.6rem;text-decoration:none;font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;font-weight:600;border:1.5px solid #1B2A4A;border-radius:2px">← Back Home</a>' +
         '</div>' +
       '</div>';
@@ -434,7 +445,7 @@
         var badge = document.createElement('div');
         badge.id = 'cityFilterBadge';
         badge.style.cssText = 'background:#1B2A4A;color:#fff;padding:14px 24px;display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem;font-size:.85rem;letter-spacing:.04em;border-radius:2px;flex-wrap:wrap;gap:1rem';
-        badge.innerHTML = '<span>📍 Filtered: <strong>' + cityFilter + '</strong> · ' + found + ' result' + (found===1?'':'s') + '</span><a href="properties.html" style="color:#F8F4EC;text-decoration:underline;font-size:.78rem;letter-spacing:.1em;text-transform:uppercase">✕ Clear filter</a>';
+        badge.innerHTML = '<span><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-6.4 7-11.4A7 7 0 0 0 5 9.6C5 14.6 12 21 12 21z"/><circle cx="12" cy="9.6" r="2.2"/></svg> Filtered: <strong>' + cityFilter + '</strong> · ' + found + ' result' + (found===1?'':'s') + '</span><a href="properties.html" style="color:#F8F4EC;text-decoration:underline;font-size:.78rem;letter-spacing:.1em;text-transform:uppercase">✕ Clear filter</a>';
         grid.parentElement.insertBefore(badge, grid);
       }
     }, 200);

@@ -5,7 +5,7 @@
 (function(){
   'use strict';
 
-  var LOGO = 'https://static.wixstatic.com/media/640c0f_de4855d5b90048c4b1b8b195ae36a064~mv2.png/v1/crop/x_0,y_56,w_500,h_240/fill/w_294,h_137,al_c,q_85/Real%20Estate%20Logo_edited.png';
+  var LOGO = 'https://static.wixstatic.com/media/640c0f_09000c1816174075966619a837ef40c3~mv2.png/v1/crop/x_0,y_63,w_500,h_231/fill/w_240,h_101,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Real%20Estate%20Logo_edited.png';
 
   // Nav items — single source of truth, used for both desktop & mobile
   var ITEMS = [
@@ -137,8 +137,8 @@
     contactDiv.appendChild(phone);
 
     var email = document.createElement('a');
-    email.href = 'mailto:sigoosh@gmail.com';
-    email.textContent = 'sigoosh@gmail.com';
+    email.href = 'mailto:info@sigalgrouprealty.com';
+    email.textContent = 'info@sigalgrouprealty.com';
     contactDiv.appendChild(email);
 
     footer.appendChild(contactDiv);
@@ -189,10 +189,32 @@
     document.body.classList.remove('sg-locked');
   }
 
+  function addHeroCloth(){
+    var n = 32;
+    var heroes = document.querySelectorAll('.page-hero, .ph-hero');
+    for (var h = 0; h < heroes.length; h++){
+      var hero = heroes[h];
+      if (hero.querySelector('.page-hero-cloth')) continue;
+      var cloth = document.createElement('div');
+      cloth.className = 'page-hero-cloth';
+      cloth.setAttribute('aria-hidden', 'true');
+      cloth.style.setProperty('--n', String(n));
+      var bits = '';
+      for (var i = 0; i < n; i++) bits += '<i style="--i:' + i + '"></i>';
+      cloth.innerHTML = bits;
+      hero.insertBefore(cloth, hero.firstChild);
+    }
+  }
+
+  function init(){
+    build();
+    addHeroCloth();
+  }
+
   // Build on load
   if(document.readyState === 'loading'){
-    document.addEventListener('DOMContentLoaded', build);
+    document.addEventListener('DOMContentLoaded', init);
   } else {
-    build();
+    init();
   }
 })();

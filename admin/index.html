@@ -18,6 +18,8 @@
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{font-family:'Archivo',sans-serif;background:#EEF3EF;color:var(--ink);overflow-x:hidden;min-height:100vh}
+svg.i{width:14px;height:14px;flex-shrink:0;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;display:inline-block;vertical-align:-2px}
+.lc-spec{display:inline-flex;align-items:center;gap:.35rem}
 img{display:block;max-width:100%}
 button{cursor:pointer;font-family:'Archivo',sans-serif}
 input,select,textarea{font-family:'Archivo',sans-serif}
@@ -154,9 +156,9 @@ input,select,textarea{font-family:'Archivo',sans-serif}
   font-size:.55rem;font-weight:700;letter-spacing:.15em;
   text-transform:uppercase;padding:.28rem .7rem;
 }
-.badge-jsold{background:var(--green);color:var(--white)}
-.badge-sold{background:var(--slate);color:var(--white)}
-.badge-sale{background:var(--gold);color:var(--ink)}
+.badge-jsold,.badge-sold{background:#C1392B;color:#fff}
+.badge-pending{background:#E8B931;color:#1B2A4A}
+.badge-sale{background:#1B7A4A;color:#fff}
 .badge-rent{background:#1B6B8A;color:var(--white)}
 .lc-body{padding:1.1rem 1.2rem 1.2rem}
 .lc-city{
@@ -485,7 +487,7 @@ input,select,textarea{font-family:'Archivo',sans-serif}
     </div>
     <div style="display:flex;align-items:center;gap:1rem;flex-wrap:wrap">
       <div class="search-box">
-        🔍 <input type="text" id="searchInput" placeholder="Search by title or city…" oninput="renderGrid()"/>
+        <svg class="i" viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.2"/><path d="m15.2 15.2 5.3 5.3"/></svg> <input type="text" id="searchInput" placeholder="Search by title or city…" oninput="renderGrid()"/>
       </div>
       <span class="listing-count" id="listingCount">Loading…</span>
     </div>
@@ -738,8 +740,8 @@ async function loadListings() {
 // ═══════════════════════════════════════════════════════
 // RENDER GRID
 // ═══════════════════════════════════════════════════════
-const STATUS_LABEL = { jsold:'Just Sold', sold:'Sold', sale:'For Sale', rent:'For Rent' };
-const STATUS_CLASS = { jsold:'badge-jsold', sold:'badge-sold', sale:'badge-sale', rent:'badge-rent' };
+const STATUS_LABEL = { jsold:'Just Sold', sold:'Sold', sale:'For Sale', pending:'Pending', rent:'For Rent' };
+const STATUS_CLASS = { jsold:'badge-jsold', sold:'badge-sold', sale:'badge-sale', pending:'badge-pending', rent:'badge-rent' };
 
 function renderGrid() {
   const query  = (document.getElementById('searchInput')?.value || '').toLowerCase();
@@ -774,14 +776,14 @@ function renderGrid() {
     <span class="lc-badge ${bc}">${bl}</span>
   </div>
   <div class="lc-body">
-    <div class="lc-city">📍 ${p.city || 'South Florida'}</div>
+    <div class="lc-city"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-6.4 7-11.4A7 7 0 0 0 5 9.6C5 14.6 12 21 12 21z"/><circle cx="12" cy="9.6" r="2.2"/></svg> ${p.city || 'South Florida'}</div>
     <div class="lc-title">${p.title || 'Untitled'}</div>
     <div class="lc-price">${p.price || '—'}</div>
     <div class="lc-specs">
-      ${p.beds  ? `<span class="lc-spec">🛏 ${p.beds}</span>`  : ''}
-      ${p.baths ? `<span class="lc-spec">🛁 ${p.baths}</span>` : ''}
-      ${p.size  ? `<span class="lc-spec">📐 ${p.size}</span>`  : ''}
-      ${p.year && p.year !== '0' ? `<span class="lc-spec">🏗 ${p.year}</span>` : ''}
+      ${p.beds  ? `<span class="lc-spec"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 18V9.5A1.5 1.5 0 0 1 4.5 8H8a3 3 0 0 1 3-3h2a3 3 0 0 1 3 3h3.5A1.5 1.5 0 0 1 21 9.5V18"/><path d="M3 14h18"/><path d="M3 18v2M21 18v2"/></svg> ${p.beds}</span>`  : ''}
+      ${p.baths ? `<span class="lc-spec"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16v3.2A3.3 3.3 0 0 1 16.7 18.5H7.3A3.3 3.3 0 0 1 4 15.2V12z"/><path d="M5 12V7.8A2.3 2.3 0 0 1 7.3 5.5"/><path d="M7 18.5V20.5M17 18.5V20.5"/></svg> ${p.baths}</span>` : ''}
+      ${p.size  ? `<span class="lc-spec"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="6" width="16" height="12" rx="1"/><path d="M8 6V4M16 6V4M8 20v-2M16 20v-2"/></svg> ${p.size}</span>`  : ''}
+      ${p.year && p.year !== '0' ? `<span class="lc-spec"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="3.5" width="12" height="17" rx="1"/><path d="M9 8h2M13 8h2M9 12h2M13 12h2M9 16h2M13 16h2"/></svg> ${p.year}</span>` : ''}
     </div>
     <select class="status-select" onchange="quickStatus(${idx}, this.value)">
       <option value="sale"  ${p.status==='sale' ?'selected':''}>For Sale</option>
