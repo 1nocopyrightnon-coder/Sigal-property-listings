@@ -487,11 +487,54 @@
     }, 200);
   }
 
+  function sitePrefix(){
+    var path = window.location.pathname.replace(/\/index\.html$/i, '').replace(/\/$/, '');
+    var segs = path.split('/').filter(Boolean);
+    if (segs.length && /\.html$/i.test(segs[segs.length - 1])) segs.pop();
+    if (!segs.length) return '';
+    return segs.map(function(){ return '../'; }).join('');
+  }
+
+  function initLocationListings(){
+    var wrap = document.querySelector('[data-sg-city-listings]');
+    if(!wrap) return;
+    var city = wrap.getAttribute('data-sg-city-listings') || '';
+    var grid = wrap.querySelector('.loc-list-grid');
+    if(!grid || !city) return;
+    fetch(sitePrefix() + 'listings/listings.json').then(function(r){ return r.json(); }).then(function(data){
+      var list = (data.listings || []).filter(function(p){
+        return (p.city || '').toLowerCase().indexOf(city.toLowerCase()) !== -1;
+      }).slice(0, 6);
+      if(!list.length){ wrap.style.display = 'none'; return; }
+      grid.innerHTML = list.map(function(p){
+        var st = (p.status || '').toLowerCase();
+        var badgeClass = 'lb-sold';
+        var badgeText = 'Sold';
+        if(st === 'sale' || st === 'for sale' || st.indexOf('active') !== -1){ badgeClass = 'lb-sale'; badgeText = 'For Sale'; }
+        else if(st.indexOf('pending') !== -1){ badgeClass = 'lb-pending'; badgeText = 'Pending'; }
+        else if(st.indexOf('just') !== -1){ badgeClass = 'lb-jsold'; badgeText = 'Just Sold'; }
+        var title = (p.title || '').replace(/</g,'');
+        var price = p.price || '';
+        var img = p.image || '';
+        var beds = p.beds || '';
+        var baths = p.baths || '';
+        var size = p.size || '';
+        return '<a class="loc-lcard" href="' + sitePrefix() + 'properties.html?city=' + encodeURIComponent(city) + '">' +
+          '<div class="loc-lcard-img"><img src="' + img + '" alt="' + title + '" loading="lazy"/>' +
+          '<span class="' + badgeClass + '">' + badgeText + '</span></div>' +
+          '<div class="loc-lcard-body"><div class="loc-lcard-price">' + price + '</div>' +
+          '<div class="loc-lcard-title">' + title + '</div>' +
+          '<div class="loc-lcard-meta">' + beds + ' bd · ' + baths + ' ba · ' + size + '</div></div></a>';
+      }).join('');
+    }).catch(function(){ wrap.style.display = 'none'; });
+  }
+
   function boot(){
     initHeroSearch();
     prefillFromURL();
     initForms();
     initPropertyFilter();
+    initLocationListings();
   }
 
   if(document.readyState === 'loading'){

@@ -7,14 +7,32 @@
 
   var LOGO = 'https://static.wixstatic.com/media/640c0f_09000c1816174075966619a837ef40c3~mv2.png/v1/crop/x_0,y_63,w_500,h_231/fill/w_240,h_101,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Real%20Estate%20Logo_edited.png';
 
-  // Nav items — single source of truth, used for both desktop & mobile
+  // Resolve links from the site root even when the page is /blog/... or /admin/...
+  function href(file){
+    file = String(file || '').replace(/^\//, '');
+    var path = window.location.pathname || '/';
+    var cut = path.search(/\/(blog|admin)(\/|$)/i);
+    if (cut !== -1) return path.slice(0, cut + 1) + file;
+    return '/' + file;
+  }
+
   var ITEMS = [
     { num:'01', href:'index.html',         label:'Home',        italic:''           },
     { num:'02', href:'properties.html',    label:'Properties',  italic:''           },
     { num:'03', href:'sell.html',          label:'Sell ',       italic:'Your Home'  },
     { num:'04', href:'neighborhoods.html', label:'Top ',        italic:'Areas'      },
-    { num:'05', href:'about.html',         label:'About ',      italic:'Sigal'      },
-    { num:'06', href:'contact.html',       label:'Contact',     italic:''           }
+    { num:'05', href:'blog/index.html',    label:'Blog',        italic:'',
+      children:[
+        { href:'blog/boca-raton.html',      label:'Boca Raton' },
+        { href:'blog/delray-beach.html',    label:'Delray Beach' },
+        { href:'blog/highland-beach.html',  label:'Highland Beach' },
+        { href:'blog/oakland-park.html',    label:'Oakland Park' },
+        { href:'blog/deerfield-beach.html', label:'Deerfield Beach' },
+        { href:'blog/boynton-beach.html',   label:'Boynton Beach' }
+      ]
+    },
+    { num:'06', href:'about.html',         label:'About ',      italic:'Sigal'      },
+    { num:'07', href:'contact.html',       label:'Contact',     italic:''           }
   ];
 
   function build(){
@@ -22,7 +40,8 @@
 
     // Determine if this is the homepage (transparent-over-hero treatment)
     var path = window.location.pathname.replace(/\/$/,'');
-    var isHome = path === '' || path === '/index.html' || path.endsWith('/index.html') || path.endsWith('/');
+    var inSub = /\/blog(\/|$)/.test(path) || /\/admin(\/|$)/.test(path);
+    var isHome = !inSub && (path === '' || path === '/index.html' || path.endsWith('/index.html') || path.endsWith('/'));
     if(isHome) document.body.setAttribute('data-hero','true');
     document.body.classList.add('sg-pad');
 
@@ -31,7 +50,7 @@
     nav.className = 'sg-nav';
 
     var logoLink = document.createElement('a');
-    logoLink.href = 'index.html';
+    logoLink.href = href('index.html');
     logoLink.className = 'sg-nav-logo';
     logoLink.setAttribute('aria-label','Sigal Group Realty home');
     var logoImg = document.createElement('img');
@@ -43,19 +62,32 @@
     // Desktop menu
     var ul = document.createElement('ul');
     ul.className = 'sg-nav-menu';
-    ITEMS.forEach(function(item, i){
+    ITEMS.forEach(function(item){
       var li = document.createElement('li');
+      if(item.children && item.children.length){
+        li.className = 'sg-nav-dd';
+      }
       var a = document.createElement('a');
-      a.href = item.href;
-      // Only Contact gets the CTA treatment on desktop
+      a.href = href(item.href);
       if(item.label === 'Contact'){
         a.className = 'sg-nav-cta';
         a.textContent = 'Free Consultation';
-        a.href = 'contact.html';
+        a.href = href('contact.html');
       } else {
         a.textContent = item.label.trim() + (item.italic ? ' ' + item.italic : '');
       }
       li.appendChild(a);
+      if(item.children && item.children.length){
+        var panel = document.createElement('div');
+        panel.className = 'sg-nav-dd-panel';
+        item.children.forEach(function(child){
+          var ca = document.createElement('a');
+          ca.href = href(child.href);
+          ca.textContent = child.label;
+          panel.appendChild(ca);
+        });
+        li.appendChild(panel);
+      }
       ul.appendChild(li);
     });
     nav.appendChild(ul);
@@ -90,7 +122,7 @@
     ITEMS.forEach(function(item){
       var li = document.createElement('li');
       var a = document.createElement('a');
-      a.href = item.href;
+      a.href = href(item.href);
       a.addEventListener('click', closeMenu);
 
       var num = document.createElement('span');
@@ -116,6 +148,18 @@
       a.appendChild(arrow);
 
       li.appendChild(a);
+      if(item.children && item.children.length){
+        var sub = document.createElement('div');
+        sub.className = 'sg-mob-sub';
+        item.children.forEach(function(child){
+          var ca = document.createElement('a');
+          ca.href = href(child.href);
+          ca.textContent = child.label;
+          ca.addEventListener('click', closeMenu);
+          sub.appendChild(ca);
+        });
+        li.appendChild(sub);
+      }
       mobUl.appendChild(li);
     });
     mobmenu.appendChild(mobUl);
