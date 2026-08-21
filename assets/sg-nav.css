@@ -365,7 +365,7 @@ body.sg-locked{overflow:hidden}
   .hsc-tabs{gap:0 !important;margin-bottom:1rem !important}
   .hsc-tab{font-size:.65rem !important;padding:.65rem .8rem !important;letter-spacing:.1em !important}
   .hsc-input-row{flex-direction:column !important;gap:.6rem !important}
-  .hsc-input{width:100% !important;min-width:0 !important;padding:.85rem 1rem !important;font-size:.9rem !important}
+  .hsc-input{width:100% !important;min-width:0 !important;padding:.85rem 1rem .85rem 2.55rem !important;font-size:.9rem !important}
   .hsc-sbtn, .hsc-btn{width:100% !important;padding:.85rem !important}
   .hero-quick-links{flex-wrap:wrap !important;gap:.5rem !important;margin-top:0 !important;margin-bottom:1rem !important}
   .hql{font-size:.62rem !important;padding:.55rem .9rem !important;letter-spacing:.12em !important}
@@ -468,14 +468,22 @@ body.sg-locked{overflow:hidden}
 .stats-strip .sstat-l{color:rgba(248,244,236,.7) !important}
 .stats-strip .sstat{border-right-color:rgba(248,244,236,.12) !important}
 .page-hero,
-.ph-hero{
+.ph-hero,
+.about-hero,
+.sh-left{
   background:#3A4F70 !important;
-  padding:8rem 0 4.4rem !important;
   position:relative;
   overflow:hidden;
 }
+.page-hero,
+.ph-hero{
+  padding:8rem 0 4.4rem !important;
+  text-align:left;
+}
 .page-hero::before,
-.ph-hero::before{
+.ph-hero::before,
+.about-hero::before,
+.sh-left::before{
   content:'';
   position:absolute;inset:0;
   opacity:.07;
@@ -484,11 +492,19 @@ body.sg-locked{overflow:hidden}
   z-index:0;
 }
 .page-hero:has(.page-hero-cloth)::before,
-.ph-hero:has(.page-hero-cloth)::before{
+.ph-hero:has(.page-hero-cloth)::before,
+.about-hero:has(.page-hero-cloth)::before,
+.sh-left:has(.page-hero-cloth)::before{
   display:none;
 }
+.hero-left:has(.page-hero-cloth) .hero-pattern{
+  display:none;
+}
+.hero-left::before,
 .page-hero::after,
-.ph-hero::after{
+.ph-hero::after,
+.about-hero::after,
+.sh-left::after{
   content:'';
   position:absolute;inset:0;
   z-index:1;
@@ -546,16 +562,21 @@ body.sg-locked{overflow:hidden}
 @media (prefers-reduced-motion:reduce){
   .page-hero-cloth,
   .page-hero-cloth i,
+  .hero-left::before,
   .page-hero::after,
-  .ph-hero::after{
+  .ph-hero::after,
+  .about-hero::after,
+  .sh-left::after{
     animation:none !important;
   }
 }
-.page-hero-inner,.ph-inner{position:relative;z-index:2}
+.page-hero-inner,.ph-inner,.ah-inner,.sh-lc{position:relative;z-index:2}
 .page-hero .h2,
 .page-hero h1,
 .ph-hero h1,
-.ph-hero .h2{
+.ph-hero .h2,
+.about-hero h1,
+.sell-hero .sh-lc h1{
   color:#F8F4EC !important;
   font-size:clamp(2.3rem,4.6vw,3.7rem) !important;
   font-weight:500 !important;
@@ -565,60 +586,87 @@ body.sg-locked{overflow:hidden}
 .page-hero .h2 i,
 .page-hero h1 i,
 .ph-hero h1 i,
-.ph-hero .h2 i{
+.ph-hero .h2 i,
+.about-hero h1 i,
+.sell-hero .sh-lc h1 i{
   color:#fff !important;
   font-weight:800 !important;
 }
 .page-hero .tag,
-.ph-hero .tag{
+.ph-hero .tag,
+.about-hero .tag,
+.sell-hero .tag{
   color:#F8F4EC !important;
 }
 .page-hero .tag::before,
-.ph-hero .tag::before{
+.ph-hero .tag::before,
+.about-hero .tag::before,
+.sell-hero .tag::before{
   background:#F8F4EC !important;
 }
 .page-hero .breadcrumb,
-.ph-hero .breadcrumb{
+.ph-hero .breadcrumb,
+.about-hero .breadcrumb,
+.sell-hero .breadcrumb{
   color:rgba(248,244,236,.72) !important;
+  justify-content:flex-start !important;
 }
 .page-hero .breadcrumb a,
-.ph-hero .breadcrumb a{
+.ph-hero .breadcrumb a,
+.about-hero .breadcrumb a,
+.sell-hero .breadcrumb a{
   color:rgba(248,244,236,.72) !important;
 }
 .page-hero .breadcrumb a:hover,
-.ph-hero .breadcrumb a:hover{
+.ph-hero .breadcrumb a:hover,
+.about-hero .breadcrumb a:hover,
+.sell-hero .breadcrumb a:hover{
   color:#fff !important;
 }
 .page-hero .breadcrumb span,
-.ph-hero .breadcrumb span{
+.ph-hero .breadcrumb span,
+.about-hero .breadcrumb span,
+.sell-hero .breadcrumb span{
   color:#F8F4EC !important;
 }
 .page-hero .ph-sub,
 .ph-hero .ph-sub,
-.ph-hero p{
+.ph-hero p,
+.about-hero .ah-text > p,
+.sell-hero .sh-lc > p{
   color:rgba(248,244,236,.8) !important;
   font-size:1.05rem !important;
   font-weight:400 !important;
   line-height:1.75 !important;
   max-width:640px;
 }
-.ph-hero .big-phone{color:#F8F4EC !important}
-.ph-hero .big-phone:hover{color:#fff !important}
-.ph-hero .phone-badge{
+.page-hero-actions{
+  display:flex;
+  gap:1rem;
+  flex-wrap:wrap;
+  margin-top:1.8rem;
+}
+.page-hero .big-phone,
+.ph-hero .big-phone{
+  justify-content:flex-start !important;
+  color:#F8F4EC !important;
+  font-size:clamp(1.8rem,4vw,2.8rem) !important;
+  margin:1.1rem 0 .2rem !important;
+}
+.ph-hero .big-phone:hover,
+.page-hero .big-phone:hover{color:#fff !important}
+.ph-hero .phone-badge,
+.page-hero .phone-badge{
   color:#F8F4EC !important;
   background:rgba(248,244,236,.1) !important;
   border-color:rgba(248,244,236,.28) !important;
 }
 
-/* Sell page hero copy on navy */
-.sell-hero .sh-lc h1{color:#F8F4EC !important}
-.sell-hero .sh-lc h1 i{color:#fff !important;font-weight:800 !important}
-.sell-hero .sh-lc > p{color:rgba(248,244,236,.8) !important}
-
 /* Navy-hero CTAs: cream fill + white outline (navy-on-navy was invisible) */
 .about-hero .btn-warm,
 .cta-navy .btn-warm,
 .ph-hero .btn-warm,
+.page-hero .btn-warm,
 .sell-hero .btn-warm{
   background:#F8F4EC !important;
   color:#1B2A4A !important;
@@ -627,6 +675,7 @@ body.sg-locked{overflow:hidden}
 .about-hero .btn-warm:hover,
 .cta-navy .btn-warm:hover,
 .ph-hero .btn-warm:hover,
+.page-hero .btn-warm:hover,
 .sell-hero .btn-warm:hover{
   background:#fff !important;
   color:#1B2A4A !important;
@@ -635,6 +684,7 @@ body.sg-locked{overflow:hidden}
 .about-hero .btn-outline-white,
 .cta-navy .btn-outline-white,
 .ph-hero .btn-outline-white,
+.page-hero .btn-outline-white,
 .sell-hero .btn-outline-white{
   background:transparent !important;
   color:#F8F4EC !important;
@@ -643,6 +693,7 @@ body.sg-locked{overflow:hidden}
 .about-hero .btn-outline-white:hover,
 .cta-navy .btn-outline-white:hover,
 .ph-hero .btn-outline-white:hover,
+.page-hero .btn-outline-white:hover,
 .sell-hero .btn-outline-white:hover{
   background:rgba(255,255,255,.12) !important;
   color:#fff !important;

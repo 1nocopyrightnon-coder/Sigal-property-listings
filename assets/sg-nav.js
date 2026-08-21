@@ -191,7 +191,7 @@
 
   function addHeroCloth(){
     var n = 32;
-    var heroes = document.querySelectorAll('.page-hero, .ph-hero');
+    var heroes = document.querySelectorAll('.page-hero, .ph-hero, .about-hero, .sh-left, .hero-left');
     for (var h = 0; h < heroes.length; h++){
       var hero = heroes[h];
       if (hero.querySelector('.page-hero-cloth')) continue;

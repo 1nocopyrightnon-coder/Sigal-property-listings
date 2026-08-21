@@ -73,46 +73,76 @@
     var card = document.querySelector('.hero-search-card, .hero-sc');
     if(!card) return;
 
-    var tabs   = card.querySelectorAll('.hsc-tab');
+    var tabs   = card.querySelectorAll('button.hsc-tab, .hsc-tab[data-sg-mode]');
     var input  = card.querySelector('input.hsc-input, input');
-    var button = card.querySelector('.hsc-sbtn, .hsc-btn:not(.hsc-tab)');
+    var button = card.querySelector('.hsc-sbtn, button.hsc-btn');
     var hint   = card.querySelector('.hsc-hint');
-    if(!input || !button) return;
+    var fieldIco = card.querySelector('.hsc-field-ico');
+    var dropdown = null;
+    var lastQuery = '';
+    if(!input) return;
 
     var mode = 'buy';
+    function hideDropdown(){ if(dropdown) dropdown.style.display = 'none'; }
+
+    var ICO = {
+      buy: '<svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.2"/><path d="m15.2 15.2 5.3 5.3"/></svg>',
+      sell: '<svg viewBox="0 0 24 24"><path d="M3 11.2 12 3.5l9 7.7"/><path d="M6 10.2V20.5h12V10.2"/><path d="M10 20.5v-6h4v6"/></svg>',
+      value: '<svg viewBox="0 0 24 24"><path d="M4 19.5V8.5"/><path d="M10 19.5V4.5"/><path d="M16 19.5v-7"/><path d="M22 19.5v-4"/></svg>'
+    };
+
     function setMode(newMode){
       mode = newMode || 'buy';
+      lastQuery = '';
+      if(fieldIco) fieldIco.innerHTML = ICO[mode] || ICO.buy;
       if(mode === 'buy'){
         input.placeholder = 'City, neighborhood, ZIP code…';
-        button.textContent = 'Search →';
+        if(button) button.textContent = 'Search →';
         if(hint) hint.textContent = 'Search listings by city, neighborhood, or ZIP.';
       } else if(mode === 'sell'){
         input.placeholder = 'Enter your home address';
-        button.textContent = 'Get Selling Plan →';
+        if(button) button.textContent = 'Get Selling Plan →';
         if(hint) hint.textContent = 'Enter your address and Sigal will outline a selling strategy.';
       } else {
         input.placeholder = 'Enter your home address';
-        button.textContent = "What's My Home Worth? →";
+        if(button) button.textContent = "What's My Home Worth? →";
         if(hint) hint.textContent = 'Free, no-obligation valuation — Sigal replies within 24 hours.';
       }
       hideDropdown();
       input.value = '';
     }
 
-    // Set up tab clicks — only real tab buttons, not the .hsc-tabs wrapper
+    function activateTab(tab){
+      if(!tab) return;
+      tabs.forEach(function(t){
+        t.classList.remove('on','active','is-active');
+        t.setAttribute('aria-selected','false');
+      });
+      tab.classList.add('on');
+      tab.setAttribute('aria-selected','true');
+      setMode(tab.getAttribute('data-sg-mode') || 'buy');
+    }
+
+    window.sgSetSearchMode = function(el){
+      var tab = el && el.closest ? el.closest('.hsc-tab') : el;
+      activateTab(tab);
+      return false;
+    };
+
     tabs.forEach(function(tab){
+      tab.addEventListener('pointerdown', function(e){
+        e.preventDefault();
+        activateTab(tab);
+      });
       tab.addEventListener('click', function(e){
         e.preventDefault();
         e.stopPropagation();
-        tabs.forEach(function(t){ t.classList.remove('on','active','is-active'); });
-        tab.classList.add('on');
-        setMode(tab.getAttribute('data-sg-mode') || 'buy');
-        input.focus();
+        activateTab(tab);
       });
     });
 
     // Dropdown — appears below the input
-    var dropdown = document.createElement('div');
+    dropdown = document.createElement('div');
     dropdown.className = 'sg-search-dropdown';
     dropdown.style.cssText = [
       'display:none',
@@ -165,11 +195,20 @@
       });
     }
 
-    function showCityResults(cities){
+    function showCityResults(cities, query){
       if(!cities.length){ hideDropdown(); return; }
       dropdown.innerHTML = cities.map(function(c){
+        var display = escapeHtml(c);
+        if(query){
+          var idx = c.toLowerCase().indexOf(query.toLowerCase());
+          if(idx !== -1){
+            display = escapeHtml(c.substring(0, idx)) +
+              '<strong style="color:#1B2A4A">' + escapeHtml(c.substring(idx, idx + query.length)) + '</strong>' +
+              escapeHtml(c.substring(idx + query.length));
+          }
+        }
         return '<div class="sg-dd-item" data-value="' + escapeAttr(c) + '" style="padding:14px 18px;cursor:pointer;border-bottom:1px solid rgba(27,42,74,.06);display:flex;align-items:center;gap:12px;font-size:.95rem;color:#1B2A4A;transition:background .15s">' +
-          '<span style="color:#1B2A4A"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-6.4 7-11.4A7 7 0 0 0 5 9.6C5 14.6 12 21 12 21z"/><circle cx="12" cy="9.6" r="2.2"/></svg></span><span>' + escapeHtml(c) + '</span>' +
+          '<span style="color:#1B2A4A"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-6.4 7-11.4A7 7 0 0 0 5 9.6C5 14.6 12 21 12 21z"/><circle cx="12" cy="9.6" r="2.2"/></svg></span><span>' + display + '</span>' +
         '</div>';
       }).join('');
       dropdown.style.display = 'block';
@@ -185,8 +224,6 @@
       });
     }
 
-    function hideDropdown(){ dropdown.style.display = 'none'; }
-
     function escapeHtml(s){
       return String(s||'').replace(/[&<>"]/g, function(c){
         return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];
@@ -198,7 +235,6 @@
 
     // Input handler — different behavior per mode
     var debounceTimer;
-    var lastQuery = '';
     input.addEventListener('input', function(){
       var q = input.value.trim();
       clearTimeout(debounceTimer);
@@ -208,7 +244,7 @@
         var matches = ALL_CITIES.filter(function(c){
           return c.toLowerCase().indexOf(q.toLowerCase()) !== -1;
         }).slice(0, 8);
-        showCityResults(matches);
+        showCityResults(matches, q);
       } else {
         // SELL or VALUE — address autocomplete via Photon
         if(q.length < 2){ hideDropdown(); return; }
@@ -247,7 +283,7 @@
       window.location.href = dest;
     }
 
-    button.addEventListener('click', function(e){ e.preventDefault(); submit(); });
+    if(button) button.addEventListener('click', function(e){ e.preventDefault(); submit(); });
     input.addEventListener('keypress', function(e){
       if(e.key === 'Enter'){ e.preventDefault(); submit(); }
     });
