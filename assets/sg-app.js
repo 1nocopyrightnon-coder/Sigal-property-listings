@@ -126,35 +126,35 @@
       'max-height:380px',
       'overflow-y:auto',
       'z-index:1050',
-      'border:1px solid rgba(26,40,32,.1)'
+      'border:1px solid rgba(27,42,74,.1)'
     ].join(';');
     var inputWrap = input.parentElement;
     inputWrap.style.position = 'relative';
     inputWrap.appendChild(dropdown);
 
     function showLoading(){
-      dropdown.innerHTML = '<div style="padding:18px;text-align:center;color:#8FA89A;font-size:.85rem;display:flex;align-items:center;gap:10px;justify-content:center"><span style="width:14px;height:14px;border:2px solid #D9E8E0;border-top-color:#1A5C3A;border-radius:50%;animation:sgSpin 0.8s linear infinite;display:inline-block"></span> Searching addresses…</div>';
+      dropdown.innerHTML = '<div style="padding:18px;text-align:center;color:#9CA3AE;font-size:.85rem;display:flex;align-items:center;gap:10px;justify-content:center"><span style="width:14px;height:14px;border:2px solid #E1E4E8;border-top-color:#1B2A4A;border-radius:50%;animation:sgSpin 0.8s linear infinite;display:inline-block"></span> Searching addresses…</div>';
       dropdown.style.display = 'block';
     }
 
     function showResults(items){
       if(!items.length){
-        dropdown.innerHTML = '<div style="padding:18px;color:#8FA89A;font-size:.85rem;font-style:italic;text-align:center">No matches — keep typing or try a different address</div>';
+        dropdown.innerHTML = '<div style="padding:18px;color:#9CA3AE;font-size:.85rem;font-style:italic;text-align:center">No matches — keep typing or try a different address</div>';
         dropdown.style.display = 'block';
         return;
       }
       dropdown.innerHTML = items.map(function(item, i){
-        return '<div class="sg-dd-item" data-value="' + escapeAttr(item.full) + '" data-i="' + i + '" style="padding:14px 18px;cursor:pointer;border-bottom:1px solid rgba(26,40,32,.06);display:flex;align-items:flex-start;gap:14px;line-height:1.4;transition:background .15s">' +
-          '<span style="font-size:1.1rem;flex-shrink:0;color:#1A5C3A">📍</span>' +
+        return '<div class="sg-dd-item" data-value="' + escapeAttr(item.full) + '" data-i="' + i + '" style="padding:14px 18px;cursor:pointer;border-bottom:1px solid rgba(27,42,74,.06);display:flex;align-items:flex-start;gap:14px;line-height:1.4;transition:background .15s">' +
+          '<span style="font-size:1.1rem;flex-shrink:0;color:#1B2A4A">📍</span>' +
           '<div style="flex:1;min-width:0">' +
-            '<div style="font-weight:600;color:#1A2820;font-size:.95rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' + escapeHtml(item.primary || item.full) + '</div>' +
-            (item.secondary ? '<div style="font-size:.78rem;color:#8FA89A;margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' + escapeHtml(item.secondary) + '</div>' : '') +
+            '<div style="font-weight:600;color:#1B2A4A;font-size:.95rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' + escapeHtml(item.primary || item.full) + '</div>' +
+            (item.secondary ? '<div style="font-size:.78rem;color:#9CA3AE;margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' + escapeHtml(item.secondary) + '</div>' : '') +
           '</div>' +
         '</div>';
       }).join('');
       dropdown.style.display = 'block';
       dropdown.querySelectorAll('.sg-dd-item').forEach(function(el){
-        el.addEventListener('mouseenter', function(){ this.style.background = '#F8F3EA'; });
+        el.addEventListener('mouseenter', function(){ this.style.background = '#F8F4EC'; });
         el.addEventListener('mouseleave', function(){ this.style.background = '#fff'; });
         el.addEventListener('mousedown', function(e){ e.preventDefault(); });
         el.addEventListener('click', function(){
@@ -168,13 +168,13 @@
     function showCityResults(cities){
       if(!cities.length){ hideDropdown(); return; }
       dropdown.innerHTML = cities.map(function(c){
-        return '<div class="sg-dd-item" data-value="' + escapeAttr(c) + '" style="padding:14px 18px;cursor:pointer;border-bottom:1px solid rgba(26,40,32,.06);display:flex;align-items:center;gap:12px;font-size:.95rem;color:#1A2820;transition:background .15s">' +
-          '<span style="color:#1A5C3A">📍</span><span>' + escapeHtml(c) + '</span>' +
+        return '<div class="sg-dd-item" data-value="' + escapeAttr(c) + '" style="padding:14px 18px;cursor:pointer;border-bottom:1px solid rgba(27,42,74,.06);display:flex;align-items:center;gap:12px;font-size:.95rem;color:#1B2A4A;transition:background .15s">' +
+          '<span style="color:#1B2A4A">📍</span><span>' + escapeHtml(c) + '</span>' +
         '</div>';
       }).join('');
       dropdown.style.display = 'block';
       dropdown.querySelectorAll('.sg-dd-item').forEach(function(el){
-        el.addEventListener('mouseenter', function(){ this.style.background = '#F8F3EA'; });
+        el.addEventListener('mouseenter', function(){ this.style.background = '#F8F4EC'; });
         el.addEventListener('mouseleave', function(){ this.style.background = '#fff'; });
         el.addEventListener('mousedown', function(e){ e.preventDefault(); });
         el.addEventListener('click', function(){
@@ -391,12 +391,12 @@
       : 'Sigal will respond personally — usually within a few hours.';
     card.innerHTML =
       '<div style="padding:3.5rem 2rem;text-align:center">' +
-        '<div style="width:72px;height:72px;border-radius:50%;background:#E8F5EE;display:inline-flex;align-items:center;justify-content:center;margin-bottom:1.5rem;font-size:2rem;color:#1A5C3A">✓</div>' +
-        '<h3 style="font-family:'Archivo',sans-serif;font-size:1.8rem;color:#1A2820;margin:0 0 .6rem;font-weight:500">Thank You!</h3>' +
-        '<p style="color:#4A6058;font-size:.95rem;line-height:1.6;max-width:380px;margin:0 auto 2rem">' + msg + '</p>' +
+        '<div style="width:72px;height:72px;border-radius:50%;background:#E8F5EE;display:inline-flex;align-items:center;justify-content:center;margin-bottom:1.5rem;font-size:2rem;color:#1B2A4A">✓</div>' +
+        '<h3 style="font-family:'Archivo',sans-serif;font-size:1.8rem;color:#1B2A4A;margin:0 0 .6rem;font-weight:500">Thank You!</h3>' +
+        '<p style="color:#56607A;font-size:.95rem;line-height:1.6;max-width:380px;margin:0 auto 2rem">' + msg + '</p>' +
         '<div style="display:flex;gap:.8rem;justify-content:center;flex-wrap:wrap">' +
-          '<a href="tel:6177770485" style="background:#1A5C3A;color:#fff;padding:.85rem 1.6rem;text-decoration:none;font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;font-weight:600;border-radius:2px">📞 Call Now</a>' +
-          '<a href="index.html" style="background:transparent;color:#1A5C3A;padding:.85rem 1.6rem;text-decoration:none;font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;font-weight:600;border:1.5px solid #1A5C3A;border-radius:2px">← Back Home</a>' +
+          '<a href="tel:6177770485" style="background:#1B2A4A;color:#fff;padding:.85rem 1.6rem;text-decoration:none;font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;font-weight:600;border-radius:2px">📞 Call Now</a>' +
+          '<a href="index.html" style="background:transparent;color:#1B2A4A;padding:.85rem 1.6rem;text-decoration:none;font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;font-weight:600;border:1.5px solid #1B2A4A;border-radius:2px">← Back Home</a>' +
         '</div>' +
       '</div>';
   }
@@ -433,8 +433,8 @@
       if(!document.getElementById('cityFilterBadge')){
         var badge = document.createElement('div');
         badge.id = 'cityFilterBadge';
-        badge.style.cssText = 'background:#1A5C3A;color:#fff;padding:14px 24px;display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem;font-size:.85rem;letter-spacing:.04em;border-radius:2px;flex-wrap:wrap;gap:1rem';
-        badge.innerHTML = '<span>📍 Filtered: <strong>' + cityFilter + '</strong> · ' + found + ' result' + (found===1?'':'s') + '</span><a href="properties.html" style="color:#F0DFA0;text-decoration:underline;font-size:.78rem;letter-spacing:.1em;text-transform:uppercase">✕ Clear filter</a>';
+        badge.style.cssText = 'background:#1B2A4A;color:#fff;padding:14px 24px;display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem;font-size:.85rem;letter-spacing:.04em;border-radius:2px;flex-wrap:wrap;gap:1rem';
+        badge.innerHTML = '<span>📍 Filtered: <strong>' + cityFilter + '</strong> · ' + found + ' result' + (found===1?'':'s') + '</span><a href="properties.html" style="color:#F8F4EC;text-decoration:underline;font-size:.78rem;letter-spacing:.1em;text-transform:uppercase">✕ Clear filter</a>';
         grid.parentElement.insertBefore(badge, grid);
       }
     }, 200);
