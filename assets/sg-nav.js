@@ -26,7 +26,7 @@
         { href:'blog/boca-raton.html',      label:'Boca Raton' },
         { href:'blog/delray-beach.html',    label:'Delray Beach' },
         { href:'blog/highland-beach.html',  label:'Highland Beach' },
-        { href:'blog/oakland-park.html',    label:'Oakland Park' },
+        { href:'blog/parkland.html',    label:'Parkland' },
         { href:'blog/deerfield-beach.html', label:'Deerfield Beach' },
         { href:'blog/boynton-beach.html',   label:'Boynton Beach' }
       ]
@@ -216,6 +216,7 @@
     var isOpen = menu.classList.toggle('is-open');
     btn.classList.toggle('is-open', isOpen);
     btn.setAttribute('aria-expanded', String(isOpen));
+    btn.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
     menu.setAttribute('aria-hidden', String(!isOpen));
     document.body.classList.toggle('sg-locked', isOpen);
   }
@@ -228,6 +229,7 @@
     if(btn){
       btn.classList.remove('is-open');
       btn.setAttribute('aria-expanded','false');
+      btn.setAttribute('aria-label','Open menu');
     }
     menu.setAttribute('aria-hidden','true');
     document.body.classList.remove('sg-locked');
@@ -235,7 +237,7 @@
 
   function addHeroCloth(){
     var n = 32;
-    var heroes = document.querySelectorAll('.page-hero, .ph-hero, .about-hero, .sh-left, .hero-left');
+    var heroes = document.querySelectorAll('.page-hero, .ph-hero, .about-hero, .sh-left');
     for (var h = 0; h < heroes.length; h++){
       var hero = heroes[h];
       if (hero.querySelector('.page-hero-cloth')) continue;

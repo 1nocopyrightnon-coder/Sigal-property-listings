@@ -360,8 +360,10 @@ body.sg-locked{overflow:hidden}
 /* Hero-transparent nav treatment removed — nav now stays
    consistently cream-glass everywhere, on every page and scroll state */
 
-/* Hide any legacy navs */
-#mainNav,#nav,#sgrMobNav,#lxNav,#sgMobBar,#lxMenu,#sgMobMenu,#sgrMobMenu,#mobMenu{
+/* Hide any legacy navs.
+   #sgMobMenu is deliberately absent: that is the id sg-nav.js gives the
+   current mobile menu, and listing it here hid the drawer on every tap. */
+#mainNav,#nav,#sgrMobNav,#lxNav,#sgMobBar,#lxMenu,#sgrMobMenu,#mobMenu{
   display:none !important;
 }
 
@@ -413,11 +415,16 @@ body.sg-locked{overflow:hidden}
 
   /* SEARCH CARD */
   .hero-search-card, .hero-sc{padding:1.2rem !important;margin:0 0 1.5rem !important}
-  .hsc-tabs{gap:0 !important;margin-bottom:1rem !important}
-  .hsc-tab{font-size:.65rem !important;padding:.65rem .8rem !important;letter-spacing:.1em !important}
-  .hsc-input-row{flex-direction:column !important;gap:.6rem !important}
-  .hsc-input{width:100% !important;min-width:0 !important;padding:.85rem 1rem .85rem 2.55rem !important;font-size:.9rem !important}
+  .hsc-tabs{gap:0 !important;margin-bottom:1rem !important;overflow-x:auto !important;-webkit-overflow-scrolling:touch !important;scrollbar-width:none !important}
+  .hsc-tabs::-webkit-scrollbar{display:none}
+  .hsc-tab{font-size:.65rem !important;padding:.65rem .7rem !important;letter-spacing:.08em !important;white-space:nowrap !important}
+  .hsc-input-row{flex-direction:column !important;gap:.45rem !important;padding:.45rem !important}
+  .hsc-input{width:100% !important;min-width:0 !important;padding:.8rem 1rem .8rem 2.45rem !important;font-size:16px !important}
   .hsc-sbtn, .hsc-btn{width:100% !important;padding:.85rem !important}
+  /* Suggestion panel height is computed in sg-app.js from the space available */
+  .sg-search-dropdown{left:-.45rem !important;right:-.45rem !important}
+  /* The floating call/email pills sit on top of the card — get them out of the way while picking */
+  body.sg-suggesting .phone-bubble{opacity:0;pointer-events:none;transition:opacity .15s}
   .hero-quick-links{flex-wrap:wrap !important;gap:.5rem !important;margin-top:0 !important;margin-bottom:1rem !important}
   .hql{font-size:.62rem !important;padding:.55rem .9rem !important;letter-spacing:.12em !important}
 
@@ -551,7 +558,6 @@ body.sg-locked{overflow:hidden}
 .hero-left:has(.page-hero-cloth) .hero-pattern{
   display:none;
 }
-.hero-left::before,
 .page-hero::after,
 .ph-hero::after,
 .about-hero::after,
@@ -613,7 +619,6 @@ body.sg-locked{overflow:hidden}
 @media (prefers-reduced-motion:reduce){
   .page-hero-cloth,
   .page-hero-cloth i,
-  .hero-left::before,
   .page-hero::after,
   .ph-hero::after,
   .about-hero::after,
@@ -891,21 +896,26 @@ body.sg-locked{overflow:hidden}
   color:#F8F4EC;
 }
 
-/* Hero search sits on navy — thinner frost so the field shows through */
+/* Hero search — cream panel so type and the navy CTA stay readable on the photo */
 .hero-search-card{
   background:
-    linear-gradient(180deg, rgba(255,255,255,.36) 0%, rgba(255,255,255,.08) 52%, rgba(130,150,180,.05) 100%),
-    rgba(158, 176, 202, .20);
-  backdrop-filter:saturate(180%) blur(24px);
-  -webkit-backdrop-filter:saturate(180%) blur(24px);
-  border:1px solid rgba(255,255,255,.34);
+    linear-gradient(180deg, rgba(248,244,236,.96) 0%, rgba(239,231,214,.92) 100%);
+  backdrop-filter:saturate(160%) blur(20px);
+  -webkit-backdrop-filter:saturate(160%) blur(20px);
+  border:1px solid rgba(255,255,255,.78);
   box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.42),
-    0 22px 50px rgba(8,14,32,.38);
+    inset 0 1px 0 rgba(255,255,255,.92),
+    0 22px 50px rgba(8,14,32,.34);
 }
 .hero-search-card .hsc-input{
-  background-color:rgba(255,255,255,.55);
-  border:1px solid rgba(255,255,255,.45);
+  background-color:transparent;
+  border:none;
+  box-shadow:none;
+}
+.hero-search-card .hsc-input:focus{
+  border:none;
+  background-color:transparent;
+  box-shadow:none;
 }
 
 /* ═══ Professional line icons ═══ */

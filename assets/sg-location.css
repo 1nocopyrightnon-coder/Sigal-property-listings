@@ -47,7 +47,7 @@ footer{background:#0F1B30;padding:5rem 0 2.5rem;border-top:3px solid var(--sage)
 .fsoc{width:36px;height:36px;border:1px solid rgba(255,255,255,.18);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.5);transition:.25s}
 .fsoc svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:1.7}
 .fsoc:hover{border-color:#F8F4EC;color:#F8F4EC}
-.fc-head{font-family:'Archivo',sans-serif;font-size:.95rem;font-weight:500;color:var(--white);margin-bottom:1.2rem;padding-bottom:.6rem;border-bottom:1px solid rgba(200,168,110,.22)}
+.fc-head{font-family:'Archivo',sans-serif;font-size:.95rem;font-weight:500;color:var(--white);margin-bottom:1.2rem;padding-bottom:.6rem;border-bottom:1px solid rgba(248,244,236,.22)}
 .fl-links{list-style:none;display:flex;flex-direction:column;gap:.7rem}
 .fl-links a{color:rgba(255,255,255,.45);font-size:.81rem;transition:.25s}
 .fl-links a:hover{color:var(--mint)}

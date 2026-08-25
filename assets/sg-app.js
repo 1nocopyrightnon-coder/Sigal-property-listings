@@ -21,49 +21,91 @@
     .catch(function(){});
 
   // ──────────────────────────────────────────────────────
-  // PHOTON ADDRESS AUTOCOMPLETE
-  // https://photon.komoot.io — free, no key, no signup
-  // Built on OpenStreetMap data, optimized for typeahead
+  // ADDRESS TYPEAHEAD
+  // Photon (OSM) returns matching places as the client types.
+  // OpenFreeMap then draws those coordinates on a MapLibre preview.
   // ──────────────────────────────────────────────────────
-  // Florida bounding box approx for biasing results
-  var FL_BIAS_LAT = 27.7663;
-  var FL_BIAS_LON = -81.6868;
+  var FL_BIAS_LAT = 26.358;
+  var FL_BIAS_LON = -80.087;
+
+  // MapLibre is ~250KB, so it is fetched the first time someone uses the search field
+  var MAPLIBRE_JS = 'https://unpkg.com/maplibre-gl@5/dist/maplibre-gl.js';
+  var MAPLIBRE_CSS = 'https://unpkg.com/maplibre-gl@5/dist/maplibre-gl.css';
+  var maplibrePromise = null;
+
+  function loadMapLibre(){
+    if(window.maplibregl) return Promise.resolve(window.maplibregl);
+    if(maplibrePromise) return maplibrePromise;
+    maplibrePromise = new Promise(function(resolve, reject){
+      var link = document.createElement('link');
+      link.rel = 'stylesheet';
+      link.href = MAPLIBRE_CSS;
+      document.head.appendChild(link);
+      var s = document.createElement('script');
+      s.src = MAPLIBRE_JS;
+      s.async = true;
+      s.onload = function(){ resolve(window.maplibregl); };
+      s.onerror = function(){ maplibrePromise = null; reject(new Error('maplibre failed')); };
+      document.head.appendChild(s);
+    });
+    return maplibrePromise;
+  }
+
+  var geoCache = {};
+
+  var geoController = null;
 
   function searchAddresses(query, callback){
     if(!query || query.length < 2){ callback([]); return; }
+    var key = query.toLowerCase();
+    if(geoCache[key]){ callback(geoCache[key]); return; }
     var url = 'https://photon.komoot.io/api/'
       + '?q=' + encodeURIComponent(query)
-      + '&limit=6'
+      + '&limit=7'
       + '&lat=' + FL_BIAS_LAT + '&lon=' + FL_BIAS_LON
-      + '&osm_tag=:!railway'  // exclude railway results
+      + '&bbox=-87.6,24.4,-79.9,31.1'
       + '&lang=en';
-    fetch(url)
+    if(geoController) geoController.abort();
+    geoController = (typeof AbortController !== 'undefined') ? new AbortController() : null;
+    fetch(url, geoController ? { signal: geoController.signal } : undefined)
       .then(function(r){ return r.json(); })
       .then(function(data){
         var results = (data.features || []).map(function(f){
           var p = f.properties || {};
-          // Build a clean US address string
+          var coords = (f.geometry && f.geometry.coordinates) || [];
           var parts = [];
           if(p.housenumber) parts.push(p.housenumber);
           if(p.street) parts.push(p.street);
           var line1 = parts.join(' ');
-          var line2 = [p.city || p.locality || p.county, p.state, p.postcode].filter(Boolean).join(', ');
-          if(!line1) line1 = p.name || '';
+          var city = p.city || p.locality || p.county || '';
+          var line2 = [city, p.state, p.postcode].filter(Boolean).join(', ');
+          if(!line1) line1 = p.name || city || '';
           var full = line2 ? (line1 + (line1 ? ', ' : '') + line2) : (p.name || line1);
           return {
             primary: line1 || p.name || '',
             secondary: line2 || p.country || '',
             full: full || (p.name || query),
             country: p.country || '',
-            state: p.state || ''
+            state: p.state || '',
+            city: city,
+            lon: coords.length ? coords[0] : null,
+            lat: coords.length > 1 ? coords[1] : null
           };
         }).filter(function(r){
-          // Keep only US results
           return !r.country || r.country === 'United States' || r.country === 'USA';
         });
+        results.sort(function(a, b){
+          var af = /florida|^fl$/i.test(a.state || '') ? 0 : 1;
+          var bf = /florida|^fl$/i.test(b.state || '') ? 0 : 1;
+          return af - bf;
+        });
+        geoCache[key] = results;
         callback(results);
       })
-      .catch(function(){ callback([]); });
+      .catch(function(err){
+        if(err && err.name === 'AbortError') return;
+        callback([]);
+      });
   }
 
   // ──────────────────────────────────────────────────────
@@ -78,12 +120,13 @@
     var button = card.querySelector('.hsc-sbtn, button.hsc-btn');
     var hint   = card.querySelector('.hsc-hint');
     var fieldIco = card.querySelector('.hsc-field-ico');
-    var dropdown = null;
     var lastQuery = '';
     if(!input) return;
 
     var mode = 'buy';
-    function hideDropdown(){ if(dropdown) dropdown.style.display = 'none'; }
+    var dropdown = null;
+    var activeIndex = -1;
+    var isTouch = window.matchMedia && window.matchMedia('(pointer: coarse)').matches;
 
     var ICO = {
       buy: '<svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.2"/><path d="m15.2 15.2 5.3 5.3"/></svg>',
@@ -98,15 +141,15 @@
       if(mode === 'buy'){
         input.placeholder = 'City, neighborhood, ZIP code…';
         if(button) button.textContent = 'Search →';
-        if(hint) hint.textContent = 'Search listings by city, neighborhood, or ZIP.';
+        if(hint) hint.textContent = 'Start typing a city or street — matches appear as you type.';
       } else if(mode === 'sell'){
         input.placeholder = 'Enter your home address';
         if(button) button.textContent = 'Get Selling Plan →';
-        if(hint) hint.textContent = 'Enter your address and Sigal will outline a selling strategy.';
+        if(hint) hint.textContent = 'Type your address — we will pin it on the map.';
       } else {
         input.placeholder = 'Enter your home address';
         if(button) button.textContent = "What's My Home Worth? →";
-        if(hint) hint.textContent = 'Free, no-obligation valuation — Sigal replies within 24 hours.';
+        if(hint) hint.textContent = 'Type your address — we will pin it on the map.';
       }
       hideDropdown();
       input.value = '';
@@ -141,87 +184,189 @@
       });
     });
 
-    // Dropdown — appears below the input
+    // Dropdown + OpenFreeMap preview (MapLibre, Liberty style)
     dropdown = document.createElement('div');
     dropdown.className = 'sg-search-dropdown';
-    dropdown.style.cssText = [
-      'display:none',
-      'position:absolute',
-      'top:calc(100% + 6px)',
-      'left:0',
-      'right:0',
-      'background:#fff',
-      'border-radius:6px',
-      'box-shadow:0 12px 40px rgba(0,0,0,.18)',
-      'max-height:380px',
-      'overflow-y:auto',
-      'z-index:2000',
-      'border:1px solid rgba(27,42,74,.1)'
-    ].join(';');
-    var inputWrap = input.parentElement;
-    inputWrap.style.position = 'relative';
-    inputWrap.appendChild(dropdown);
+    dropdown.setAttribute('role', 'listbox');
+    var listEl = document.createElement('div');
+    listEl.className = 'sg-dd-list';
+    var mapWrap = document.createElement('div');
+    mapWrap.className = 'sg-dd-map-wrap';
+    mapWrap.hidden = true;
+    var mapEl = document.createElement('div');
+    mapEl.className = 'sg-dd-map';
+    mapEl.setAttribute('aria-hidden', 'true');
+    mapWrap.appendChild(mapEl);
+    dropdown.appendChild(listEl);
+    dropdown.appendChild(mapWrap);
+    var row = input.closest('.hsc-input-row') || input.parentElement;
+    row.style.position = 'relative';
+    row.appendChild(dropdown);
+
+    var previewMap = null;
+    var previewMarker = null;
+    var lastItems = [];
+    var lastPicked = null;
+
+    // Size the panel to the room actually available, and only flip it above the
+    // field when there is genuinely no space below (otherwise it covers the tabs)
+    function placeDropdown(){
+      var r = input.getBoundingClientRect();
+      var gap = 20;
+      var below = window.innerHeight - r.bottom - gap;
+      var above = r.top - gap;
+      var flip = below < 190 && above > below;
+      dropdown.classList.toggle('is-above', flip);
+
+      var room = Math.max(150, Math.min(320, flip ? above : below));
+      var mapH = mapWrap.hidden ? 0 : Math.round(Math.min(148, Math.max(88, room * 0.42)));
+      if(mapH){
+        mapWrap.style.height = mapH + 'px';
+        mapEl.style.height = mapH + 'px';
+      }
+      listEl.style.maxHeight = Math.max(92, room - mapH) + 'px';
+      if(previewMap) previewMap.resize();
+    }
+
+    function showDropdown(){
+      dropdown.style.display = 'block';
+      input.setAttribute('aria-expanded', 'true');
+      document.body.classList.add('sg-suggesting');
+      placeDropdown();
+      if(previewMap){
+        requestAnimationFrame(function(){ previewMap.resize(); });
+      }
+    }
+
+    function hideDropdown(){
+      if(dropdown) dropdown.style.display = 'none';
+      input.setAttribute('aria-expanded', 'false');
+      input.removeAttribute('aria-activedescendant');
+      document.body.classList.remove('sg-suggesting');
+      activeIndex = -1;
+    }
+
+    function ensurePreviewMap(){
+      if(previewMap) return Promise.resolve(null);
+      return loadMapLibre().then(function(){
+        if(previewMap || !window.maplibregl) return;
+        previewMap = new maplibregl.Map({
+          container: mapEl,
+          style: 'https://tiles.openfreemap.org/styles/liberty',
+          center: [FL_BIAS_LON, FL_BIAS_LAT],
+          zoom: 11,
+          attributionControl: { compact: true },
+          scrollZoom: false,
+          dragRotate: false,
+          pitchWithRotate: false
+        });
+        previewMarker = new maplibregl.Marker({ color: '#1B2A4A' })
+          .setLngLat([FL_BIAS_LON, FL_BIAS_LAT])
+          .addTo(previewMap);
+      }).catch(function(){ mapWrap.hidden = true; });
+    }
+
+    function flyToItem(item){
+      if(!item || item.lon == null || item.lat == null){
+        mapWrap.hidden = true;
+        return;
+      }
+      mapWrap.hidden = false;
+      ensurePreviewMap().then(function(){
+        if(!previewMap) return;
+        var zoom = item.isCity ? 12 : 15.4;
+        previewMap.jumpTo({ center: [item.lon, item.lat], zoom: zoom });
+        if(previewMarker) previewMarker.setLngLat([item.lon, item.lat]);
+        previewMap.resize();
+        placeDropdown();
+      });
+    }
+
+    function setActive(i, scroll){
+      var nodes = listEl.querySelectorAll('.sg-dd-item');
+      if(!nodes.length) return;
+      activeIndex = i;
+      nodes.forEach(function(node, n){
+        var on = n === i;
+        node.classList.toggle('is-active', on);
+        if(on){
+          input.setAttribute('aria-activedescendant', node.id);
+          if(scroll && node.scrollIntoView) node.scrollIntoView({ block: 'nearest' });
+        }
+      });
+      flyToItem(lastItems[i]);
+    }
 
     function showLoading(){
-      dropdown.innerHTML = '<div style="padding:18px;text-align:center;color:#9CA3AE;font-size:.85rem;display:flex;align-items:center;gap:10px;justify-content:center"><span style="width:14px;height:14px;border:2px solid #E1E4E8;border-top-color:#1B2A4A;border-radius:50%;animation:sgSpin 0.8s linear infinite;display:inline-block"></span> Searching addresses…</div>';
-      dropdown.style.display = 'block';
+      listEl.innerHTML = '<div class="sg-dd-loading"><span style="width:14px;height:14px;border:2px solid #E1E4E8;border-top-color:#1B2A4A;border-radius:50%;animation:sgSpin .8s linear infinite;display:inline-block;margin-right:8px;vertical-align:middle"></span> Finding addresses…</div>';
+      mapWrap.hidden = true;
+      showDropdown();
     }
 
     function showResults(items){
-      if(!items.length){
-        dropdown.innerHTML = '<div style="padding:18px;color:#9CA3AE;font-size:.85rem;font-style:italic;text-align:center">No matches — keep typing or try a different address</div>';
-        dropdown.style.display = 'block';
+      lastItems = items || [];
+      if(!lastItems.length){
+        listEl.innerHTML = '<div class="sg-dd-empty">No matches — keep typing a street, city, or ZIP</div>';
+        mapWrap.hidden = true;
+        showDropdown();
         return;
       }
-      dropdown.innerHTML = items.map(function(item, i){
-        return '<div class="sg-dd-item" data-value="' + escapeAttr(item.full) + '" data-i="' + i + '" style="padding:14px 18px;cursor:pointer;border-bottom:1px solid rgba(27,42,74,.06);display:flex;align-items:flex-start;gap:14px;line-height:1.4;transition:background .15s">' +
-          '<span style="font-size:1.1rem;flex-shrink:0;color:#1B2A4A"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-6.4 7-11.4A7 7 0 0 0 5 9.6C5 14.6 12 21 12 21z"/><circle cx="12" cy="9.6" r="2.2"/></svg></span>' +
+      listEl.innerHTML = lastItems.map(function(item, i){
+        var ico = item.isCity
+          ? '<path d="M3 11.2 12 3.5l9 7.7"/><path d="M6 10.2V20.5h12V10.2"/><path d="M10 20.5v-6h4v6"/>'
+          : '<path d="M12 21s7-6.4 7-11.4A7 7 0 0 0 5 9.6C5 14.6 12 21 12 21z"/><circle cx="12" cy="9.6" r="2.2"/>';
+        return '<div class="sg-dd-item" role="option" id="sg-dd-opt-' + i + '" aria-selected="false"' +
+          ' data-value="' + escapeAttr(item.full) + '" data-i="' + i + '">' +
+          '<svg class="i" viewBox="0 0 24 24" aria-hidden="true">' + ico + '</svg>' +
           '<div style="flex:1;min-width:0">' +
-            '<div style="font-weight:600;color:#1B2A4A;font-size:.95rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' + escapeHtml(item.primary || item.full) + '</div>' +
-            (item.secondary ? '<div style="font-size:.78rem;color:#9CA3AE;margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' + escapeHtml(item.secondary) + '</div>' : '') +
-          '</div>' +
-        '</div>';
+            '<div class="sg-dd-pri">' + escapeHtml(item.primary || item.full) + '</div>' +
+            (item.secondary ? '<div class="sg-dd-sec">' + escapeHtml(item.secondary) + '</div>' : '') +
+          '</div></div>';
       }).join('');
-      dropdown.style.display = 'block';
-      dropdown.querySelectorAll('.sg-dd-item').forEach(function(el){
-        el.addEventListener('mouseenter', function(){ this.style.background = '#F8F4EC'; });
-        el.addEventListener('mouseleave', function(){ this.style.background = '#fff'; });
+      activeIndex = -1;
+      showDropdown();
+      var firstWithCoords = lastItems.filter(function(it){ return it.lon != null; })[0];
+      flyToItem(firstWithCoords);
+      listEl.querySelectorAll('.sg-dd-item').forEach(function(el){
+        el.addEventListener('mouseenter', function(){
+          if(isTouch) return;
+          setActive(Number(this.dataset.i), false);
+        });
         el.addEventListener('mousedown', function(e){ e.preventDefault(); });
         el.addEventListener('click', function(){
-          input.value = this.dataset.value;
-          hideDropdown();
-          submit();
+          var i = Number(this.dataset.i);
+          // On touch there is no hover, so the first tap previews the pin and
+          // fills the field; the Search button commits it.
+          if(isTouch && activeIndex !== i){
+            setActive(i, false);
+            lastPicked = lastItems[i] || null;
+            input.value = this.dataset.value;
+            lastQuery = input.value.trim();
+            if(hint) hint.textContent = 'Tap again, or press Search, to continue.';
+            return;
+          }
+          choose(i);
         });
       });
     }
 
-    function showCityResults(cities, query){
-      if(!cities.length){ hideDropdown(); return; }
-      dropdown.innerHTML = cities.map(function(c){
-        var display = escapeHtml(c);
-        if(query){
-          var idx = c.toLowerCase().indexOf(query.toLowerCase());
-          if(idx !== -1){
-            display = escapeHtml(c.substring(0, idx)) +
-              '<strong style="color:#1B2A4A">' + escapeHtml(c.substring(idx, idx + query.length)) + '</strong>' +
-              escapeHtml(c.substring(idx + query.length));
-          }
-        }
-        return '<div class="sg-dd-item" data-value="' + escapeAttr(c) + '" style="padding:14px 18px;cursor:pointer;border-bottom:1px solid rgba(27,42,74,.06);display:flex;align-items:center;gap:12px;font-size:.95rem;color:#1B2A4A;transition:background .15s">' +
-          '<span style="color:#1B2A4A"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-6.4 7-11.4A7 7 0 0 0 5 9.6C5 14.6 12 21 12 21z"/><circle cx="12" cy="9.6" r="2.2"/></svg></span><span>' + display + '</span>' +
-        '</div>';
-      }).join('');
-      dropdown.style.display = 'block';
-      dropdown.querySelectorAll('.sg-dd-item').forEach(function(el){
-        el.addEventListener('mouseenter', function(){ this.style.background = '#F8F4EC'; });
-        el.addEventListener('mouseleave', function(){ this.style.background = '#fff'; });
-        el.addEventListener('mousedown', function(e){ e.preventDefault(); });
-        el.addEventListener('click', function(){
-          input.value = this.dataset.value;
-          hideDropdown();
-          submit();
-        });
-      });
+    function choose(i){
+      var item = lastItems[i];
+      if(!item) return;
+      lastPicked = item;
+      input.value = item.full;
+      hideDropdown();
+      submit();
+    }
+
+    function cityItem(c){
+      return {
+        primary: c,
+        secondary: 'Search listings in this city',
+        full: c,
+        city: c,
+        isCity: true
+      };
     }
 
     function escapeHtml(s){
@@ -233,38 +378,65 @@
       return String(s||'').replace(/"/g, '&quot;');
     }
 
-    // Input handler — different behavior per mode
     var debounceTimer;
     input.addEventListener('input', function(){
       var q = input.value.trim();
+      lastPicked = null;
       clearTimeout(debounceTimer);
-
-      if(mode === 'buy'){
-        if(!q){ hideDropdown(); return; }
-        var matches = ALL_CITIES.filter(function(c){
-          return c.toLowerCase().indexOf(q.toLowerCase()) !== -1;
-        }).slice(0, 8);
-        showCityResults(matches, q);
-      } else {
-        // SELL or VALUE — address autocomplete via Photon
-        if(q.length < 2){ hideDropdown(); return; }
-        if(q === lastQuery) return;
-        lastQuery = q;
-        showLoading();
-        debounceTimer = setTimeout(function(){
-          searchAddresses(q, function(results){
-            if(input.value.trim() !== q) return; // user kept typing
-            showResults(results);
-          });
-        }, 280);
-      }
+      if(q.length < 2){ hideDropdown(); lastQuery = ''; return; }
+      if(q === lastQuery) return;
+      lastQuery = q;
+      showLoading();
+      debounceTimer = setTimeout(function(){
+        searchAddresses(q, function(results){
+          if(input.value.trim() !== q) return;
+          var items = results;
+          if(mode === 'buy'){
+            var cityHits = ALL_CITIES.filter(function(c){
+              return c.toLowerCase().indexOf(q.toLowerCase()) !== -1;
+            }).slice(0, 3).map(cityItem);
+            items = cityHits.concat(results).slice(0, 8);
+          }
+          showResults(items);
+        });
+      }, 260);
     });
 
     input.addEventListener('focus', function(){
+      loadMapLibre().catch(function(){});
+      if(dropdown.style.display === 'block') return;
       if(mode === 'buy' && !input.value && ALL_CITIES.length){
-        showCityResults(ALL_CITIES.slice(0, 8));
+        showResults(ALL_CITIES.slice(0, 6).map(cityItem));
       }
     });
+
+    input.addEventListener('keydown', function(e){
+      var open = dropdown.style.display === 'block';
+      if(e.key === 'Escape'){
+        hideDropdown();
+        return;
+      }
+      if(e.key === 'ArrowDown' || e.key === 'ArrowUp'){
+        if(!open || !lastItems.length) return;
+        e.preventDefault();
+        var next = e.key === 'ArrowDown' ? activeIndex + 1 : activeIndex - 1;
+        if(next >= lastItems.length) next = 0;
+        if(next < 0) next = lastItems.length - 1;
+        setActive(next, true);
+        return;
+      }
+      if(e.key === 'Enter'){
+        e.preventDefault();
+        if(open && activeIndex >= 0){ choose(activeIndex); return; }
+        submit();
+      }
+    });
+
+    function reposition(){
+      if(dropdown.style.display === 'block') placeDropdown();
+    }
+    window.addEventListener('resize', reposition);
+    window.addEventListener('scroll', reposition, { passive: true });
 
     document.addEventListener('click', function(e){
       if(!card.contains(e.target)) hideDropdown();
@@ -273,20 +445,21 @@
     function submit(){
       var q = input.value.trim();
       if(mode === 'buy'){
-        window.location.href = q
-          ? 'properties.html?city=' + encodeURIComponent(q)
+        var city = (lastPicked && lastPicked.city) ? lastPicked.city : q;
+        window.location.href = city
+          ? 'properties.html?city=' + encodeURIComponent(city)
           : 'properties.html';
         return;
       }
       var dest = 'sell.html?mode=' + encodeURIComponent(mode);
       if(q) dest += '&address=' + encodeURIComponent(q);
+      if(lastPicked && lastPicked.lat != null && lastPicked.lon != null){
+        dest += '&lat=' + lastPicked.lat + '&lon=' + lastPicked.lon;
+      }
       window.location.href = dest;
     }
 
     if(button) button.addEventListener('click', function(e){ e.preventDefault(); submit(); });
-    input.addEventListener('keypress', function(e){
-      if(e.key === 'Enter'){ e.preventDefault(); submit(); }
-    });
 
     // Initial mode from default-active tab
     var activeTab = card.querySelector('.hsc-tab.on, .hsc-tab.active, .hsc-btn-tab.on');
@@ -439,7 +612,7 @@
     card.innerHTML =
       '<div style="padding:3.5rem 2rem;text-align:center">' +
         '<div style="width:72px;height:72px;border-radius:50%;background:#E8F5EE;display:inline-flex;align-items:center;justify-content:center;margin-bottom:1.5rem;font-size:2rem;color:#1B2A4A">✓</div>' +
-        '<h3 style="font-family:'Archivo',sans-serif;font-size:1.8rem;color:#1B2A4A;margin:0 0 .6rem;font-weight:500">Thank You!</h3>' +
+        '<h3 style="font-family:Archivo,sans-serif;font-size:1.8rem;color:#1B2A4A;margin:0 0 .6rem;font-weight:500">Thank You!</h3>' +
         '<p style="color:#56607A;font-size:.95rem;line-height:1.6;max-width:380px;margin:0 auto 2rem">' + msg + '</p>' +
         '<div style="display:flex;gap:.8rem;justify-content:center;flex-wrap:wrap">' +
           '<a href="tel:6177770485" style="background:#1B2A4A;color:#fff;padding:.85rem 1.6rem;text-decoration:none;font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;font-weight:600;border-radius:2px"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg> Call Now</a>' +

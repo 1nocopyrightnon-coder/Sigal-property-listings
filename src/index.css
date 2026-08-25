@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+[data-reviews-marquee] {
+  --background: 40 47% 95%;
+  --foreground: 221 46% 20%;
+  --muted-foreground: 222 16% 41%;
+  --border: 216 12% 89%;
+  font-family: Archivo, sans-serif;
+  width: 100%;
+  overflow: hidden;
+}
