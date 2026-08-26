@@ -9,6 +9,19 @@
 
   var ALL_CITIES = [];
 
+  function escapeHtml(s){
+    return String(s || '').replace(/[&<>"']/g, function(c){
+      return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
+    });
+  }
+  function escapeAttr(s){
+    return escapeHtml(s);
+  }
+  function safeImgUrl(u){
+    var s = String(u || '').trim();
+    return /^https?:\/\//i.test(s) ? s : '';
+  }
+
   // Load city list from listings (for Buy tab autocomplete)
   fetch('listings/listings.json')
     .then(function(r){ return r.json(); })
@@ -625,6 +638,47 @@
     document.querySelectorAll('.form-card, .cf-form-card, .val-form, .valuation-card, [class*="form-card"]').forEach(wireFormCard);
   }
 
+  function buildCityFilterBadge(cityFilter, found){
+    var badge = document.createElement('div');
+    badge.id = 'cityFilterBadge';
+    badge.style.cssText = 'background:#1B2A4A;color:#F8F4EC;padding:14px 24px;display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem;border-radius:2px;font-size:.85rem;letter-spacing:.04em;flex-wrap:wrap;gap:1rem';
+    var left = document.createElement('span');
+    left.insertAdjacentHTML('afterbegin', '<svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-6.4 7-11.4A7 7 0 0 0 5 9.6C5 14.6 12 21 12 21z"/><circle cx="12" cy="9.6" r="2.2"/></svg> ');
+    left.appendChild(document.createTextNode('Filtered by location: '));
+    var strong = document.createElement('strong');
+    strong.textContent = cityFilter;
+    left.appendChild(strong);
+    left.appendChild(document.createTextNode(' · ' + found + ' propert' + (found === 1 ? 'y' : 'ies') + ' found'));
+    var clear = document.createElement('a');
+    clear.href = 'properties.html';
+    clear.style.cssText = 'color:#F8F4EC;text-decoration:underline;font-size:.78rem;letter-spacing:.1em;text-transform:uppercase';
+    clear.textContent = '✕ Clear filter';
+    badge.appendChild(left);
+    badge.appendChild(clear);
+    return badge;
+  }
+
+  function buildCityEmptyState(cityFilter){
+    var box = document.createElement('div');
+    box.className = 'state-box';
+    box.style.cssText = 'grid-column:1/-1;text-align:center;padding:4rem 2rem;color:#9CA3AE';
+    box.insertAdjacentHTML('afterbegin', '<svg class="i" style="width:42px;height:42px;color:#1B2A4A" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11.2 12 3.5l9 7.7"/><path d="M6 10.2V20.5h12V10.2"/><path d="M10 20.5v-6h4v6"/></svg>');
+    var title = document.createElement('div');
+    title.style.cssText = 'font-family:\'Archivo\',sans-serif;font-size:1.3rem;color:#56607A;margin:1rem 0 .5rem';
+    title.textContent = 'No listings in ' + cityFilter + ' yet';
+    var sub = document.createElement('div');
+    sub.style.cssText = 'font-size:.85rem;margin-bottom:1.5rem';
+    sub.textContent = 'Try browsing all listings, or contact Sigal for off-market opportunities.';
+    var link = document.createElement('a');
+    link.href = 'properties.html';
+    link.style.cssText = 'background:#1B2A4A;color:#F8F4EC;padding:12px 24px;text-decoration:none;font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;display:inline-block';
+    link.textContent = 'View All Properties';
+    box.appendChild(title);
+    box.appendChild(sub);
+    box.appendChild(link);
+    return box;
+  }
+
   // ──────────────────────────────────────────────────────
   // PROPERTIES PAGE — ?city= filter
   // ──────────────────────────────────────────────────────
@@ -651,11 +705,11 @@
       var countEl = document.getElementById('propCount');
       if(countEl) countEl.textContent = 'Showing ' + found + ' propert' + (found===1?'y':'ies') + ' in ' + cityFilter;
       if(!document.getElementById('cityFilterBadge')){
-        var badge = document.createElement('div');
-        badge.id = 'cityFilterBadge';
-        badge.style.cssText = 'background:#1B2A4A;color:#fff;padding:14px 24px;display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem;font-size:.85rem;letter-spacing:.04em;border-radius:2px;flex-wrap:wrap;gap:1rem';
-        badge.innerHTML = '<span><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-6.4 7-11.4A7 7 0 0 0 5 9.6C5 14.6 12 21 12 21z"/><circle cx="12" cy="9.6" r="2.2"/></svg> Filtered: <strong>' + cityFilter + '</strong> · ' + found + ' result' + (found===1?'':'s') + '</span><a href="properties.html" style="color:#F8F4EC;text-decoration:underline;font-size:.78rem;letter-spacing:.1em;text-transform:uppercase">✕ Clear filter</a>';
-        grid.parentElement.insertBefore(badge, grid);
+        grid.parentElement.insertBefore(buildCityFilterBadge(cityFilter, found), grid);
+      }
+      if(found === 0){
+        grid.textContent = '';
+        grid.appendChild(buildCityEmptyState(cityFilter));
       }
     }, 200);
   }
@@ -686,14 +740,14 @@
         if(st === 'sale' || st === 'for sale' || st.indexOf('active') !== -1){ badgeClass = 'lb-sale'; badgeText = 'For Sale'; }
         else if(st.indexOf('pending') !== -1){ badgeClass = 'lb-pending'; badgeText = 'Pending'; }
         else if(st.indexOf('just') !== -1){ badgeClass = 'lb-jsold'; badgeText = 'Just Sold'; }
-        var title = (p.title || '').replace(/</g,'');
-        var price = p.price || '';
-        var img = p.image || '';
-        var beds = p.beds || '';
-        var baths = p.baths || '';
-        var size = p.size || '';
+        var title = escapeHtml(p.title || '');
+        var price = escapeHtml(p.price || '');
+        var img = safeImgUrl(p.image);
+        var beds = escapeHtml(p.beds || '');
+        var baths = escapeHtml(p.baths || '');
+        var size = escapeHtml(p.size || '');
         return '<a class="loc-lcard" href="' + sitePrefix() + 'properties.html?city=' + encodeURIComponent(city) + '">' +
-          '<div class="loc-lcard-img"><img src="' + img + '" alt="' + title + '" loading="lazy"/>' +
+          '<div class="loc-lcard-img"><img src="' + escapeAttr(img) + '" alt="' + title + '" loading="lazy"/>' +
           '<span class="' + badgeClass + '">' + badgeText + '</span></div>' +
           '<div class="loc-lcard-body"><div class="loc-lcard-price">' + price + '</div>' +
           '<div class="loc-lcard-title">' + title + '</div>' +

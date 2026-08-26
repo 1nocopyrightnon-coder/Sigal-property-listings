@@ -429,6 +429,15 @@ footer{background:#0F1B30;padding:5rem 0 2.5rem;border-top:3px solid var(--sage)
 
 <script>
 // ── NAV + UI ─────────────────────────────────────────────
+function escapeHtml(s){
+  return String(s||'').replace(/[&<>"']/g,function(c){
+    return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
+  });
+}
+function safeImgUrl(u){
+  var s=String(u||'').trim();
+  return /^https?:\/\//i.test(s)?s:'';
+}
 window.addEventListener('scroll',()=>{
   document.getElementById('btt').classList.toggle('show',scrollY>400);
 });
@@ -443,35 +452,62 @@ const stColor={jsold:'#1B2A4A',sold:'#56607A',sale:'#1B2A4A',rent:'#0F1B30'};
 const stTextColor={jsold:'#F8F4EC',sold:'#fff',sale:'#F8F4EC',rent:'#fff'};
 
 function openModal(p){
-  mGal=Array.isArray(p.gallery)&&p.gallery.length ? p.gallery : [p.image];
+  var rawGal=Array.isArray(p.gallery)&&p.gallery.length ? p.gallery : [p.image];
+  mGal=rawGal.map(safeImgUrl).filter(Boolean);
+  if(!mGal.length) mGal=[''];
   mIdx=0;
   document.getElementById('mTitle').textContent=p.title||'';
   document.getElementById('mPrice').textContent=p.price||'';
   var loc = p.address || p.city || '';
-  document.getElementById('mAddr').innerHTML = loc
-    ? '<svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-6.4 7-11.4A7 7 0 0 0 5 9.6C5 14.6 12 21 12 21z"/><circle cx="12" cy="9.6" r="2.2"/></svg> ' + loc
-    : '';
+  var mAddr = document.getElementById('mAddr');
+  mAddr.textContent = '';
+  if(loc){
+    mAddr.insertAdjacentHTML('afterbegin','<svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-6.4 7-11.4A7 7 0 0 0 5 9.6C5 14.6 12 21 12 21z"/><circle cx="12" cy="9.6" r="2.2"/></svg> ');
+    mAddr.appendChild(document.createTextNode(loc));
+  }
   const sb=document.getElementById('mStatus');
   sb.textContent=stLabel[p.status]||p.status||'';
   sb.style.background=stColor[p.status]||'#1B2A4A';
   sb.style.color=stTextColor[p.status]||'#F8F4EC';
-  let meta='';
-  if(p.beds)    meta+=`<div class="m-mi"><span class="m-mi-v">${p.beds}</span><span class="m-mi-l">Bedrooms</span></div>`;
-  if(p.baths)   meta+=`<div class="m-mi"><span class="m-mi-v">${p.baths}</span><span class="m-mi-l">Bathrooms</span></div>`;
-  if(p.size)    meta+=`<div class="m-mi"><span class="m-mi-v" style="font-size:1rem">${p.size}</span><span class="m-mi-l">Size</span></div>`;
-  if(p.year&&p.year!=='0') meta+=`<div class="m-mi"><span class="m-mi-v">${p.year}</span><span class="m-mi-l">Year Built</span></div>`;
-  if(p.type)    meta+=`<div class="m-mi"><span class="m-mi-v" style="font-size:.85rem;line-height:1.3">${p.type}</span><span class="m-mi-l">Type</span></div>`;
-  document.getElementById('mMeta').innerHTML=meta;
+  var metaEl=document.getElementById('mMeta');
+  metaEl.textContent='';
+  function addMeta(v,l,small){
+    if(!v) return;
+    var d=document.createElement('div');
+    d.className='m-mi';
+    var vv=document.createElement('span');
+    vv.className='m-mi-v';
+    if(small) vv.style.cssText='font-size:.85rem;line-height:1.3';
+    vv.textContent=v;
+    var ll=document.createElement('span');
+    ll.className='m-mi-l';
+    ll.textContent=l;
+    d.appendChild(vv); d.appendChild(ll);
+    metaEl.appendChild(d);
+  }
+  addMeta(p.beds,'Bedrooms');
+  addMeta(p.baths,'Bathrooms');
+  addMeta(p.size,'Size',true);
+  if(p.year&&p.year!=='0') addMeta(p.year,'Year Built');
+  addMeta(p.type,'Type',true);
   document.getElementById('mDesc').textContent=p.description||'';
   renderGal();
   document.getElementById('modalBg').classList.add('open');
   document.body.style.overflow='hidden';
 }
 function renderGal(){
-  document.getElementById('mHeroImg').src=mGal[mIdx]||'';
-  document.getElementById('mThumbs').innerHTML=mGal
-    .map((u,i)=>`<img class="thumb ${i===mIdx?'on':''}" src="${u}" onclick="setImg(${i})" loading="lazy"/>`)
-    .join('');
+  document.getElementById('mHeroImg').src=safeImgUrl(mGal[mIdx])||'';
+  var thumbs=document.getElementById('mThumbs');
+  thumbs.textContent='';
+  mGal.forEach(function(u,i){
+    var img=document.createElement('img');
+    img.className='thumb'+(i===mIdx?' on':'');
+    img.src=safeImgUrl(u);
+    img.loading='lazy';
+    img.alt='';
+    img.onclick=function(){ setImg(i); };
+    thumbs.appendChild(img);
+  });
 }
 function setImg(i){mIdx=i;renderGal();}
 function navGal(d){mIdx=(mIdx+d+mGal.length)%mGal.length;renderGal();}
@@ -494,20 +530,28 @@ if(savedFilter){ activeStatus = savedFilter; sessionStorage.removeItem('filter')
 function pcard(p,i){
   const bc={jsold:'lb-jsold',sold:'lb-sold',sale:'lb-sale',pending:'lb-pending',rent:'lb-rent'}[p.status]||'lb-sold';
   const bt={jsold:'Just Sold',sold:'Sold',sale:'For Sale',pending:'Pending',rent:'For Rent'}[p.status]||'Sold';
-  return `<div class="pcard rx" data-s="${p.status}" data-price="${p.price||''}" data-beds="${p.beds||'0'}" data-type="${(p.type||'').toLowerCase()}" onclick="openModal(LISTING_BY_IDX[${i}])">
+  const img=safeImgUrl(p.image);
+  const title=escapeHtml(p.title||'');
+  const price=escapeHtml(p.price||'');
+  const city=escapeHtml(p.city||'South Florida');
+  const beds=escapeHtml(p.beds||'—');
+  const baths=escapeHtml(p.baths||'—');
+  const size=escapeHtml(p.size||'—');
+  const year=(p.year&&p.year!=='0')?escapeHtml(p.year):'';
+  return `<div class="pcard rx" data-s="${escapeHtml(p.status||'')}" data-price="${escapeHtml(p.price||'')}" data-beds="${escapeHtml(p.beds||'0')}" data-type="${escapeHtml((p.type||'').toLowerCase())}" onclick="openModal(LISTING_BY_IDX[${i}])">
   <div class="pcard-img">
-    <img src="${p.image||''}" alt="${p.title||''}" loading="lazy"/>
+    <img src="${img}" alt="${title}" loading="lazy"/>
     <span class="pcard-badge ${bc}">${bt}</span>
-    <div class="pcard-price-bar"><div class="pcard-price">${p.price||''}</div></div>
+    <div class="pcard-price-bar"><div class="pcard-price">${price}</div></div>
   </div>
   <div class="pcard-body">
-    <div class="pcard-loc"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-6.4 7-11.4A7 7 0 0 0 5 9.6C5 14.6 12 21 12 21z"/><circle cx="12" cy="9.6" r="2.2"/></svg> ${p.city||'South Florida'}</div>
-    <div class="pcard-name">${p.title||''}</div>
+    <div class="pcard-loc"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-6.4 7-11.4A7 7 0 0 0 5 9.6C5 14.6 12 21 12 21z"/><circle cx="12" cy="9.6" r="2.2"/></svg> ${city}</div>
+    <div class="pcard-name">${title}</div>
     <div class="pcard-specs">
-      <span class="pspec"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 18V9.5A1.5 1.5 0 0 1 4.5 8H8a3 3 0 0 1 3-3h2a3 3 0 0 1 3 3h3.5A1.5 1.5 0 0 1 21 9.5V18"/><path d="M3 14h18"/><path d="M3 18v2M21 18v2"/></svg> ${p.beds||'—'}</span>
-      <span class="pspec"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16v3.2A3.3 3.3 0 0 1 16.7 18.5H7.3A3.3 3.3 0 0 1 4 15.2V12z"/><path d="M5 12V7.8A2.3 2.3 0 0 1 7.3 5.5"/><path d="M7 18.5V20.5M17 18.5V20.5"/></svg> ${p.baths||'—'}</span>
-      <span class="pspec"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="6" width="16" height="12" rx="1"/><path d="M8 6V4M16 6V4M8 20v-2M16 20v-2"/></svg> ${p.size||'—'}</span>
-      ${p.year&&p.year!=='0'?`<span class="pspec"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="3.5" width="12" height="17" rx="1"/><path d="M9 8h2M13 8h2M9 12h2M13 12h2M9 16h2M13 16h2"/></svg> ${p.year}</span>`:''}
+      <span class="pspec"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 18V9.5A1.5 1.5 0 0 1 4.5 8H8a3 3 0 0 1 3-3h2a3 3 0 0 1 3 3h3.5A1.5 1.5 0 0 1 21 9.5V18"/><path d="M3 14h18"/><path d="M3 18v2M21 18v2"/></svg> ${beds}</span>
+      <span class="pspec"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16v3.2A3.3 3.3 0 0 1 16.7 18.5H7.3A3.3 3.3 0 0 1 4 15.2V12z"/><path d="M5 12V7.8A2.3 2.3 0 0 1 7.3 5.5"/><path d="M7 18.5V20.5M17 18.5V20.5"/></svg> ${baths}</span>
+      <span class="pspec"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="6" width="16" height="12" rx="1"/><path d="M8 6V4M16 6V4M8 20v-2M16 20v-2"/></svg> ${size}</span>
+      ${year?`<span class="pspec"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="3.5" width="12" height="17" rx="1"/><path d="M9 8h2M13 8h2M9 12h2M13 12h2M9 16h2M13 16h2"/></svg> ${year}</span>`:''}
     </div>
   </div>
 </div>`;
@@ -608,54 +652,7 @@ loadListings();
 </script>
   <script src="assets/sg-nav.js" defer></script>
 
-<script>
-// Read URL query parameter and pre-filter properties
-(function(){
-  var params = new URLSearchParams(window.location.search);
-  var cityFilter = params.get('city');
-  if(!cityFilter) return;
-  // Wait for listings to load, then filter by city
-  var attempts = 0;
-  var interval = setInterval(function(){
-    attempts++;
-    if(attempts > 50){ clearInterval(interval); return; }
-    var grid = document.getElementById('propsGrid');
-    if(!grid || grid.querySelector('.state-spinner') || grid.querySelector('.state-box')) return;
-    var cards = grid.querySelectorAll('.pcard');
-    if(!cards.length) return;
-    clearInterval(interval);
-
-    // Filter cards by city
-    var found = 0;
-    cards.forEach(function(card){
-      var locText = card.querySelector('.pcard-loc');
-      var matches = locText && locText.textContent.toLowerCase().indexOf(cityFilter.toLowerCase()) !== -1;
-      card.style.display = matches ? '' : 'none';
-      if(matches) found++;
-    });
-
-    // Update count
-    var countEl = document.getElementById('propCount');
-    if(countEl) countEl.textContent = 'Showing ' + found + ' properties in ' + cityFilter;
-
-    // Add a clear filter badge
-    var ctx = grid.parentElement;
-    if(ctx && !document.getElementById('cityFilterBadge')){
-      var badge = document.createElement('div');
-      badge.id = 'cityFilterBadge';
-      badge.style.cssText = 'background:#1B2A4A;color:#F8F4EC;padding:14px 24px;display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem;border-radius:2px;font-size:.85rem;letter-spacing:.04em';
-      badge.innerHTML = '<span><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-6.4 7-11.4A7 7 0 0 0 5 9.6C5 14.6 12 21 12 21z"/><circle cx="12" cy="9.6" r="2.2"/></svg> Filtered by location: <strong>' + cityFilter + '</strong> &middot; ' + found + ' propert' + (found===1?'y':'ies') + ' found</span><a href="properties.html" style="color:#F8F4EC;text-decoration:underline;font-size:.78rem;letter-spacing:.1em;text-transform:uppercase">✕ Clear filter</a>';
-      ctx.insertBefore(badge, grid);
-    }
-
-    if(found === 0){
-      grid.innerHTML = '<div class="state-box" style="grid-column:1/-1;text-align:center;padding:4rem 2rem;color:#9CA3AE"><svg class="i" style="width:42px;height:42px;color:#1B2A4A" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11.2 12 3.5l9 7.7"/><path d="M6 10.2V20.5h12V10.2"/><path d="M10 20.5v-6h4v6"/></svg><div style="font-family:\'Archivo\',sans-serif;font-size:1.3rem;color:#56607A;margin:1rem 0 .5rem">No listings in ' + cityFilter + ' yet</div><div style="font-size:.85rem;margin-bottom:1.5rem">Try browsing all listings, or contact Sigal for off-market opportunities.</div><a href="properties.html" style="background:#1B2A4A;color:#F8F4EC;padding:12px 24px;text-decoration:none;font-size:.75rem;letter-spacing:.1em;text-transform:uppercase">View All Properties</a></div>';
-    }
-  }, 200);
-})();
-</script>
-  
-<script src="assets/sg-app.js" defer></script>
+<script src="assets/sg-app.js?v=sec1" defer></script>
 <script src="assets/sg-mobnav-fix.js?v=mobmenu-fix" defer></script>
   
 </body>
