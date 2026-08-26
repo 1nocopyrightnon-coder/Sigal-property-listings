@@ -19,9 +19,10 @@
   var ITEMS = [
     { num:'01', href:'index.html',         label:'Home',        italic:''           },
     { num:'02', href:'properties.html',    label:'Properties',  italic:''           },
-    { num:'03', href:'sell.html',          label:'Sell ',       italic:'Your Home'  },
-    { num:'04', href:'neighborhoods.html', label:'Top ',        italic:'Areas'      },
-    { num:'05', href:'blog/index.html',    label:'Blog',        italic:'',
+    { num:'03', href:'search.html',        label:'MLS ',        italic:'Search'     },
+    { num:'04', href:'sell.html',          label:'Sell ',       italic:'Your Home'  },
+    { num:'05', href:'neighborhoods.html', label:'Top ',        italic:'Areas'      },
+    { num:'06', href:'blog/index.html',    label:'Blog',        italic:'',
       children:[
         { href:'blog/boca-raton.html',      label:'Boca Raton' },
         { href:'blog/delray-beach.html',    label:'Delray Beach' },
@@ -31,8 +32,8 @@
         { href:'blog/boynton-beach.html',   label:'Boynton Beach' }
       ]
     },
-    { num:'06', href:'about.html',         label:'About ',      italic:'Sigal'      },
-    { num:'07', href:'contact.html',       label:'Contact',     italic:''           }
+    { num:'07', href:'about.html',         label:'About ',      italic:'Sigal'      },
+    { num:'08', href:'contact.html',       label:'Contact',     italic:''           }
   ];
 
   function build(){

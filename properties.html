@@ -314,7 +314,11 @@ footer{background:#0F1B30;padding:5rem 0 2.5rem;border-top:3px solid var(--sage)
     <h1 class="h2" style="margin-top:.6rem">
       South Florida <i>Properties</i>
     </h1>
-    <p class="ph-sub">Click any listing to view photos, full description and details. Filter by status, price, bedrooms or type below.</p>
+    <p class="ph-sub">Sigal’s curated sold and featured portfolio. For every active listing on the market, use <a href="search.html" style="color:#EBD6A8;text-decoration:underline">Live MLS Search</a>.</p>
+    <div style="display:flex;flex-wrap:wrap;gap:.75rem;margin-top:1.1rem">
+      <a href="search.html" class="btn btn-forest" style="font-size:.72rem;padding:.75rem 1.4rem">Search All MLS Listings →</a>
+      <a href="contact.html" class="btn btn-ghost" style="font-size:.72rem;padding:.75rem 1.4rem;border-color:rgba(248,244,236,.45);color:var(--cream)">Request a Showing</a>
+    </div>
   </div>
 </div>
 
@@ -373,9 +377,10 @@ footer{background:#0F1B30;padding:5rem 0 2.5rem;border-top:3px solid var(--sage)
     </div>
     <div style="text-align:center;margin-top:4rem;padding:3rem;background:var(--white);border:1px solid var(--rule)" id="ctaBox" style="display:none">
       <h3 class="h3" style="margin-bottom:.8rem">Don't see what you're looking for?</h3>
-      <p class="lead" style="max-width:520px;margin:0 auto 1.8rem">Sigal has access to off-market listings across all of South Florida.</p>
+      <p class="lead" style="max-width:520px;margin:0 auto 1.8rem">Search live BeachesMLS listings, or ask Sigal about off-market opportunities across South Florida.</p>
       <div style="display:flex;gap:.8rem;justify-content:center;flex-wrap:wrap">
-        <a href="tel:6177770485" class="btn btn-forest"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg> Call Sigal: (617) 777-0485</a>
+        <a href="search.html" class="btn btn-forest">Search MLS Listings →</a>
+        <a href="tel:6177770485" class="btn btn-ghost"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg> Call Sigal: (617) 777-0485</a>
         <a href="contact.html" class="btn btn-ghost">Send Your Wishlist →</a>
       </div>
     </div>
@@ -400,6 +405,7 @@ footer{background:#0F1B30;padding:5rem 0 2.5rem;border-top:3px solid var(--sage)
       <li><a href="index.html">Home</a></li>
       <li><a href="blog/index.html">Blog</a></li>
       <li><a href="properties.html">All Properties</a></li>
+      <li><a href="search.html">MLS Search</a></li>
       <li><a href="sell.html">Sell Your Home</a></li>
       <li><a href="neighborhoods.html">Top Areas</a></li>
       <li><a href="about.html">About Sigal</a></li>
@@ -650,7 +656,7 @@ async function loadListings(){
 
 loadListings();
 </script>
-  <script src="assets/sg-nav.js" defer></script>
+  <script src="assets/sg-nav.js?v=mls1" defer></script>
 
 <script src="assets/sg-app.js?v=sec1" defer></script>
 <script src="assets/sg-mobnav-fix.js?v=mobmenu-fix" defer></script>

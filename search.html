@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Search MLS Listings | Sigal Group Realty | BeachesMLS</title>
+<meta name="description" content="Search live BeachesMLS listings across South Florida with Sigal Fishman. Browse active homes for sale, then call Sigal for a private showing."/>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --forest-deep:#1B2A4A;--forest:#1B2A4A;--cream:#F8F4EC;--ink:#1B2A4A;
+  --slate:#56607A;--silver:#9CA3AE;--rule:#E1E4E8;--white:#FFFFFF;--off:#F4F0E8;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{font-family:'Archivo',sans-serif;background:var(--off);color:var(--ink);overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+.wrap{max-width:1260px;margin:0 auto;padding:0 2.5rem}
+svg.i{width:14px;height:14px;flex-shrink:0;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;display:inline-block;vertical-align:-2px}
+.tag{font-size:.62rem;font-weight:700;letter-spacing:.3em;text-transform:uppercase;color:var(--ink);display:inline-flex;align-items:center;gap:.6rem}
+.tag::before{content:'';width:22px;height:2px;background:var(--forest)}
+.h2{font-family:'Archivo',sans-serif;font-size:clamp(1.6rem,2.8vw,2.4rem);font-weight:500;line-height:1.1;color:var(--ink)}
+.h2 i{font-style:normal;font-weight:800}
+.lead{color:var(--slate);font-size:.92rem;line-height:1.8}
+.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.85rem 1.6rem;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;transition:.3s;font-family:'Archivo',sans-serif;border:2px solid transparent}
+.btn-forest{background:var(--forest-deep);color:var(--cream);border-color:var(--forest-deep)}
+.btn-forest:hover{background:#101B30;transform:translateY(-1px)}
+.btn-ghost{background:transparent;color:var(--forest-deep);border-color:var(--forest-deep)}
+.btn-ghost:hover{background:var(--forest-deep);color:var(--cream)}
+.page-hero{background:var(--forest-deep);color:var(--cream);padding:7.5rem 0 2rem}
+.page-hero .tag{color:var(--cream)}.page-hero .tag::before{background:var(--cream)}
+.page-hero .lead{color:rgba(248,244,236,.82);max-width:42rem;margin-top:.75rem}
+.breadcrumb{font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;margin-bottom:1rem;opacity:.75}
+.breadcrumb a{color:var(--cream);text-decoration:underline;text-underline-offset:3px}
+.hero-actions{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:1.25rem}
+.mls-layout{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:1.25rem;padding:1.5rem 0 3rem;min-height:calc(100vh - 220px)}
+.mls-frame-wrap{background:var(--white);border:1px solid var(--rule);min-height:72vh;display:flex;flex-direction:column}
+.mls-frame-head{display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:.85rem 1rem;border-bottom:1px solid var(--rule);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--slate);flex-wrap:wrap}
+.mls-frame-wrap iframe{flex:1;width:100%;min-height:68vh;border:none;display:block;background:#fff}
+.mls-rail{display:flex;flex-direction:column;gap:1rem}
+.mls-card{background:var(--white);border:1px solid var(--rule);padding:1.25rem}
+.mls-card h3{font-family:'Archivo',sans-serif;font-size:1.05rem;font-weight:600;color:var(--forest-deep);margin-bottom:.55rem}
+.mls-card p{font-size:.84rem;line-height:1.65;color:var(--slate);margin-bottom:1rem}
+.mls-card .btn{width:100%;justify-content:center}
+.mls-note{font-size:.68rem;line-height:1.55;color:var(--silver);padding-top:.5rem;border-top:1px solid var(--rule);margin-top:.5rem}
+.mls-disclaimer{font-size:.65rem;line-height:1.6;color:var(--silver);padding:1rem 0 2rem}
+@media(max-width:960px){
+  .mls-layout{grid-template-columns:1fr}
+  .mls-rail{order:-1}
+  .mls-frame-wrap iframe,.mls-frame-wrap{min-height:62vh}
+}
+</style>
+<link rel="stylesheet" href="assets/sg-nav.css?v=mobmenu-fix"/>
+</head>
+<body>
+
+<div class="page-hero">
+  <div class="wrap">
+    <div class="breadcrumb"><a href="index.html">Home</a> › <span>MLS Search</span></div>
+    <div class="tag">Live BeachesMLS Data</div>
+    <h1 class="h2" style="margin-top:.6rem">Search All <i>MLS Listings</i></h1>
+    <p class="lead">Browse active South Florida listings updated through BeachesMLS. For Sigal’s sold portfolio and featured properties, visit <a href="properties.html" style="color:#EBD6A8;text-decoration:underline">Sigal’s Listings</a>.</p>
+    <div class="hero-actions">
+      <a href="properties.html" class="btn btn-ghost" style="border-color:rgba(248,244,236,.45);color:var(--cream)">Sigal’s Listings</a>
+      <a href="tel:6177770485" class="btn btn-forest">Call Sigal: (617) 777-0485</a>
+    </div>
+  </div>
+</div>
+
+<section>
+  <div class="wrap mls-layout">
+    <div class="mls-frame-wrap">
+      <div class="mls-frame-head">
+        <span>Powered by Flexmls · BeachesMLS</span>
+        <a href="#" id="mlsOpenTab" target="_blank" rel="noopener noreferrer" style="color:var(--forest-deep);text-decoration:underline">Open in new tab ↗</a>
+      </div>
+      <iframe
+        id="mlsFrame"
+        title="BeachesMLS property search"
+        referrerpolicy="strict-origin-when-cross-origin"
+        allow="fullscreen"
+      ></iframe>
+    </div>
+    <aside class="mls-rail" aria-label="Contact Sigal">
+      <div class="mls-card">
+        <h3>Saw something you like?</h3>
+        <p>Text or email Sigal the MLS number, address, or a screenshot — she’ll verify details and set up a private showing.</p>
+        <a href="tel:6177770485" class="btn btn-forest"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg> Call Now</a>
+        <a href="contact.html" class="btn btn-ghost" style="margin-top:.65rem">Send MLS# / Address →</a>
+        <p class="mls-note">Listings displayed are courtesy of BeachesMLS and participating brokers. Information deemed reliable but not guaranteed.</p>
+      </div>
+      <div class="mls-card">
+        <h3>Off-market access</h3>
+        <p>Not everything worth buying is on the MLS. Sigal tracks pocket listings and pre-market opportunities across Boca, Delray, and Highland Beach.</p>
+        <a href="contact.html" class="btn btn-ghost">Request Off-Market List →</a>
+      </div>
+    </aside>
+  </div>
+  <div class="wrap mls-disclaimer">
+    Listing data © BeachesMLS. All rights reserved. Information is for consumers’ personal, non-commercial use and may not be used for any purpose other than to identify prospective properties consumers may be interested in purchasing. Display of MLS data is subject to BeachesMLS IDX rules and broker approval.
+  </div>
+</section>
+
+<script src="assets/sg-mls.js"></script>
+<script>
+(function(){
+  var url = window.SG_MLS_EMBED || 'https://link.flexmls.com/1zc76kndtgku,15';
+  var frame = document.getElementById('mlsFrame');
+  var tab = document.getElementById('mlsOpenTab');
+  if(frame) frame.src = url;
+  if(tab) tab.href = url;
+})();
+</script>
+<script src="assets/sg-nav.js?v=mls1" defer></script>
+<script src="assets/sg-mobnav-fix.js?v=mobmenu-fix" defer></script>
+</body>
+</html>
