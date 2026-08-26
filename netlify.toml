@@ -1,7 +1,8 @@
 # Netlify Configuration — Sigal Group Realty
 
 [build]
-  publish = "."
+  command = "npm run build"
+  publish = "dist"
   functions = "netlify/functions"
 
 # Identity + Git Gateway for CMS
