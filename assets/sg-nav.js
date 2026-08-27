@@ -19,7 +19,7 @@
   var ITEMS = [
     { num:'01', href:'index.html',         label:'Home',        italic:''           },
     { num:'02', href:'properties.html',    label:'Properties',  italic:''           },
-    { num:'03', href:'search.html',        label:'MLS ',        italic:'Search'     },
+    { num:'03', href:'search.html',        label:'Concierge ',  italic:'Search'     },
     { num:'04', href:'sell.html',          label:'Sell ',       italic:'Your Home'  },
     { num:'05', href:'neighborhoods.html', label:'Top ',        italic:'Areas'      },
     { num:'06', href:'blog/index.html',    label:'Blog',        italic:'',

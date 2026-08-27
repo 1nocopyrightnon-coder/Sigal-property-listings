@@ -136,7 +136,7 @@ a{text-decoration:none;color:inherit}
   margin-bottom:2rem;
 }
 .hsc-tabs{display:flex;gap:0;margin-bottom:.95rem;border-bottom:1px solid rgba(27,42,74,.1);position:relative;z-index:60}
-.hsc-tab{display:inline-flex;align-items:center;gap:.5rem;padding:.7rem 1.05rem;font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(27,42,74,.42);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;transition:.25s;background:none;border-top:none;border-left:none;border-right:none;font-family:'Archivo',sans-serif;pointer-events:auto;position:relative;z-index:61}
+.hsc-tab{display:inline-flex;align-items:center;gap:.45rem;padding:.7rem .85rem;font-size:.66rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(27,42,74,.42);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;transition:.25s;background:none;border-top:none;border-left:none;border-right:none;font-family:'Archivo',sans-serif;pointer-events:auto;position:relative;z-index:61;white-space:nowrap;flex-shrink:0}
 .hsc-tab:hover{color:var(--forest-deep)}
 .hsc-tab.on,.hsc-tab.on:hover{color:var(--forest-deep);border-bottom-color:var(--hero-accent)}
 .hsc-tab svg{width:15px;height:15px;flex-shrink:0;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;pointer-events:none}
@@ -563,6 +563,10 @@ footer{background:#0F1B30;padding:5rem 0 2.5rem;border-top:3px solid var(--sage)
           <button type="button" class="hsc-tab" data-sg-mode="value" onclick="window.sgSetSearchMode&&window.sgSetSearchMode(this)">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19.5V8.5"/><path d="M10 19.5V4.5"/><path d="M16 19.5v-7"/><path d="M22 19.5v-4"/></svg>
             Home Value
+          </button>
+          <button type="button" class="hsc-tab" data-sg-mode="concierge" onclick="window.sgSetSearchMode&&window.sgSetSearchMode(this)" aria-label="Concierge Search">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="7" height="7" rx="1"/><rect x="13" y="4" width="7" height="7" rx="1"/><rect x="4" y="13" width="7" height="7" rx="1"/><rect x="13" y="13" width="7" height="7" rx="1"/></svg>
+            Concierge
           </button>
         </div>
         <p class="hsc-hint">Start typing a city or street — matches appear as you type.</p>
@@ -1268,7 +1272,7 @@ document.querySelectorAll('.ftag').forEach(btn=>{
   desktop.addEventListener('change', loadHeroVideo);
 })();
 </script>
-  <script src="assets/sg-nav.js?v=mls1" defer></script>
+  <script src="assets/sg-nav.js?v=mls3" defer></script>
 
 
 <!-- ═══ NETLIFY FORMS — detection stubs for build process ═══ -->
@@ -1286,7 +1290,7 @@ document.querySelectorAll('.ftag').forEach(btn=>{
   <input type="text" name="property-type"/>
   <textarea name="details"></textarea>
 </form>
-<script src="assets/sg-app.js?v=ofm3" defer></script>
+<script src="assets/sg-app.js?v=concierge2" defer></script>
 <script src="assets/sg-mobnav-fix.js?v=mobmenu-fix" defer></script>
 <script src="assets/reviews-marquee.js" defer></script>
   

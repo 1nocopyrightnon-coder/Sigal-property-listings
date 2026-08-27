@@ -122,7 +122,7 @@
   }
 
   // ──────────────────────────────────────────────────────
-  // HERO SEARCH (3 tabs)
+  // HERO SEARCH (4 tabs — Buy / Sell / Home Value / Concierge MLS)
   // ──────────────────────────────────────────────────────
   function initHeroSearch(){
     var card = document.querySelector('.hero-search-card, .hero-sc');
@@ -144,12 +144,14 @@
     var ICO = {
       buy: '<svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.2"/><path d="m15.2 15.2 5.3 5.3"/></svg>',
       sell: '<svg viewBox="0 0 24 24"><path d="M3 11.2 12 3.5l9 7.7"/><path d="M6 10.2V20.5h12V10.2"/><path d="M10 20.5v-6h4v6"/></svg>',
-      value: '<svg viewBox="0 0 24 24"><path d="M4 19.5V8.5"/><path d="M10 19.5V4.5"/><path d="M16 19.5v-7"/><path d="M22 19.5v-4"/></svg>'
+      value: '<svg viewBox="0 0 24 24"><path d="M4 19.5V8.5"/><path d="M10 19.5V4.5"/><path d="M16 19.5v-7"/><path d="M22 19.5v-4"/></svg>',
+      concierge: '<svg viewBox="0 0 24 24"><rect x="4" y="4" width="7" height="7" rx="1"/><rect x="13" y="4" width="7" height="7" rx="1"/><rect x="4" y="13" width="7" height="7" rx="1"/><rect x="13" y="13" width="7" height="7" rx="1"/></svg>'
     };
 
     function setMode(newMode){
       mode = newMode || 'buy';
       lastQuery = '';
+      lastPicked = null;
       if(fieldIco) fieldIco.innerHTML = ICO[mode] || ICO.buy;
       if(mode === 'buy'){
         input.placeholder = 'City, neighborhood, ZIP code…';
@@ -159,6 +161,10 @@
         input.placeholder = 'Enter your home address';
         if(button) button.textContent = 'Get Selling Plan →';
         if(hint) hint.textContent = 'Type your address — we will pin it on the map.';
+      } else if(mode === 'concierge'){
+        input.placeholder = 'City, address, or MLS #…';
+        if(button) button.textContent = 'Concierge Search →';
+        if(hint) hint.textContent = 'Full BeachesMLS market — your search copies automatically for the next page.';
       } else {
         input.placeholder = 'Enter your home address';
         if(button) button.textContent = "What's My Home Worth? →";
@@ -373,9 +379,12 @@
     }
 
     function cityItem(c){
+      var sub = mode === 'concierge'
+        ? 'Search all MLS listings in this area'
+        : 'Search listings in this city';
       return {
         primary: c,
-        secondary: 'Search listings in this city',
+        secondary: sub,
         full: c,
         city: c,
         isCity: true
@@ -404,7 +413,7 @@
         searchAddresses(q, function(results){
           if(input.value.trim() !== q) return;
           var items = results;
-          if(mode === 'buy'){
+          if(mode === 'buy' || mode === 'concierge'){
             var cityHits = ALL_CITIES.filter(function(c){
               return c.toLowerCase().indexOf(q.toLowerCase()) !== -1;
             }).slice(0, 3).map(cityItem);
@@ -420,6 +429,17 @@
       if(dropdown.style.display === 'block') return;
       if(mode === 'buy' && !input.value && ALL_CITIES.length){
         showResults(ALL_CITIES.slice(0, 6).map(cityItem));
+      }
+      if(mode === 'concierge' && !input.value && ALL_CITIES.length){
+        showResults(ALL_CITIES.slice(0, 6).map(function(c){
+          return {
+            primary: c,
+            secondary: 'Search all MLS listings in this area',
+            full: c,
+            city: c,
+            isCity: true
+          };
+        }));
       }
     });
 
@@ -457,6 +477,28 @@
 
     function submit(){
       var q = input.value.trim();
+      if(mode === 'concierge'){
+        var term = q;
+        if(lastPicked){
+          if(lastPicked.full) term = lastPicked.full;
+          else if(lastPicked.city) term = lastPicked.city;
+        }
+        if(term){
+          try {
+            sessionStorage.setItem('sg_concierge_q', term);
+            sessionStorage.removeItem('sg_concierge_copied');
+          } catch(e){}
+          if(navigator.clipboard && navigator.clipboard.writeText){
+            navigator.clipboard.writeText(term).then(function(){
+              try { sessionStorage.setItem('sg_concierge_copied', '1'); } catch(e){}
+            }).catch(function(){});
+          }
+        }
+        window.location.href = term
+          ? 'search.html?q=' + encodeURIComponent(term)
+          : 'search.html';
+        return;
+      }
       if(mode === 'buy'){
         var city = (lastPicked && lastPicked.city) ? lastPicked.city : q;
         window.location.href = city
