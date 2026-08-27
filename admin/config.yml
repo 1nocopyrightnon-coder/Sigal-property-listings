@@ -5,7 +5,7 @@ backend:
 media_library:
   name: cloudinary
   config:
-    cloud_name: dlbhwfm7b
+    cloud_name: f9jxg1t4
     upload_preset: sigal_listings
 
 locale: en

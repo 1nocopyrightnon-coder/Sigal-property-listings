@@ -97,7 +97,10 @@ a{text-decoration:none;color:inherit}
 
 /* ═══════════════ HERO ═══════════════ */
 #hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;position:relative;overflow:visible;z-index:20}
-.hero-bg-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;pointer-events:none}
+.hero-bg-poster,.hero-bg-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;pointer-events:none}
+@media (min-width:901px){.hero-bg-poster{display:none}}
+@media (max-width:900px){.hero-bg-video{display:none}}
+@media (prefers-reduced-motion:reduce){.hero-bg-video{display:none!important}.hero-bg-poster{display:block!important}}
 .hero-left{position:relative;background:transparent;display:flex;flex-direction:column;justify-content:center;padding:7rem 4rem 5rem 4.5rem;z-index:10}
 #hero .hero-pattern{display:none}
 #hero .hero-left .page-hero-cloth{display:none !important}
@@ -521,9 +524,8 @@ footer{background:#0F1B30;padding:5rem 0 2.5rem;border-top:3px solid var(--sage)
 
 <!-- ░░░ HERO ░░░ -->
 <section id="hero">
-  <video class="hero-bg-video" autoplay muted loop playsinline>
-    <source src="Bocareg.mp4" type="video/mp4"/>
-  </video>
+  <img class="hero-bg-poster" src="assets/hero-poster.jpg" alt="" width="1280" height="720" decoding="async" fetchpriority="high"/>
+  <video class="hero-bg-video" autoplay muted loop playsinline poster="assets/hero-poster.jpg" aria-hidden="true"></video>
   <div class="hero-left">
     <div class="hero-left-content">
       <div class="hero-eyebrow"><span></span>South Florida's Trusted Realtor</div>
@@ -1244,6 +1246,26 @@ document.querySelectorAll('.ftag').forEach(btn=>{
   }
 
   run();
+})();
+</script>
+<script>
+(function(){
+  var desktop = window.matchMedia('(min-width: 901px)');
+  var motionOk = window.matchMedia('(prefers-reduced-motion: no-preference)');
+  function loadHeroVideo(){
+    var video = document.querySelector('.hero-bg-video');
+    if(!video || video.dataset.loaded) return;
+    if(!desktop.matches || !motionOk.matches) return;
+    video.dataset.loaded = '1';
+    var source = document.createElement('source');
+    source.src = 'assets/Bocareg-hero.mp4';
+    source.type = 'video/mp4';
+    video.appendChild(source);
+    video.load();
+    video.play().catch(function(){});
+  }
+  loadHeroVideo();
+  desktop.addEventListener('change', loadHeroVideo);
 })();
 </script>
   <script src="assets/sg-nav.js?v=mls1" defer></script>

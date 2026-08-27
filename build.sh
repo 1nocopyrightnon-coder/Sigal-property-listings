@@ -22,7 +22,7 @@ for f in "$ROOT"/*.html; do
   cp "$f" dist/
 done
 
-for f in "$ROOT"/*.{jpg,jpeg,png,webp,mp4}; do
+for f in "$ROOT"/*.{jpg,jpeg,png,webp}; do
   [ -e "$f" ] || continue
   cp "$f" dist/
 done
