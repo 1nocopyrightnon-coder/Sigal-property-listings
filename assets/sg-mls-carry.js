@@ -1,12 +1,14 @@
-// Passes hero Concierge search to the MLS page (Flexmls iframe cannot be prefilled cross-origin).
+// Compat layer — prefer assets/sg-mls-handoff.js (Path A/B discovery + attribution).
+// Kept so older search.html includes still work if handoff is missing.
 (function(){
   'use strict';
+  if(typeof window.sgInitMlsFrame === 'function' && window.sgMlsHandoff) return;
 
   function getQuery(){
     var params = new URLSearchParams(window.location.search);
     var q = params.get('q') || params.get('city') || '';
     if(!q){
-      try { q = sessionStorage.getItem('sg_concierge_q') || ''; } catch(e){}
+      try { q = sessionStorage.getItem('sg_concierge_q') || sessionStorage.getItem('sg_hero_query') || ''; } catch(e){}
     }
     return String(q || '').trim();
   }
@@ -41,19 +43,14 @@
     if(hint){
       hint.textContent = 'Your search is ready below — paste it into the MLS box to see live listings.';
     }
-
     var copied = false;
     try { copied = sessionStorage.getItem('sg_concierge_copied') === '1'; } catch(e){}
     if(copied && msg){
       msg.textContent = 'Copied to your clipboard — tap the MLS search field below, then Paste.';
     }
-
     if(copyBtn){
-      copyBtn.addEventListener('click', function(){
-        copyText(term, msg);
-      });
+      copyBtn.addEventListener('click', function(){ copyText(term, msg); });
     }
-
     input.addEventListener('focus', function(){ input.select(); });
   };
 
@@ -62,7 +59,11 @@
     var frame = document.getElementById('mlsFrame');
     var tab = document.getElementById('mlsOpenTab');
     if(frame && !frame.src) frame.src = url;
-    if(tab) tab.href = url;
+    if(tab){
+      tab.href = url;
+      tab.rel = 'noopener noreferrer';
+      tab.target = '_blank';
+    }
     if(typeof window.sgInitMlsCarry === 'function') window.sgInitMlsCarry();
   };
 })();

@@ -214,7 +214,7 @@ svg.i{width:14px;height:14px;flex-shrink:0;stroke:currentColor;fill:none;stroke-
           <input id="mlsCarryInput" type="text" readonly aria-label="Search term to paste into MLS"/>
           <button type="button" class="mls-carry-copy" id="mlsCarryCopy">Copy</button>
         </div>
-        <p class="mls-carry-msg" id="mlsCarryMsg">Tap the MLS search field below, then Paste.</p>
+        <p class="mls-carry-msg" id="mlsCarryMsg">Tap Copy, then click the MLS search box and Paste.</p>
       </div>
 
       <div class="mls-viewport">
@@ -236,6 +236,8 @@ svg.i{width:14px;height:14px;flex-shrink:0;stroke:currentColor;fill:none;stroke-
       <div class="mls-card navy">
         <h3>Saw something?</h3>
         <p>Paste the MLS number or address — Sigal will verify details and arrange a private showing.</p>
+        <label for="mlsTipField" class="mls-carry-label" style="color:var(--butter)">MLS tip / address</label>
+        <input id="mlsTipField" name="mls_tip" data-sg-mls-tip type="text" placeholder="MLS # or address" style="width:100%;margin-bottom:.75rem;border:1px solid rgba(248,244,236,.25);background:rgba(255,255,255,.08);color:var(--cream);padding:.65rem .7rem;font-family:Archivo,sans-serif;font-size:.86rem;border-radius:2px"/>
         <a href="tel:6177770485" class="btn btn-cream"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg> Call Now</a>
         <a href="contact.html" class="btn btn-ghost" style="border-color:rgba(248,244,236,.35);color:var(--cream)">Send MLS# →</a>
         <p class="mls-note">Information deemed reliable but not guaranteed.</p>
@@ -253,6 +255,7 @@ svg.i{width:14px;height:14px;flex-shrink:0;stroke:currentColor;fill:none;stroke-
 </section>
 
 <script src="assets/sg-mls.js"></script>
+<script src="assets/sg-mls-handoff.js"></script>
 <script src="assets/sg-mls-carry.js"></script>
 <script>
 (function(){

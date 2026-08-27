@@ -483,15 +483,18 @@
           if(lastPicked.full) term = lastPicked.full;
           else if(lastPicked.city) term = lastPicked.city;
         }
+        if(typeof window.sgMlsHandoff === 'function'){
+          window.sgMlsHandoff(term, { source: 'concierge-hero' });
+          return;
+        }
+        // Fallback if handoff script missing
         if(term){
           try {
             sessionStorage.setItem('sg_concierge_q', term);
-            sessionStorage.removeItem('sg_concierge_copied');
+            sessionStorage.setItem('sg_hero_query', term);
           } catch(e){}
           if(navigator.clipboard && navigator.clipboard.writeText){
-            navigator.clipboard.writeText(term).then(function(){
-              try { sessionStorage.setItem('sg_concierge_copied', '1'); } catch(e){}
-            }).catch(function(){});
+            navigator.clipboard.writeText(term).catch(function(){});
           }
         }
         window.location.href = term
@@ -620,6 +623,10 @@
     card.querySelectorAll('input, select, textarea').forEach(function(field){
       if(field.name && field.value) data[field.name] = field.value;
     });
+    try {
+      var hq = sessionStorage.getItem('sg_hero_query') || sessionStorage.getItem('sg_concierge_q');
+      if(hq && !data.hero_query) data.hero_query = hq;
+    } catch(e){}
     data['_source_page'] = window.location.pathname || '/';
     data['_submitted_at'] = new Date().toISOString();
 

@@ -77,6 +77,11 @@
     card.querySelectorAll('input, select, textarea').forEach(function(field){
       if(field.name && field.value) data[field.name] = field.value;
     });
+    // Concierge / hero search attribution
+    try {
+      var hq = sessionStorage.getItem('sg_hero_query') || sessionStorage.getItem('sg_concierge_q');
+      if(hq && !data.hero_query) data.hero_query = hq;
+    } catch(e){}
     // Honeypot field for spam protection
     data['bot-field'] = '';
 
